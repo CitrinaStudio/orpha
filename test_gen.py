@@ -1,12 +1,28 @@
-import sys
 import timeit
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
 
+
+sns.set(color_codes=True)
+
+setup = '''
 import numpy
 
 import gen
+    
+params = gen.gen_name(20)
+crc32 = gen.gen_crc32_hash(params)
+adler32 = gen.gen_adler32_hash(params)
 
-for i in range(0, 100, 1):        
-    params = gen.gen_name(numpy.random.randint(500, 900000))
-    crc32 = gen.gen_crc32_hash(params)
-    adler32 = gen.gen_adler32_hash(params)
-    print("\n  |  " + params + " | " + crc32 + " | " + adler32)
+print(params)
+print(crc32)
+print(adler32)
+
+'''
+
+time = np.asarray(timeit.Timer(setup=setup).repeat(1000))
+print(time)
+iris = sns.load_dataset("iris")
+sns.distplot(time)
+plt.show()
