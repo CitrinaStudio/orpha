@@ -2,38 +2,60 @@
 
 import numpy as np
 
+import header
 
-def new_player():
-    player_name = input("Input name: ")
+import string
 
+def _intput_ckeck_error(err_msg, input_msg):
     try:
-        player_age = int(input("Input age of your character: "))
+        var = int(input(input_msg))
 
     except ValueError:
         # TODO: сделать нормальный вывод сообщений об ошибке
 
-        print("Sorry, but input age is invalid. Pleas, try again.")
+        print(err_msg)
 
         while_exit = 0  # Для того, чтобы выйти из цикла, токо тогда, когда не словим исключение
 
         while while_exit != 1:
             try:
-                player_age = int(input("Input age of your character: "))
+                var = int(input(input_msg))
 
             except ValueError:
-                print("Sorry, but input age is invalid. Pleas, try again.")
+                print(err_msg)
 
             else:
-
-                if player_age <= 0:
-                    player_age = np.random.randint(11, 21)
-
-                print(player_age)  # DEBUG string
                 while_exit = 1
-    
-    else:
-    
-                if player_age <= 0:
-                    player_age = np.random.randint(11, 21)
 
-                print(player_age)  # DEBUG string
+    return var
+
+
+def new_player():
+    player_name = input("Input name: ")
+
+    print("Please, choice your class: \n\n")
+
+    for i in range(0, header.QUANTITY_PLAYER_CLASSES, 1):
+        print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i])
+
+    player_class = string.capwords(input("\nInput your class: "))
+
+    while_exit = 0  # Для того, чтобы выйти из цикла, токо тогда, когда не словим исключение
+    if player_class not in header.PLAYER_CLASSES:
+        while while_exit != 1:
+            print("Sorry, but you input invalid class. Try again.")
+
+            print("Please, choice your class: \n")
+
+            for i in range(0, header.QUANTITY_PLAYER_CLASSES, 1):
+                print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i])
+
+            player_class = string.capwords(input("\nInput your class: "))
+
+            if player_class in header.PLAYER_CLASSES:
+                while_exit = 1
+
+    player_age = _intput_ckeck_error(
+        "Sorry, but you input invalid age. Please, try again.", "Input age: ")
+
+    
