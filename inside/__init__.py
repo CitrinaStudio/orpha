@@ -1,4 +1,4 @@
 """ init module """
 
-import lib.gen
-import lib.player
+import inside.gen
+import inside.player
