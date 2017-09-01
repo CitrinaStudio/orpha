@@ -1,10 +1,16 @@
 """ Player functions module """
 
+import sqlite3 as sqlite
+import string
+
 import numpy as np
 
 import header
+import inside
 
-import string
+connect = sqlite.connect("game.db")
+db = connect.cursor()
+
 
 def _intput_ckeck_error(err_msg, input_msg):
     try:
@@ -58,4 +64,15 @@ def new_player():
     player_age = _intput_ckeck_error(
         "Sorry, but you input invalid age. Please, try again.", "Input age: ")
 
-    
+    player_hash = inside.gen.gen_crc32_hash(
+        (player_name, player_class, player_age))
+
+    try:
+        db.execute("INSERT INTO players (hash, name, age, class) VALUES ('%s', '%s', %s, '%s')" % (
+            player_hash, player_name, player_age, player_class))
+
+    except sqlite.IntegrityError:
+        print("Error!!! Player exist! Try again!")
+        exit(1)
+
+    connect.commit()
