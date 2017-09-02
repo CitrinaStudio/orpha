@@ -37,6 +37,8 @@ def _intput_ckeck_error(err_msg, input_msg):
 
 
 def new_player():
+    #TODO: Масштабирование функции в release 0.3
+
     player_name = input("Input name: ")
 
     print("Please, choice your class: \n\n")
