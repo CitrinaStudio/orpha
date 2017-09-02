@@ -6,9 +6,9 @@ DEFAULT_MP = 10
 DEFAULT_HP = 10
 CLASSES_BONUSES = {
     'Warrior': {
-        'hp': 5, 
+        'hp': 5,
         'mp': 0
-    }, 
+    },
     'Roge': {
         'hp': 4,
         'mp': 1
