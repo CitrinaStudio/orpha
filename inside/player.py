@@ -4,23 +4,47 @@
 try:
     import sqlite3 as sqlite
     import string
-    import log
-
-
-    import numpy as np
+    import os
 
     import header
     import inside
 
-except ImportError: 
-    log.logging.critical('Ошибка импорта.')
+except ImportError as err_detail:
+    inside.log.logging.critical('Ошибка импорта.')
+    inside.log.logging.critical('Модуль %s не найден!' %
+                                str(err_detail).split(": ")[0])
+    exit(1)
 
 else:
-    log.logging.info('Импорт прошел успешно.')
+    inside.log.logging.info('Импорт дополнительных модулей прошел успешно.')
 
 
-connect = sqlite.connect("game.db")
-db = connect.cursor()
+CONNECT = sqlite.connect("game.db")
+DB = CONNECT.cursor()
+
+
+check_table_ok = 0
+
+while check_table_ok != 1:
+    try:
+        DB.execute("SELECT * FROM players")
+        DB.execute("SELECT * FROM lands")
+
+    except sqlite.OperationalError as err_detail:
+
+        table_name = str(err_detail).split(": ")[1]
+
+        inside.log.logging.error("Структра БД повреждена!")
+        inside.log.logging.error("Таблица %s не найдена!" % table_name)
+        DB.execute(header.TABLES_CREATE_COMMANDS[table_name])
+
+        inside.log.logging.info("Таблица %s успешно создана" % table_name)
+
+        #TODO: сделать проверку структуры таблиц через хеш-суммы
+    else:
+        inside.log.logging.info("С БД всё хорошо!")
+        check_table_ok = 1
+
 
 
 def _intput_ckeck_error(err_msg, input_msg):
@@ -48,7 +72,7 @@ def _intput_ckeck_error(err_msg, input_msg):
 
 
 def new_player():
-    #TODO: Масштабирование функции в release 0.3
+    # TODO: Масштабирование функции в release 0.3
 
     player_name = input("Input name: ")
 
@@ -81,11 +105,11 @@ def new_player():
         (player_name, player_class, player_age))
 
     try:
-        db.execute("INSERT INTO players (hash, name, age, class) VALUES ('%s', '%s', %s, '%s')" % (
+        DB.execute("INSERT INTO players (hash, name, age, class) VALUES ('%s', '%s', %s, '%s')" % (
             player_hash, player_name, player_age, player_class))
 
     except sqlite.IntegrityError:
         print("Error!!! Player exist! Try again!")
         exit(1)
 
-    connect.commit()
+    CONNECT.commit()
