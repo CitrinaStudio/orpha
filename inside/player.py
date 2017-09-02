@@ -26,28 +26,29 @@ CONNECT = sqlite.connect("game.db")
 DB = CONNECT.cursor()
 
 
-# Проверка существования таблиц:
+def db_check():
+    # Проверка существования таблиц:
 
-check_table_ok = 0
+    check_table_ok = 0
 
-while check_table_ok != 1:
-    try:
-        DB.execute("SELECT * FROM players")
-        DB.execute("SELECT * FROM lands")
+    while check_table_ok != 1:
+        try:
+            DB.execute("SELECT * FROM players")
+            DB.execute("SELECT * FROM lands")
 
-    except sqlite.OperationalError as err_detail:
+        except sqlite.OperationalError as err_detail:
 
-        table_name = str(err_detail).split(": ")[1]
+            table_name = str(err_detail).split(": ")[1]
 
-        inside.log.logging.error("Структра БД повреждена!")
-        inside.log.logging.error("Таблица %s не найдена!" % table_name)
-        DB.execute(header.TABLES_CREATE_COMMANDS[table_name])
+            inside.log.logging.error("Структра БД повреждена!")
+            inside.log.logging.error("Таблица %s не найдена!" % table_name)
+            DB.execute(header.TABLES_CREATE_COMMANDS[table_name])
 
-        inside.log.logging.info("Таблица %s успешно создана" % table_name)
+            inside.log.logging.info("Таблица %s успешно создана" % table_name)
 
-    else:
-        inside.log.logging.info("С БД всё хорошо!")
-        check_table_ok = 1
+        else:
+            inside.log.logging.info("С БД всё хорошо!")
+            check_table_ok = 1
 
 
 
@@ -122,7 +123,8 @@ def new_player():
         if "UNIQUE" in str(err_detail):
             inside.util.cprint("Error!!! Player exist! Try again!", "red")
             exit(1)
-
+    #inside.log.logging.info("Персонаж создан!")
     CONNECT.commit()
+    #inside.log.logging.info("Персонаж записан в БД!")
 
 
