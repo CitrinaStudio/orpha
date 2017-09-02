@@ -1,5 +1,6 @@
 """ Player functions module """
 
+# Проверка существования модулей:
 
 try:
     import sqlite3 as sqlite
@@ -19,9 +20,13 @@ else:
     inside.log.logging.info('Импорт дополнительных модулей прошел успешно.')
 
 
+# подключение к БД
+
 CONNECT = sqlite.connect("game.db")
 DB = CONNECT.cursor()
 
+
+# Проверка существования таблиц:
 
 check_table_ok = 0
 
@@ -40,7 +45,6 @@ while check_table_ok != 1:
 
         inside.log.logging.info("Таблица %s успешно создана" % table_name)
 
-        #TODO: сделать проверку структуры таблиц через хеш-суммы
     else:
         inside.log.logging.info("С БД всё хорошо!")
         check_table_ok = 1
@@ -48,13 +52,13 @@ while check_table_ok != 1:
 
 
 def _intput_ckeck_error(err_msg, input_msg):
+    """Проверка введенного занчения"""
     try:
         var = int(input(input_msg))
 
     except ValueError:
-        # TODO: сделать нормальный вывод сообщений об ошибке
 
-        print(err_msg)
+        inside.util.cprint(err_msg, "red")
 
         while_exit = 0  # Для того, чтобы выйти из цикла, токо тогда, когда не словим исключение
 
@@ -63,7 +67,7 @@ def _intput_ckeck_error(err_msg, input_msg):
                 var = int(input(input_msg))
 
             except ValueError:
-                print(err_msg)
+                inside.util.cprint(err_msg, "red")
 
             else:
                 while_exit = 1
@@ -72,6 +76,8 @@ def _intput_ckeck_error(err_msg, input_msg):
 
 
 def new_player():
+    """Создание и запись нового персонажа"""
+
     # TODO: Масштабирование функции в release 0.3
 
     player_name = input("Input name: ")
@@ -79,19 +85,22 @@ def new_player():
     print("Please, choice your class: \n\n")
 
     for i in range(0, header.QUANTITY_PLAYER_CLASSES, 1):
-        print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i])
+        print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i]) #Вывод списка классов
 
     player_class = string.capwords(input("\nInput your class: "))
 
     while_exit = 0  # Для того, чтобы выйти из цикла, токо тогда, когда не словим исключение
+
+    #Проверка существования класса
     if player_class not in header.PLAYER_CLASSES:
+        
         while while_exit != 1:
-            print("Sorry, but you input invalid class. Try again.")
+            inside.util.cprint("Sorry, but you input invalid class. Try again.", "red")
 
             print("Please, choice your class: \n")
 
             for i in range(0, header.QUANTITY_PLAYER_CLASSES, 1):
-                print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i])
+                print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i]) #Вывод списка классов
 
             player_class = string.capwords(input("\nInput your class: "))
 
@@ -104,12 +113,16 @@ def new_player():
     player_hash = inside.gen.gen_crc32_hash(
         (player_name, player_class, player_age))
 
+    #Попытка записи в БД и проверка существования идентичного персонажа
     try:
-        DB.execute("INSERT INTO players (hash, name, age, class) VALUES ('%s', '%s', %s, '%s')" % (
-            player_hash, player_name, player_age, player_class))
+        DB.execute("INSERT INTO players (hash, name, age, class, coor) VALUES ('%s', '%s', %s, '%s', '%s')" % (
+            player_hash, player_name, player_age, player_class, str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y))))
 
-    except sqlite.IntegrityError:
-        print("Error!!! Player exist! Try again!")
-        exit(1)
+    except sqlite.IntegrityError as err_detail:
+        if "UNIQUE" in str(err_detail):
+            inside.util.cprint("Error!!! Player exist! Try again!", "red")
+            exit(1)
 
     CONNECT.commit()
+
+
