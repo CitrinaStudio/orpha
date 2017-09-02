@@ -1,12 +1,23 @@
 """ Player functions module """
 
-import sqlite3 as sqlite
-import string
 
-import numpy as np
+try:
+    import sqlite3 as sqlite
+    import string
+    import log
 
-import header
-import inside
+
+    import numpy as np
+
+    import header
+    import inside
+
+except ImportError: 
+    log.logging.critical('Ошибка импорта.')
+
+else:
+    log.logging.info('Импорт прошел успешно.')
+
 
 connect = sqlite.connect("game.db")
 db = connect.cursor()
