@@ -1,5 +1,6 @@
 """ Shell module """
 import string
+
 import inside
 
 import sqlite3 as sqlite
@@ -12,9 +13,17 @@ DB = CONNECT.cursor()
 inside.util.db_check()
 
 def _play_start(player_params, debug_mode=0):
+    
     if debug_mode != 1:
             inside.util.clear()
-
+    while True:
+        query = string.capwords(input('~> '))
+        if query == 'Save':
+            DB.execute("INSERT INTO players (hash, name, age, class, coor, hp, mp) VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s')" % (
+            player_params[0], player_params[1], player_params[2], player_params[3], player_params[4], player_params[5], player_params[6]))
+        elif query == 'Exit':
+            inside.util.cprint('Exit to main menu.', 'green', 'black')
+            return 0
 
 def init(debug_mode=0):
     if debug_mode != 1:
@@ -23,12 +32,13 @@ def init(debug_mode=0):
     while True:
         query = string.capwords(input('$ '))
         if query == 'Help':
-            print('Commands:\n Clear - For clear console \n Newplayer - Creating new player\n Infoclasses - Information about classes\n Exit - exit from shell')
+            inside.util.cprint('Commands:\n Clear - For clear console \n Newplayer - Creating new player\n Infoclasses - Information about classes\n Quit - exit from shell\n Loadplayer - loading your player\n Listplayers - list of available players' , 'white', 'black')
         elif query == 'Clear':
             inside.util.clear()
         elif query == 'Newplayer':
             inside.player.new_player()
-        elif query == 'Exit':
+        elif query == 'Quit':
+            
             inside.util.cprint('Good Bye!', 'green', 'black')
             exit(0)
         elif query == 'Infoclasses':

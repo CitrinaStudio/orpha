@@ -116,8 +116,8 @@ def new_player():
 
     #Попытка записи в БД и проверка существования идентичного персонажа
     try:
-        DB.execute("INSERT INTO players (hash, name, age, class, coor) VALUES ('%s', '%s', %s, '%s', '%s')" % (
-            player_hash, player_name, player_age, player_class, str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y))))
+        DB.execute("INSERT INTO players (hash, name, age, class, coor, hp, mp) VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s')" % (
+            player_hash, player_name, player_age, player_class, str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)), header.DEFAULT_MP, header.DEFAULT_HP))
 
     except sqlite.IntegrityError as err_detail:
         if "UNIQUE" in str(err_detail):
