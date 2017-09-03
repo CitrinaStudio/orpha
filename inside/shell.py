@@ -19,7 +19,10 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
     map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
 
-    player_coor = list(player_params[4])
+    if list(player_params[4]) != (0, 0):
+        player_coor = list(player_params[4])
+    else:
+        player_coor = inside.map.get_player_spawn(map)
 
     while True:
         query = string.capwords(input('~> '))
@@ -29,7 +32,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
         elif query == 'Exit':
             inside.util.cprint('Exit to main menu.', 'green', 'black')
             return 0
-    
+
         elif query in ("North", "N"):
             player_coor[0] += 1
 

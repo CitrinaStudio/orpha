@@ -26,26 +26,27 @@ TABLES_CREATE_COMMANDS = {
 
 #DB_MD5_ETALON = "5b20a543c3b19c3dc9355b93f71308da"
 
-<<<<<<< Updated upstream
-DEFAULT_PLAYER_X = 1
-DEFAULT_PLAYER_Y = 1
-
 
 CONVENTIONAL_NOTATIONAL = {
-    "H": "You came to Home",
-    "S": "You came to Shop",
-    "B": "You came to Bar",
-    "M": "You came to Mountain",
-    "C": "You came to Cave",
-    "f": "You came to Field",
-    "F": "You came to Forest",
-    "R": "You came to River",
-    "B": "you came to little Bridge",
+    "H": "Home",
+    "S": "Shop",
+    "B": "Bar",
+    "M": "Mountain",
+    "C": "Cave",
+    "f": "Field",
+    "F": "Forest",
+    "R": "River",
+    "b": "little Bridge",
+    "p": "Player spawn"
 }
-=======
+
+CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = ["H", "S", "B", "M", "C", "f", "F", "R", "b"]
+
+
 DEFAULT_PLAYER_X = 0
 DEFAULT_PLAYER_Y = 0
 
 DEFAULT_WEIGHT_MAP = 100
 DEFAULT_HEIGHT_MAP = 100
->>>>>>> Stashed changes
+
+DEFAULT_QUANTITY_MAP_STRING = DEFAULT_HEIGHT_MAP
