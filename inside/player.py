@@ -126,5 +126,3 @@ def new_player():
     #inside.log.logging.info("Персонаж создан!")
     CONNECT.commit()
     #inside.log.logging.info("Персонаж записан в БД!")
-
-

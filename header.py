@@ -28,3 +28,16 @@ TABLES_CREATE_COMMANDS = {
 
 DEFAULT_PLAYER_X = 1
 DEFAULT_PLAYER_Y = 1
+
+
+CONVENTIONAL_NOTATIONAL = {
+    "H": "You came to Home",
+    "S": "You came to Shop",
+    "B": "You came to Bar",
+    "M": "You came to Mountain",
+    "C": "You came to Cave",
+    "f": "You came to Field",
+    "F": "You came to Forest",
+    "R": "You came to River",
+    "B": "you came to little Bridge",
+}
