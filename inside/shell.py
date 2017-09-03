@@ -12,10 +12,15 @@ DB = CONNECT.cursor()
 inside.util.db_check()
 
 
-def _play_start(player_params, debug_mode=0):
+def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
     if debug_mode != 1:
         inside.util.clear()
+
+    map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
+
+    player_coor = list(player_params[4])
+
     while True:
         query = string.capwords(input('~> '))
         if query == 'Save':
@@ -24,6 +29,9 @@ def _play_start(player_params, debug_mode=0):
         elif query == 'Exit':
             inside.util.cprint('Exit to main menu.', 'green', 'black')
             return 0
+    
+        elif query in ("North", "N"):
+            player_coor[0] += 1
 
 
 def init(debug_mode=0):

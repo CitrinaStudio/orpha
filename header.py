@@ -26,6 +26,7 @@ TABLES_CREATE_COMMANDS = {
 
 #DB_MD5_ETALON = "5b20a543c3b19c3dc9355b93f71308da"
 
+<<<<<<< Updated upstream
 DEFAULT_PLAYER_X = 1
 DEFAULT_PLAYER_Y = 1
 
@@ -41,3 +42,10 @@ CONVENTIONAL_NOTATIONAL = {
     "R": "You came to River",
     "B": "you came to little Bridge",
 }
+=======
+DEFAULT_PLAYER_X = 0
+DEFAULT_PLAYER_Y = 0
+
+DEFAULT_WEIGHT_MAP = 100
+DEFAULT_HEIGHT_MAP = 100
+>>>>>>> Stashed changes
