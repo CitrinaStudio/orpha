@@ -4,6 +4,8 @@ import string
 
 import inside
 
+import header
+
 # подключение к БД
 
 CONNECT = sqlite.connect("game.db")
@@ -18,11 +20,13 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
         inside.util.clear()
 
     map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
-
-    if list(player_params[4]) != (0, 0):
-        player_coor = list(player_params[4])
+    if '0' in player_params[4]:
+        player_coor = list(inside.map.get_player_spawn(map))
     else:
-        player_coor = inside.map.get_player_spawn(map)
+        player_coor = list(player_params[4])
+    
+    print(player_coor)
+
 
     while True:
         query = string.capwords(input('~> '))
@@ -34,7 +38,15 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             return 0
 
         elif query in ("North", "N"):
-            player_coor[0] += 1
+            map_notation = inside.map.get_map_point(map, (player_coor[0], player_coor[1] + 1))
+            
+            if map_notation == "#":
+                print("You can't go to this side. There is a wall.")
+            
+            else:
+                player_coor[1] += 1
+                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+
 
 
 def init(debug_mode=0):
@@ -58,18 +70,18 @@ def init(debug_mode=0):
             print('Warriors - are a very powerful class, with the ability to tank or deal significant melee damage.\n The warriors Protection tree contains many talents to improve their survivability and generate threat versus monsters.\n Protection warriors are one of the main tanking classes of the game and are considered the "classic" tanking class.\n (They\'re also great flag carriers in PvP!) They also have two damage-oriented talent trees - Arms and Fury,\n the latter of which includes the talent  Titans Grip, which allows the warrior to wield two two-handed weapons at the same time.\n They are capable of strong melee AoE damage with spells such as  Whirlwind and  Bladestorm. A warrior fights while in a specific stance,\n which affects Rage generation.')
             print('Rouge - every town and city has its share of rogues. Most of them live up to the worst stereotypes of the class, making a living as burglars,\n assassins, cutpurses, and con artists. Often, these scoundrels are organized into a thieves’ guild or crime family.\n Plenty of rogues operate independently, but even they sometimes recruit apprentices to help them in their scams and heists.\n A few rogues make an honest living as locksmiths, investigators, or exterminators, which can be a dangerous\n job in a world where dire rats—and wererats—haunt the sewers.')
         elif query == 'Listplayers':
-            players_names = list(DB.execute("select * from players"))
+            players = list(DB.execute("select * from players"))
 
-            if players_names == []:
+            if players == []:
                 print("Characters not found!")
 
             else:
 
                 print("Character list:")
 
-                for i in range(0, len(players_names), 1):
+                for i in range(0, len(players), 1):
                     print("№ %d  Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s" % (
-                        i + 1, players_names[i][1], players_names[i][2], players_names[i][3], players_names[i][4], players_names[i][5], players_names[i][6]))
+                        i + 1, players[i][1], players[i][2], players[i][3], players[i][4], players[i][5], players[i][6]))
 
         elif query == "Loadplayer":
             player_name = input("Input character name: ")
@@ -77,7 +89,7 @@ def init(debug_mode=0):
             player_params = list(DB.execute(
                 "select * from players where name='%s'" % player_name))
 
-            _play_start(player_params)
+            _play_start(player_params[0])
 
         else:
             inside.util.cprint(

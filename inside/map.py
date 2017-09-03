@@ -6,8 +6,8 @@ import header
 import inside
 
 
-def get_map_point(map_arr, x, y):
-    print(map_arr[y][x])
+def get_map_point(map_arr, coor):
+    return map_arr[coor[0]][coor[1]]
 
 
 def get_player_spawn(map_arr):
