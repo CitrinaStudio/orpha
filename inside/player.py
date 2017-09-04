@@ -5,7 +5,6 @@
 try:
     import sqlite3 as sqlite
     import string
-    import os
 
     import header
     import inside
@@ -27,7 +26,7 @@ DB = CONNECT.cursor()
 
 
 def db_check():
-    # Проверка существования таблиц:
+    """Проверка существования таблиц"""
 
     check_table_ok = 0
 
@@ -51,9 +50,9 @@ def db_check():
             check_table_ok = 1
 
 
-
 def _intput_ckeck_error(err_msg, input_msg):
     """Проверка введенного занчения"""
+
     try:
         var = int(input(input_msg))
 
@@ -79,29 +78,30 @@ def _intput_ckeck_error(err_msg, input_msg):
 def new_player():
     """Создание и запись нового персонажа"""
 
-    # TODO: Масштабирование функции в release 0.3
-
     player_name = input("Input name: ")
 
     print("Please, choice your class: \n\n")
 
     for i in range(0, header.QUANTITY_PLAYER_CLASSES, 1):
-        print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i]) #Вывод списка классов
+        # Вывод списка классов
+        print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i])
 
     player_class = string.capwords(input("\nInput your class: "))
 
     while_exit = 0  # Для того, чтобы выйти из цикла, токо тогда, когда не словим исключение
 
-    #Проверка существования класса
+    # Проверка существования класса
     if player_class not in header.PLAYER_CLASSES:
-        
+
         while while_exit != 1:
-            inside.util.cprint("Sorry, but you input invalid class. Try again.", "red")
+            inside.util.cprint(
+                "Sorry, but you input invalid class. Try again.", "red")
 
             print("Please, choice your class: \n")
 
             for i in range(0, header.QUANTITY_PLAYER_CLASSES, 1):
-                print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i]) #Вывод списка классов
+                # Вывод списка классов
+                print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i])
 
             player_class = string.capwords(input("\nInput your class: "))
 
@@ -114,10 +114,14 @@ def new_player():
     player_hash = inside.gen.gen_crc32_hash(
         (player_name, player_class, player_age))
 
-    #Попытка записи в БД и проверка существования идентичного персонажа
+    # Попытка записи в БД и проверка существования идентичного персонажа
     try:
-        DB.execute("INSERT INTO players (hash, name, age, class, coor, hp, mp) VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s')" % (
-            player_hash, player_name, player_age, player_class, str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)), header.DEFAULT_HP + header.CLASSES_BONUSES[player_class]['hp'], header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp']))
+        DB.execute("""INSERT INTO players (hash, name, age, class, coor, hp, mp)
+                        VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s')""" % (
+                            player_hash, player_name, player_age, player_class,
+                            str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)),
+                            header.DEFAULT_HP + header.CLASSES_BONUSES[player_class]['hp'],
+                            header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp']))
 
     except sqlite.IntegrityError as err_detail:
         if "UNIQUE" in str(err_detail):
