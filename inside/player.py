@@ -50,7 +50,7 @@ def db_check():
             check_table_ok = 1
 
 
-def _intput_ckeck_error(err_msg, input_msg):
+def _intput_check_error(err_msg, input_msg):
     """Проверка введенного занчения"""
 
     try:
@@ -108,7 +108,7 @@ def new_player():
             if player_class in header.PLAYER_CLASSES:
                 while_exit = 1
 
-    player_age = _intput_ckeck_error(
+    player_age = _intput_check_error(
         "Sorry, but you input invalid age. Please, try again.", "Input age: ")
 
     player_hash = inside.gen.gen_crc32_hash(

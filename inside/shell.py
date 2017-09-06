@@ -86,6 +86,94 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             if debug_mode == 1:
                 print(player_coor)
 
+        elif query in ("West", "W"):
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] - 1 , player_coor[1]))
+
+            if map_notation == "#":
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] -= 1
+                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("East", "E"):
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] + 1 , player_coor[1]))
+
+            if map_notation == "#":
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] -= 1
+                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("Northwest", "Nw"):
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] - 1 , player_coor[1] + 1))
+
+            if map_notation == "#":
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] -= 1
+                player_coor[1] += 1
+                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("Northeast", "Ne"):
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] + 1 , player_coor[1] + 1))
+
+            if map_notation == "#":
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] += 1
+                player_coor[1] += 1
+                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("Southwest", "Sw"):
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] - 1 , player_coor[1] - 1))
+
+            if map_notation == "#":
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] -= 1
+                player_coor[1] -= 1
+                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("Southeast", "Se"):
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] + 1 , player_coor[1] - 1))
+
+            if map_notation == "#":
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] -= 1
+                player_coor[1] -= 1
+                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+
+            if debug_mode == 1:
+                print(player_coor)
+
         elif query == 'Clear':
             inside.util.clear()
 
