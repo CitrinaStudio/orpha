@@ -135,26 +135,26 @@ def change_ability():
     """Изменение параметров персанажа"""
     
     if player_class = 'Warrior':
-        header.CLASSES_ABILITY[player_class]['str']+0,
-        header.CLASSES_ABILITY[player_class]['dex']+0,
-        header.CLASSES_ABILITY[player_class]['con']+0,
-        header.CLASSES_ABILITY[player_class]['int']+0,
-        header.CLASSES_ABILITY[player_class]['wis']+0,
-        header.CLASSES_ABILITY[player_class]['char']+0,
+        header.CLASSES_ABILITY[player_class]['str'] + 0
+        header.CLASSES_ABILITY[player_class]['dex'] + 0
+        header.CLASSES_ABILITY[player_class]['con'] + 0
+        header.CLASSES_ABILITY[player_class]['int'] + 0
+        header.CLASSES_ABILITY[player_class]['wis'] + 0
+        header.CLASSES_ABILITY[player_class]['char'] + 0
         
     elif player_class = 'Roge':
-        header.CLASSES_ABILITY[player_class]['str']+0,
-        header.CLASSES_ABILITY[player_class]['dex']+0,
-        header.CLASSES_ABILITY[player_class]['con']+0,
-        header.CLASSES_ABILITY[player_class]['int']+0,
-        header.CLASSES_ABILITY[player_class]['wis']+0,
-        header.CLASSES_ABILITY[player_class]['char']+0,,
+        header.CLASSES_ABILITY[player_class]['str'] + 0
+        header.CLASSES_ABILITY[player_class]['dex'] + 0
+        header.CLASSES_ABILITY[player_class]['con'] + 0
+        header.CLASSES_ABILITY[player_class]['int'] + 0
+        header.CLASSES_ABILITY[player_class]['wis'] + 0
+        header.CLASSES_ABILITY[player_class]['char'] + 0
         
     elif player_class = 'Mage':
-        header.CLASSES_ABILITY[player_class]['str']+0,
-        header.CLASSES_ABILITY[player_class]['dex']+0,
-        header.CLASSES_ABILITY[player_class]['con']+0,
-        header.CLASSES_ABILITY[player_class]['int']+0,
-        header.CLASSES_ABILITY[player_class]['wis']+0,
-        header.CLASSES_ABILITY[player_class]['char']+0,
+        header.CLASSES_ABILITY[player_class]['str'] + 0
+        header.CLASSES_ABILITY[player_class]['dex'] + 0
+        header.CLASSES_ABILITY[player_class]['con'] + 0
+        header.CLASSES_ABILITY[player_class]['int'] + 0
+        header.CLASSES_ABILITY[player_class]['wis'] + 0 
+        header.CLASSES_ABILITY[player_class]['char'] + 0
         
