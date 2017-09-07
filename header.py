@@ -21,6 +21,33 @@ CLASSES_BONUSES = {
     }
 }
 
+CLASSES_ABILITY = {
+    'Warrior':{
+        'str': 0,
+        'dex': 0,
+        'con': 0,
+        'int': 0,
+        'wis': 0,
+        'char': 0
+    },
+    'Roge':{
+        'str': 0,
+        'dex': 0,
+        'con': 0,
+        'int': 0,
+        'wis': 0, 
+        'char': 0 
+    },
+    'Mage':{
+        'str': 0,
+        'dex': 0,
+        'con': 0,
+        'int': 0,
+        'wis': 0,
+        'char': 0 
+    }
+}
+
 TABLES_CREATE_COMMANDS = {
     'lands': "CREATE TABLE `lands` (`name` TEXT NOT NULL UNIQUE,`entry_point` TEXT NOT NULL UNIQUE);",
     'players': "CREATE TABLE `players` ( `hash`	TEXT NOT NULL UNIQUE, `name` TEXT UNIQUE NOT NULL, `age` INTEGER NOT NULL, `class` TEXT NOT NULL,	`coor` TEXT NOT NULL, `hp` TEXT NOT NULL, `mp` TEXT NOT NULL,  PRIMARY KEY(`hash`));"
