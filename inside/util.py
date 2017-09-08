@@ -1,29 +1,27 @@
-from colorama import init, Fore, Back, Style
-
-
 import os
-
 import sqlite3 as sqlite
 
-import inside
+from colorama import Back, Fore, Style, init
 
 import header
+import inside
 
 init()
 
-def cprint(msg, foreground = "black", background = "white"):
+
+def cprint(msg, foreground="black", background="white"):
     fground = foreground.upper()
     bground = background.upper()
     style = getattr(Fore, fground) + getattr(Back, bground)
     print(style + msg + Style.RESET_ALL)
 
-import os
 
 def clear():
-    os.system('cls' if os.name=='nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def db_check():
-    
+
     CONNECT = sqlite.connect("game.db")
     DB = CONNECT.cursor()
 
