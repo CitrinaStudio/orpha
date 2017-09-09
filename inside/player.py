@@ -34,6 +34,8 @@ def db_check():
         try:
             DB.execute("SELECT * FROM players")
             DB.execute("SELECT * FROM lands")
+            DB.execute("SELECT * FROM bars")
+            DB.execute("SELECT * FROM homes")
 
         except sqlite.OperationalError as err_detail:
 
@@ -130,31 +132,3 @@ def new_player():
     #inside.log.logging.info("Персонаж создан!")
     CONNECT.commit()
     #inside.log.logging.info("Персонаж записан в БД!")
-
-def change_ability():
-    """Изменение параметров персанажа"""
-    
-    if player_class = 'Warrior':
-        header.CLASSES_ABILITY[player_class]['str'] + 0
-        header.CLASSES_ABILITY[player_class]['dex'] + 0
-        header.CLASSES_ABILITY[player_class]['con'] + 0
-        header.CLASSES_ABILITY[player_class]['int'] + 0
-        header.CLASSES_ABILITY[player_class]['wis'] + 0
-        header.CLASSES_ABILITY[player_class]['char'] + 0
-        
-    elif player_class = 'Roge':
-        header.CLASSES_ABILITY[player_class]['str'] + 0
-        header.CLASSES_ABILITY[player_class]['dex'] + 0
-        header.CLASSES_ABILITY[player_class]['con'] + 0
-        header.CLASSES_ABILITY[player_class]['int'] + 0
-        header.CLASSES_ABILITY[player_class]['wis'] + 0
-        header.CLASSES_ABILITY[player_class]['char'] + 0
-        
-    elif player_class = 'Mage':
-        header.CLASSES_ABILITY[player_class]['str'] + 0
-        header.CLASSES_ABILITY[player_class]['dex'] + 0
-        header.CLASSES_ABILITY[player_class]['con'] + 0
-        header.CLASSES_ABILITY[player_class]['int'] + 0
-        header.CLASSES_ABILITY[player_class]['wis'] + 0 
-        header.CLASSES_ABILITY[player_class]['char'] + 0
-        

@@ -50,7 +50,9 @@ CLASSES_ABILITY = {
 
 TABLES_CREATE_COMMANDS = {
     'lands': "CREATE TABLE `lands` (`name` TEXT NOT NULL UNIQUE,`entry_point` TEXT NOT NULL UNIQUE);",
-    'players': "CREATE TABLE `players` ( `hash`	TEXT NOT NULL UNIQUE, `name` TEXT UNIQUE NOT NULL, `age` INTEGER NOT NULL, `class` TEXT NOT NULL,	`coor` TEXT NOT NULL, `hp` TEXT NOT NULL, `mp` TEXT NOT NULL,  PRIMARY KEY(`hash`));"
+    'players': "CREATE TABLE `players` ( `hash`	TEXT NOT NULL UNIQUE, `name` TEXT UNIQUE NOT NULL, `age` INTEGER NOT NULL, `class` TEXT NOT NULL,	`coor` TEXT NOT NULL, `hp` TEXT NOT NULL, `mp` TEXT NOT NULL,  PRIMARY KEY(`hash`));",
+    'bars': "CREATE TABLE `bars` (`coor_hash` TEXT NOT NULL UNIQUE,	`name` TEXT NOT NULL, `menu` TEXT, PRIMARY KEY(`coor_hash`));",
+    'homes': "CREATE TABLE `homes` (`coor_hash`	TEXT NOT NULL UNIQUE, `detail` TEXT, PRIMARY KEY(`coor_hash`));"
 }
 
 
@@ -65,6 +67,17 @@ CONVENTIONAL_NOTATIONAL = {
     "R": "River",
     "b": "little Bridge",
     "p": "Player spawn"
+}
+
+CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
+    "H": "homes",
+    "S": "shops",
+    "B": "bars",
+    "M": "mountains",
+    "C": "caves",
+    "f": "fields",
+    "F": "forests",
+    "R": "rivers",
 }
 
 CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = ["H", "S", "B", "M", "C", "f", "F", "R", "b"]
