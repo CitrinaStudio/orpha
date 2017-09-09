@@ -11,7 +11,7 @@ import header
 
 init()
 
-def cprint(msg, foreground = "black", background = "white"):
+def cprint(msg, foreground = "black", background = "white"): #Функция вывода цветного текста для ошибок
     fground = foreground.upper()
     bground = background.upper()
     style = getattr(Fore, fground) + getattr(Back, bground)
@@ -19,10 +19,10 @@ def cprint(msg, foreground = "black", background = "white"):
 
 import os
 
-def clear():
+def clear(): #Очищение командной строки
     os.system('cls' if os.name=='nt' else 'clear')
 
-def db_check():
+def db_check():  #Проверка базы данных
     
     CONNECT = sqlite.connect("game.db")
     DB = CONNECT.cursor()

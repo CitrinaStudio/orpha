@@ -1,3 +1,5 @@
+"""Test module"""
+
 import inside
 
 import header
