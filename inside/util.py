@@ -6,6 +6,12 @@ from colorama import Back, Fore, Style, init
 import header
 import inside
 
+import sqlite3 as sqlite
+
+CONNECT = sqlite.connect("game.db")
+DB = CONNECT.cursor()
+
+
 init()
 
 def cprint(msg, foreground = "black", background = "white"): #Функция вывода цветного текста для ошибок

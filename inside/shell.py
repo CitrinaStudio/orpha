@@ -14,7 +14,7 @@ inside.util.db_check()
 
 
 def _get_playerlist():
-"""Функция получения списка персонажей"""
+    """Функция получения списка персонажей"""
     players = list(DB.execute("select * from players"))
 
     if players == []:
@@ -30,13 +30,13 @@ def _get_playerlist():
 
 
 def _save_char(player_params, player_coor):
-"""Функця сохранения персонажа"""
+    """Функця сохранения персонажа"""
     DB.execute("UPDATE players SET age = %s, coor = '%s', hp = %s, mp = %s WHERE name='%s'" % (
         player_params[2], "%s, %s" % (player_coor[0], player_coor[1]), player_params[5], player_params[6], player_params[1]))
 
 
 def _play_start(player_params, debug_mode=0, map_file="default_map"):
-"""Игровой процесс"""
+    """Игровой процесс"""
     if debug_mode != 1:
         inside.util.clear()
 
@@ -190,7 +190,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
 
 def init(debug_mode=0):
-"""Инициальзация командной строки"""
+    """Инициальзация командной строки"""
     if debug_mode != 1:
         inside.util.clear()
 
