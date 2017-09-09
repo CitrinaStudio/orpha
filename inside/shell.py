@@ -13,6 +13,26 @@ DB = CONNECT.cursor()
 inside.util.db_check()
 
 
+def _get_playerlist():
+    players = list(DB.execute("select * from players"))
+
+    if players == []:
+        print("Characters not found!")
+
+    else:
+
+        print("Character list:")
+
+        for i in range(0, len(players), 1):
+            print("№ %d  Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s" % (
+                i + 1, players[i][1], players[i][2], players[i][3], players[i][4], players[i][5], players[i][6]))
+
+
+def _save_char(player_params, player_coor):
+    DB.execute("UPDATE players SET age = %s, coor = '%s', hp = %s, mp = %s WHERE name='%s'" % (
+        player_params[2], "%s, %s" % (player_coor[0], player_coor[1]), player_params[5], player_params[6], player_params[1]))
+
+
 def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
     if debug_mode != 1:
@@ -34,7 +54,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
         elif query == 'Exit':
             _save_char(player_params, player_coor)
-
+            
             inside.util.cprint('Exit to main menu.', 'green', 'black')
             return 0
 
@@ -167,35 +187,6 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
         CONNECT.commit()
 
 
-def _get_loadplayer():
-    player_name = input("\nInput character name: ")
-
-    player_params = list(DB.execute(
-        "select * from players where name='%s'" % player_name))
-
-    _play_start(player_params[0])
-
-
-def _get_playerlist():
-    players = list(DB.execute("select * from players"))
-
-    if players == []:
-        print("Characters not found!")
-
-    else:
-
-        print("Character list:")
-
-        for i in range(0, len(players), 1):
-            print("№ %d  Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s" % (
-                i + 1, players[i][1], players[i][2], players[i][3], players[i][4], players[i][5], players[i][6]))
-
-
-def _save_char(player_params, player_coor):
-    DB.execute("UPDATE players SET age = %s, coor = '%s', hp = %s, mp = %s WHERE name='%s'" % (
-        player_params[2], "%s, %s" % (player_coor[0], player_coor[1]), player_params[5], player_params[6], player_params[1]))
-
-
 def init(debug_mode=0):
     if debug_mode != 1:
         inside.util.clear()
@@ -225,7 +216,13 @@ def init(debug_mode=0):
 
         elif query == "Loadplayer":
             _get_playerlist()
-            _get_loadplayer()
+
+            player_name = input("\nInput character name: ")
+
+            player_params = list(DB.execute(
+                "select * from players where name='%s'" % player_name))
+
+            _play_start(player_params[0])
 
         else:
             inside.util.cprint(
