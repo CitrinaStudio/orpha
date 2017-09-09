@@ -130,7 +130,7 @@ def new_player():
                             header.CLASSES_ABILITY[player_class]['inte'],
                             header.CLASSES_ABILITY[player_class]['wis'],
                             header.CLASSES_ABILITY[player_class]['cha'],
-                            header.CLASSES_BONUSES[player_class]['dex'] + header.CLASSES_ABILITY[player_class]['dex'],
+                            header.CLASSES_BONUSES[player_class]['dex'] + header.CLASSES_ABILITY[player_class]['dex']))
 
 
 
