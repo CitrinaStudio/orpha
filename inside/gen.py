@@ -35,7 +35,7 @@ def gen_name(size):
         string.ascii_uppercase + string.digits) for _ in range(size)))
 
 
-def gen_map(map_file):
+def gen_map(map_file="default_map"):
     """ Генерация карты """
 
     gamemap = open("inside/maps/%s" % map_file, "w")
@@ -53,34 +53,22 @@ def gen_map(map_file):
             map_natation = nprand.choice(
                 header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL)
 
-            if player_spawn != 1:
-                probabylity_emerge = nprand.randint(0, 10000001)
-
-                if probabylity_emerge < 50:
-                    map_strings += "p"
-                    player_spawn = 1
-
-                else:
-                    map_strings += map_natation
-
-            else:
-                map_strings += map_natation
+            map_strings += map_natation
 
         map_strings += "#\n"
 
     map_strings += "#" * header.DEFAULT_WEIGHT_MAP + "\n"
 
-    if player_spawn == 0:
-        random_spawn_point = nprand.randint(0, 10001)
-        valid_spawn_point = 0
+    random_spawn_point = nprand.randint(0, 10001)
+    valid_spawn_point = 0
 
-        while valid_spawn_point != 1:
-            if map_strings[random_spawn_point] == "#":
+    while valid_spawn_point != 1:
+        if map_strings[random_spawn_point] == "#":
                 random_spawn_point = nprand.randint(0, 10001)
 
-            else:
-                map_strings = map_strings[:random_spawn_point] + \
-                    "p" + map_strings[random_spawn_point + 1:]
-                valid_spawn_point = 1
+        else:
+            map_strings = map_strings[:random_spawn_point] + \
+                "p" + map_strings[random_spawn_point + 1:]
+            valid_spawn_point = 1
 
     gamemap.write(map_strings)

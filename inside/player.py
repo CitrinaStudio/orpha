@@ -34,6 +34,8 @@ def db_check():
         try:
             DB.execute("SELECT * FROM players")
             DB.execute("SELECT * FROM lands")
+            DB.execute("SELECT * FROM bars")
+            DB.execute("SELECT * FROM homes")
 
         except sqlite.OperationalError as err_detail:
 

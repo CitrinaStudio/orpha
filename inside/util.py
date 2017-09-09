@@ -1,13 +1,10 @@
-from colorama import init, Fore, Back, Style
-
-
 import os
-
 import sqlite3 as sqlite
 
-import inside
+from colorama import Back, Fore, Style, init
 
 import header
+import inside
 
 init()
 
@@ -17,7 +14,6 @@ def cprint(msg, foreground = "black", background = "white"): #Функция в�
     style = getattr(Fore, fground) + getattr(Back, bground)
     print(style + msg + Style.RESET_ALL)
 
-import os
 
 def clear(): #Очищение командной строки
     os.system('cls' if os.name=='nt' else 'clear')

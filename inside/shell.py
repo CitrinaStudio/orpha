@@ -69,7 +69,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
             else:
                 player_coor[1] += 1
-                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+                inside.map.get_map_detail(map, player_coor)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -83,7 +83,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
             else:
                 player_coor[1] -= 1
-                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+                inside.map.get_map_detail(map, player_coor)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -97,7 +97,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
             else:
                 player_coor[0] -= 1
-                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+                inside.map.get_map_detail(map, player_coor)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -111,7 +111,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
             else:
                 player_coor[0] -= 1
-                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+                inside.map.get_map_detail(map, player_coor)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -126,7 +126,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             else:
                 player_coor[0] -= 1
                 player_coor[1] += 1
-                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+                inside.map.get_map_detail(map, player_coor)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -141,7 +141,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             else:
                 player_coor[0] += 1
                 player_coor[1] += 1
-                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+                inside.map.get_map_detail(map, player_coor)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -156,7 +156,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             else:
                 player_coor[0] -= 1
                 player_coor[1] -= 1
-                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+                inside.map.get_map_detail(map, player_coor)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -171,10 +171,17 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             else:
                 player_coor[0] -= 1
                 player_coor[1] -= 1
-                print(header.CONVENTIONAL_NOTATIONAL[map_notation])
+                inside.map.get_map_detail(map, player_coor)
 
             if debug_mode == 1:
                 print(player_coor)
+        
+        elif query in ("Mylocation", "Ml"):
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0], player_coor[1]))
+
+
+            print("Your location: %s" % header.CONVENTIONAL_NOTATIONAL[map_notation])
 
         elif query == 'Clear': #Очищение Шелла
             inside.util.clear()
