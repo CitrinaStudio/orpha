@@ -134,7 +134,7 @@ def new_player():
 def change_ability():
     """Изменение параметров персанажа"""
     
-    if player_class = 'Warrior':
+    if player_class == 'Warrior':
         header.CLASSES_ABILITY[player_class]['str'] + 0
         header.CLASSES_ABILITY[player_class]['dex'] + 0
         header.CLASSES_ABILITY[player_class]['con'] + 0
@@ -142,7 +142,7 @@ def change_ability():
         header.CLASSES_ABILITY[player_class]['wis'] + 0
         header.CLASSES_ABILITY[player_class]['char'] + 0
         
-    elif player_class = 'Roge':
+    elif player_class == 'Roge':
         header.CLASSES_ABILITY[player_class]['str'] + 0
         header.CLASSES_ABILITY[player_class]['dex'] + 0
         header.CLASSES_ABILITY[player_class]['con'] + 0
@@ -150,7 +150,7 @@ def change_ability():
         header.CLASSES_ABILITY[player_class]['wis'] + 0
         header.CLASSES_ABILITY[player_class]['char'] + 0
         
-    elif player_class = 'Mage':
+    elif player_class == 'Mage':
         header.CLASSES_ABILITY[player_class]['str'] + 0
         header.CLASSES_ABILITY[player_class]['dex'] + 0
         header.CLASSES_ABILITY[player_class]['con'] + 0

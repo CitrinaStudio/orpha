@@ -88,7 +88,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
                 print("You can't go to this side. There is a wall.")
 
             else:
-                player_coor[0] -= 1
+                player_coor[0] += 1
                 print(header.CONVENTIONAL_NOTATIONAL[map_notation])
 
             if debug_mode == 1:
@@ -154,6 +154,13 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             if debug_mode == 1:
                 print(player_coor)
 
+        elif query in ("Mylocation", "Ml"):
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0], player_coor[1]))
+            print("Your location: %s" % header.CONVENTIONAL_NOTATIONAL[map_notation])
+            print(player_coor)
+            print("h")
+            
         elif query == 'Clear':
             inside.util.clear()
 
