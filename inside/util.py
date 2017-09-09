@@ -18,12 +18,8 @@ def cprint(msg, foreground = "black", background = "white"): #Функция в�
 def clear(): #Очищение командной строки
     os.system('cls' if os.name=='nt' else 'clear')
 
-def db_check():  #Проверка базы данных
-    
-    CONNECT = sqlite.connect("game.db")
-    DB = CONNECT.cursor()
-
-    # Проверка существования таблиц:
+def db_check():
+    """Проверка существования таблиц"""
 
     check_table_ok = 0
 
@@ -31,6 +27,8 @@ def db_check():  #Проверка базы данных
         try:
             DB.execute("SELECT * FROM players")
             DB.execute("SELECT * FROM lands")
+            DB.execute("SELECT * FROM bars")
+            DB.execute("SELECT * FROM homes")
 
         except sqlite.OperationalError as err_detail:
 
