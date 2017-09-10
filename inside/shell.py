@@ -25,14 +25,14 @@ def _get_playerlist():
         print("Character list:")
 
         for i in range(0, len(players), 1):
-            print("№ %d  Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s" % (
+            print("№ %d  Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s " % (
                 i + 1, players[i][1], players[i][2], players[i][3], players[i][4], players[i][5], players[i][6]))
 
 
 def _save_char(player_params, player_coor):
     """Функця сохранения персонажа"""
-    DB.execute("UPDATE players SET age = %s, coor = '%s', hp = %s, mp = %s WHERE name='%s'" % (
-        player_params[2], "%s, %s" % (player_coor[0], player_coor[1]), player_params[5], player_params[6], player_params[1]))
+    DB.execute("UPDATE players SET age = %s, coor = '%s', hp = %s, mp = %s, str =%s, dex =%s, con =%s, inte =%s, wis =%s, cha =%s WHERE name='%s'" % (
+        player_params[2], "%s, %s" % (player_coor[0], player_coor[1]), player_params[5], player_params[6], player_params[7],player_params[8], player_params[9], player_params[10], player_params[11], player_params[12], player_params[1]))
 
 
 def _play_start(player_params, debug_mode=0, map_file="default_map"):
@@ -179,11 +179,17 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
         elif query in ("Mylocation", "Ml"):
             map_notation = inside.map.get_map_point(
                 map, (player_coor[0], player_coor[1]))
+        
 
             print("Your location: %s" %
                   header.CONVENTIONAL_NOTATIONAL[map_notation])
 
-        elif query == 'Clear':  # Очищение Шелла
+            print("Your location: %s" % header.CONVENTIONAL_NOTATIONAL[map_notation])
+        
+        elif query in ("Myparams", "Mp"):
+            print("Your params: \n hp: %s\n mp: %s\n\n Abilityes: \n\n str: %s\n dex: %s\n con: %s\n inte: %s\n wis: %s\n cha: %s" % (player_params[5], player_params[6], player_params[7], player_params[8], player_params[9], player_params[10], player_params[11], player_params[12]))
+
+        elif query == 'Clear': #Очищение Шелла
             inside.util.clear()
 
         CONNECT.commit()

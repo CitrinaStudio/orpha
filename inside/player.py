@@ -36,6 +36,12 @@ def db_check():
             DB.execute("SELECT * FROM lands")
             DB.execute("SELECT * FROM bars")
             DB.execute("SELECT * FROM homes")
+            DB.execute("SELECT * FROM rivers")
+            DB.execute("SELECT * FROM shops")
+            DB.execute("SELECT * FROM mountains")
+            DB.execute("SELECT * FROM caves")
+            DB.execute("SELECT * FROM fields")
+            DB.execute("SELECT * FROM forests")
 
         except sqlite.OperationalError as err_detail:
 
@@ -119,18 +125,18 @@ def new_player():
     # Попытка записи в БД и проверка существования идентичного персонажа
     try:
         DB.execute("""INSERT INTO players (hash, name, age, class, coor, hp, mp, str, dex, con, inte, wis, cha)
-                        VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s')""" % (
+                        VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')""" % (
                             player_hash, player_name, player_age, player_class,
                             str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)),
                             header.DEFAULT_HP + header.CLASSES_BONUSES[player_class]['hp'],
                             header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp'],
-                            header.CLASSES_ABILITY[player_class]['str'],
-                            header.CLASSES_ABILITY[player_class]['dex'],
-                            header.CLASSES_ABILITY[player_class]['con'],
-                            header.CLASSES_ABILITY[player_class]['inte'],
-                            header.CLASSES_ABILITY[player_class]['wis'],
-                            header.CLASSES_ABILITY[player_class]['cha'],
-                            header.CLASSES_BONUSES[player_class]['dex'] + header.CLASSES_ABILITY[player_class]['dex']))
+                            header.CLASSES_ABILITY[player_class]['str'] + header.CLASSES_BONUSES[player_class]['str'],
+                            header.CLASSES_ABILITY[player_class]['dex'] + header.CLASSES_BONUSES[player_class]['dex'], 
+                            header.CLASSES_ABILITY[player_class]['con'] + header.CLASSES_BONUSES[player_class]['con'],
+                            header.CLASSES_ABILITY[player_class]['inte'] + header.CLASSES_BONUSES[player_class]['inte'],
+                            header.CLASSES_ABILITY[player_class]['wis'] + header.CLASSES_BONUSES[player_class]['wis'],
+                            header.CLASSES_ABILITY[player_class]['cha'] +  header.CLASSES_BONUSES[player_class]['cha']))
+                            
 
 
 
@@ -143,3 +149,4 @@ def new_player():
     #inside.log.logging.info("Персонаж записан в БД!")
 
 #def change_params():
+    '''Функция изменения параметров игрока'''
