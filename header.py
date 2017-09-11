@@ -2,6 +2,8 @@
 
 import numpy as np
 
+import inside
+
 PLAYER_CLASSES = ("Warrior", "Roge", "Mage")
 QUANTITY_PLAYER_CLASSES = len(PLAYER_CLASSES)
 
@@ -106,9 +108,11 @@ CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
     "f": "fields",
     "F": "forests",
     "R": "rivers",
+    "V": "villages"
+
 }
 
-CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = ["H", "S", "B", "M", "C", "f", "F", "R", "b"]
+CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = ["H", "S", "B", "M", "C", "f", "F", "R", "b", "V"]
 
 
 DEFAULT_PLAYER_X = 0
