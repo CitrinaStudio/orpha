@@ -35,6 +35,12 @@ def db_check():
             DB.execute("SELECT * FROM lands")
             DB.execute("SELECT * FROM bars")
             DB.execute("SELECT * FROM homes")
+            DB.execute("SELECT * FROM rivers")
+            DB.execute("SELECT * FROM shops")
+            DB.execute("SELECT * FROM mountains")
+            DB.execute("SELECT * FROM caves")
+            DB.execute("SELECT * FROM fields")
+            DB.execute("SELECT * FROM forests")
 
         except sqlite.OperationalError as err_detail:
 

@@ -25,6 +25,38 @@ CONNECT = sqlite.connect("game.db")
 DB = CONNECT.cursor()
 
 
+def db_check():
+    """Проверка существования таблиц"""
+
+    check_table_ok = 0
+
+    while check_table_ok != 1:
+        try:
+            DB.execute("SELECT * FROM players")
+            DB.execute("SELECT * FROM lands")
+            DB.execute("SELECT * FROM bars")
+            DB.execute("SELECT * FROM homes")
+            DB.execute("SELECT * FROM rivers")
+            DB.execute("SELECT * FROM shops")
+            DB.execute("SELECT * FROM mountains")
+            DB.execute("SELECT * FROM caves")
+            DB.execute("SELECT * FROM fields")
+            DB.execute("SELECT * FROM forests")
+
+        except sqlite.OperationalError as err_detail:
+
+            table_name = str(err_detail).split(": ")[1]
+
+            inside.log.logging.error("Структра БД повреждена!")
+            inside.log.logging.error("Таблица %s не найдена!" % table_name)
+            DB.execute(header.TABLES_CREATE_COMMANDS[table_name])
+
+            inside.log.logging.info("Таблица %s успешно создана" % table_name)
+
+        else:
+            inside.log.logging.info("С БД всё хорошо!")
+            check_table_ok = 1
+
 
 def _intput_check_error(err_msg, input_msg):
     """Проверка введенного занчения"""
@@ -92,12 +124,21 @@ def new_player():
 
     # Попытка записи в БД и проверка существования идентичного персонажа
     try:
-        DB.execute("""INSERT INTO players (hash, name, age, class, coor, hp, mp)
-                        VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s')""" % (
+        DB.execute("""INSERT INTO players (hash, name, age, class, coor, hp, mp, str, dex, con, inte, wis, cha)
+                        VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')""" % (
                             player_hash, player_name, player_age, player_class,
                             str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)),
                             header.DEFAULT_HP + header.CLASSES_BONUSES[player_class]['hp'],
-                            header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp']))
+                            header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp'],
+                            header.CLASSES_ABILITY[player_class]['str'] + header.CLASSES_BONUSES[player_class]['str'],
+                            header.CLASSES_ABILITY[player_class]['dex'] + header.CLASSES_BONUSES[player_class]['dex'], 
+                            header.CLASSES_ABILITY[player_class]['con'] + header.CLASSES_BONUSES[player_class]['con'],
+                            header.CLASSES_ABILITY[player_class]['inte'] + header.CLASSES_BONUSES[player_class]['inte'],
+                            header.CLASSES_ABILITY[player_class]['wis'] + header.CLASSES_BONUSES[player_class]['wis'],
+                            header.CLASSES_ABILITY[player_class]['cha'] +  header.CLASSES_BONUSES[player_class]['cha']))
+                            
+
+
 
     except sqlite.IntegrityError as err_detail:
         if "UNIQUE" in str(err_detail):
@@ -106,3 +147,6 @@ def new_player():
     #inside.log.logging.info("Персонаж создан!")
     CONNECT.commit()
     #inside.log.logging.info("Персонаж записан в БД!")
+
+#def change_params():
+    '''Функция изменения параметров игрока'''
