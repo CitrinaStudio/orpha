@@ -231,7 +231,32 @@ def init(debug_mode=0):
             player_params = list(DB.execute(
                 "select * from players where name='%s'" % player_name))
 
-            _play_start(player_params[0])
+            try:
+                _play_start(player_params[0])
+            
+            except IndexError:
+                inside.util.cprint("Player not found! Try again", "red")
+
+                while_exit_status = 0
+
+                while while_exit_status != 1:
+                    _get_playerlist()
+
+                    player_name = input("\nInput character name: ")
+
+                    player_params = list(DB.execute(
+                        "select * from players where name='%s'" % player_name))
+                    
+                    try:
+                        _play_start(player_params[0])
+                    
+                    except IndexError:
+                        inside.util.cprint("Player not found! Try again", "red")
+                    
+                    else:
+                        while_exit_status = 1
+                    
+                    
 
         else:
             inside.util.cprint(
