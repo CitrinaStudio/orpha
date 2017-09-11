@@ -29,18 +29,19 @@ def _get_playerlist():
                 i + 1, players[i][1], players[i][2], players[i][3], players[i][4], players[i][5], players[i][6]))
 
 
-def _save_char(player_params, player_coor):
+def save_char(player_params, player_coor):
     """Функця сохранения персонажа"""
     DB.execute("UPDATE players SET age = %s, coor = '%s', hp = %s, mp = %s, str =%s, dex =%s, con =%s, inte =%s, wis =%s, cha =%s WHERE name='%s'" % (
         player_params[2], "%s, %s" % (player_coor[0], player_coor[1]), player_params[5], player_params[6], player_params[7],player_params[8], player_params[9], player_params[10], player_params[11], player_params[12], player_params[1]))
 
 
-def _play_start(player_params, debug_mode=0, map_file="default_map"):
+def play_start(player_params, debug_mode=0, map_file="default_map", recursion_count=0):
     """Игровой процесс"""
     if debug_mode != 1:
         inside.util.clear()
 
     map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
+    print(player_params)
 
     if player_params[4] == "(0, 0)":
         player_coor = list(inside.map.get_player_spawn(map))
@@ -52,12 +53,16 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
         query = string.capwords(input('~> '))
 
         if query == 'Save':
-            _save_char(player_params, player_coor)
+            save_char(player_params, player_coor)
 
-        elif query == 'Exit':
-            _save_char(player_params, player_coor)
+        elif query == 'Exit' and recursion_count == 0:
+            save_char(player_params, player_coor)
 
             inside.util.cprint('Exit to main menu.', 'green', 'black')
+            return 0
+        
+        elif query == 'Exit' and recursion_count != 0:
+            print(000)
             return 0
 
         elif query in ("North", "N"):  # Передвижение на север
@@ -69,7 +74,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
             else:
                 player_coor[1] += 1
-                inside.map.get_map_detail(map, player_coor)
+                inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -83,7 +88,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
             else:
                 player_coor[1] -= 1
-                inside.map.get_map_detail(map, player_coor)
+                inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -97,7 +102,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
             else:
                 player_coor[0] -= 1
-                inside.map.get_map_detail(map, player_coor)
+                inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -111,7 +116,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
 
             else:
                 player_coor[0] -= 1
-                inside.map.get_map_detail(map, player_coor)
+                inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -126,10 +131,13 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             else:
                 player_coor[0] -= 1
                 player_coor[1] += 1
-                inside.map.get_map_detail(map, player_coor)
+                inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
+        
+        elif query in ("Recurslevel", "Rl"):
+            print("Current rec. level: %s" % recursion_count)
 
         elif query in ("Northeast", "Ne"):  # Передвижение на Северо - восток
             map_notation = inside.map.get_map_point(
@@ -141,7 +149,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             else:
                 player_coor[0] += 1
                 player_coor[1] += 1
-                inside.map.get_map_detail(map, player_coor)
+                inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -156,7 +164,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             else:
                 player_coor[0] -= 1
                 player_coor[1] -= 1
-                inside.map.get_map_detail(map, player_coor)
+                inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -171,7 +179,7 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             else:
                 player_coor[0] -= 1
                 player_coor[1] -= 1
-                inside.map.get_map_detail(map, player_coor)
+                inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -187,7 +195,9 @@ def _play_start(player_params, debug_mode=0, map_file="default_map"):
             print("Your location: %s" % header.CONVENTIONAL_NOTATIONAL[map_notation])
         
         elif query in ("Myparams", "Mp"):
-            print("Your params: \n hp: %s\n mp: %s\n\n Abilityes: \n\n str: %s\n dex: %s\n con: %s\n inte: %s\n wis: %s\n cha: %s" % (player_params[5], player_params[6], player_params[7], player_params[8], player_params[9], player_params[10], player_params[11], player_params[12]))
+            print("Your params: \n hp: %s\n mp: %s\n\n Abilityes: \n\n str: %s\n dex: %s\n con: %s\n inte: %s\n wis: %s\n cha: %s" %
+            (player_params[5], player_params[6], player_params[7], player_params[8],
+                player_params[9], player_params[10], player_params[11], player_params[12]))
 
         elif query == 'Clear': #Очищение Шелла
             inside.util.clear()
@@ -233,7 +243,7 @@ def init(debug_mode=0):
                 "select * from players where name='%s'" % player_name))
 
             try:
-                _play_start(player_params[0])
+                play_start(player_params[0])
             
             except IndexError:
                 inside.util.cprint("Player not found! Try again", "red")
@@ -249,7 +259,7 @@ def init(debug_mode=0):
                         "select * from players where name='%s'" % player_name))
                     
                     try:
-                        _play_start(player_params[0])
+                        play_start(player_params[0])
                     
                     except IndexError:
                         inside.util.cprint("Player not found! Try again", "red")
