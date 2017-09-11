@@ -212,6 +212,7 @@ def init(debug_mode=0):
             inside.player.new_player()
 
         elif query == 'Quit':  # Выход
+            inside.util.clear()
             inside.util.cprint('Good Bye!', 'green', 'black')
             exit(0)
 
@@ -225,7 +226,7 @@ def init(debug_mode=0):
 
         elif query in ("Loadplayer", 'Lp'):  # Загрузка персонажа
             _get_playerlist()
-
+            
             player_name = input("\nInput character name: ")
 
             player_params = list(DB.execute(

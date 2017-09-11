@@ -42,6 +42,7 @@ def db_check():
             DB.execute("SELECT * FROM caves")
             DB.execute("SELECT * FROM fields")
             DB.execute("SELECT * FROM forests")
+            DB.execute("SELECT * FROM briges")
 
         except sqlite.OperationalError as err_detail:
 
