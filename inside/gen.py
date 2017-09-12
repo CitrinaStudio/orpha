@@ -82,3 +82,35 @@ def gen_detail_map(map_arr):
             if map_arr[x][y] != "p" and map_arr[x][y] != "#":
                 print(True)
             
+def gen_village():
+    
+    name = gen_name(64)
+    
+    gamemap = open("inside/maps/%s" % name, "w")
+    
+    map_strings = ""
+
+    map_strings += "#" * header.DEFAULT_WEIGHT_MAP_VILLAGE + "\n"
+
+
+    for _ in range(0, header.DEFAULT_QUANTITY_MAP_STRING_VILLAGE - 2, 1):
+        map_strings += "#"
+
+        for x in range(0, header.DEFAULT_WEIGHT_MAP_VILLAGE - 2, 1):
+            
+            map_natation = nprand.choice(
+                header.CONVENTIONAL_NOTATIONAL_VILLAGE)
+
+            if map_natation == "H" and random.random() > 0.7:
+                map_strings += map_natation
+                
+            else:
+                map_strings += " "
+
+        map_strings += "#\n"
+
+    map_strings += "#" * header.DEFAULT_WEIGHT_MAP_VILLAGE + "\n"
+
+    gamemap.write(map_strings)
+
+    return name
