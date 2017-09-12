@@ -45,29 +45,29 @@ CLASSES_BONUSES = {
 }
 
 CLASSES_ABILITY = {
-    'Warrior':{
-        'str': np.random.randint(4,10),
-        'dex': np.random.randint(2,5),
-        'con': np.random.randint(4,9),
-        'inte': np.random.randint(1,3),
-        'wis': np.random.randint(1,3),
-        'cha': np.random.randint(2,5)
+    'Warrior': {
+        'str': np.random.randint(4, 10),
+        'dex': np.random.randint(2, 5),
+        'con': np.random.randint(4, 9),
+        'inte': np.random.randint(1, 3),
+        'wis': np.random.randint(1, 3),
+        'cha': np.random.randint(2, 5)
     },
-    'Roge':{
-        'str': np.random.randint(4,7),
-        'dex': np.random.randint(4,9),
-        'con': np.random.randint(3,5),
-        'inte': np.random.randint(1,4),
-        'wis': np.random.randint(1,4), 
-        'cha': np.random.randint(2,5)
+    'Roge': {
+        'str': np.random.randint(4, 7),
+        'dex': np.random.randint(4, 9),
+        'con': np.random.randint(3, 5),
+        'inte': np.random.randint(1, 4),
+        'wis': np.random.randint(1, 4),
+        'cha': np.random.randint(2, 5)
     },
-    'Mage':{
-        'str': np.random.randint(2,6),
-        'dex': np.random.randint(2,5),
-        'con': np.random.randint(2,5),
-        'inte': np.random.randint(5,10),
-        'wis': np.random.randint(5,10),
-        'cha': np.random.randint(2,6) 
+    'Mage': {
+        'str': np.random.randint(2, 6),
+        'dex': np.random.randint(2, 5),
+        'con': np.random.randint(2, 5),
+        'inte': np.random.randint(5, 10),
+        'wis': np.random.randint(5, 10),
+        'cha': np.random.randint(2, 6)
     }
 }
 
@@ -98,7 +98,8 @@ CONVENTIONAL_NOTATIONAL = {
     "R": "River",
     "b": "little Bridge",
     "p": "Player spawn",
-    " ": "***Wind***"
+    " ": "***Wind***",
+    "V": "Village"
 }
 
 CONVENTIONAL_NOTATIONAL_ENTER_POINT = ["V"]
@@ -120,7 +121,8 @@ CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
 
 }
 
-CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = ["H", "S", "B", "M", "C", "f", "F", "R", "b", "V"]
+CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
+    "H", "S", "B", "M", "C", "f", "F", "R", "b", "V"]
 
 
 DEFAULT_PLAYER_X = 0

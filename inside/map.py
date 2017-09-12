@@ -12,6 +12,7 @@ DB = CONNECT.cursor()
 
 inside.util.db_check()
 
+
 def get_map_point(map_arr, coor):
     """ Получить значение, находящееся по заданным кооринатам """
 
@@ -36,7 +37,7 @@ def get_player_spawn(map_arr):
 
 def get_map_detail(map_arr, coor, player_params):
     """Получить детальное описание местности"""
-
+    print(player_params)
     map_notation = inside.map.get_map_point(
         map_arr, (coor[0], coor[1]))
     coor_hash = inside.gen.gen_crc32_hash(str(coor))
@@ -44,14 +45,13 @@ def get_map_detail(map_arr, coor, player_params):
     print(map_notation, coor_hash)
 
     if map_notation in header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES:
-        print(list(DB.execute("SELECT * FROM %s WHERE coor_hash='%s'" % (header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash))))
+        print(list(DB.execute("SELECT * FROM %s WHERE coor_hash='%s'" %
+                              (header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash))))
     else:
         print(5)
-    
-    inside.shell.save_char(player_params, coor)
-    
+
     if map_notation in header.CONVENTIONAL_NOTATIONAL_ENTER_POINT:
         player_params = list(player_params)
         player_params[4] = "%s, %s" % (coor[0], coor[1])
-        inside.shell.play_start(player_params, recursion_count=1, map_file=header.NAME_MAPS_FILES[map_notation])
-    
+        inside.shell.play_start(
+            player_params, recursion_count=1, map_file=header.NAME_MAPS_FILES[map_notation])
