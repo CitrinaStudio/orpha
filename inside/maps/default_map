@@ -1,100 +1,100 @@
 ####################################################################################################
-#SCSCCVfbBMCRbCfSRMCMHSFfRHCffBVSRBVbBFFCFRSCVfFCFMMCHCfCfHSVCFfCCCBMBSSBBRbVVRRffCRbCMSMCHSRRVFbHC#
-#FCfVRfFCbMCHHCHFbHMFHMSbMVbBRMRbbHRfVRCFRVCHSbRHCSVVbRbFSRFMRbRRHHHRSVSMBCCVRBVSSBfHbFFBbMHRCFRSHH#
-#RBfbCCfVFbHBBVVVMRBHHfHVCfSbHRBCVFbHRFbBVRfMSSBFbVfVHSFCMVHVMMMFMSbfHRSFVCRHSRHFMRHBFRSHHfSSMHSFRR#
-#bSCbHFSRRRRHMffCBRBBCBHMSVFfRCBRBCfCSbHVbCRSBMRbbBBVbfMfBCbbFHHbfRMSfMFfVMCCBHHBRbVfSFfVfFVHHVRMbB#
-#fBRBMCfMffCFMMBfFHBBfRCbFHVfVHBMSMHSbCHRFHBHBfRMRSfHfRHfSCFRSMFSbVfMSbbRCfbSSVBVFbBVMCBRfbSBVCbMbb#
-#MRFFCHHbbSCFSCMMCVbBVHVbHVSCffRVVCfVSFfHSVCCRfVFBSRbBCfFHbBBRbVbSRbMRFCSVSfSSfRbVRRCSCSffBSRffCFfH#
-#HBHfMMVHVCRbbSFFSSVHBbBVfVHFHVCfFFSbMCCbCHCbBVCCVCFRCRMMfBHSSBFbVCBSBVBbHMMbHCMfCSHHHFCFRHfFMfVRCS#
-#CbBbbHSbFSfFSVHVRRSVRbRMRSfCbfFVbbHfRbVFVVVMHbfCVMVBBHSFHRbCRbRVFVFBCHHVCHSHRCbBbFHFbfbfMFVfCBMBVC#
-#RSRbCfHfbVFfFSBVMHfBVfBSMCMBVfHMbSRRRHHFMHFFRFRVBMfFbfSbSCBMBFBRFFBRFRSFMSBMBSCVfSCBCfbVHRHCbbHHMC#
-#SRBbBSRSVbRfFbHFfBHVSfBVRSVBSCbHbFRVMFfCHHRMVfCFFHfffSHbSHVHCFHHfCBBMBfFSSbHVHBHCbBMMbfbSfFFBRHbVV#
-#bHSCFSfSMRCHRRMCbfVfCFFVBHMHCCFRSHRFbHVMbMfRVCRMMVRSfFVVHfRMCBVRbfFHVVBMFVFBMMBHBRVMMHHFbCHRCbffSH#
-#CCSHRSMffHHFbCCFCFfbffCfVbMRVSHHfMSfFCBVRHHFBBfbFFRHSHVVRbRSHHVFFbMCRFCVFHRSfbMfCFBCCVMBVBFCVRVSMB#
-#CFfffCfMHCVHHFBFbVMHRbHMCVfbBRSBbSRMFFSBfHfCCSCRSBSBFMRbVbVbFfSVCBHHbBVffRfHVRBHSBfbMHMRCMRBCSbCfV#
-#MSFFVHfCFRVRRBMFHMFMCSFSRFSVMRFRFRRBCCFHSMVCRHFRbCbSFCRfHBFVbMCfHVBCHSBfSBRBbRffMCVMSRBbFfSMMBRVFf#
-#VFfMVfbffSHCSbCbHCCCSSRVSfHRRRfSSHMfRSHMCBVFRHCRVBVVbRbfRRbRMHBRSHbBMBSCHCMCVCCMFHFbSCRfBMRBMHVbbF#
-#fCRHVRbSVCRSSbSVVCFHbfHVCCMVFbMSbVCVCBMCFCHbbCMVHHbMCVVFfCCfHRRRfMSbVRBFCMMCbMfRCbMRRRVRFfMbFCSRCH#
-#ffbSHbHRVSMBCHRMRBCfBfMCfRFCMFMSCRMMBBbSVRfBVHHBHRbBHMSHHFSBHMMbbVSMMRRSCVVRMSVBMSMFMSBBFVfCfMCHHf#
-#fVCFFFHFBCfVbSbMCMFFMSbMFBCMHBFbbbfbbfMHHSBFBFBfSMMHfbSfCMfMHFFVRfFCSFSFbSfRHbFMCVbHVRbBbCSbbHRRRR#
-#bRCFCFFFFBfBbVFHMBMFffCFFCfbSSbbbfVFbSVffHRHfRVHfVfSFRffVCSfCfHCCbBbbCbfbFRFCRVbSbMHFRfSSSBMfFfBBF#
-#RRVSHSVRbBRFCSCRMBSVFBffCVMCBbfHVffFHVVSSBVMMHBBCRVSSVfbFMfbBFFBFHVfSbSVMSfSRCCMHBHMHHRFbCMHHbVFHR#
-#RCRRbBMRfRMCHfSBHbVVSMfMbRBVBHCCFRSCSCbRBCFMHRRSfSCFSBbMVCBCHFbRHHBHVCVCCMfHbCVRbRCSFFbVffSCBHbVVH#
-#bHFbfHMbBMBSbSMRbbbMHMBRSHVMfBBHRBCHSHbHFVbVbMBCRVbVRSbVHCRRbBHRSBSFfFffSfMBbbVCFCbHVHRbBbBCFVRfSV#
-#SHffMbSCbfSbRfCFbVVMBSRbfHHCfHHbRHVbBMMFVHffbFbBfVfSSBSfMBfBHFRfSMRbbHBHBSBffSFRBRbCbBCHCHbSMVBSCR#
-#MbRSbCFFbVVffSRRVbVBBMfHbHRMFSFBCSBfVBHVCBSMRbffBfHSffCVRBCCSSMFCBFVBCfFCSRSCMffSfHSbMBfFfHVMfSfHH#
-#BMBSMRMSRMRbfCHRbVbbSfRbVbRVHfBRRVSMCfCRFBMHCVBbRSFBSMVSbFCFMBBHSCBCfRHMFRBbHfCCfSffFfVVMHCFRRHVMC#
-#bSVMfbbBHSVCMVSFCSFMFHCVSCHBMMHFFFFFHHBCBRfMFCCCbfbSVVVMMCVMBBHRMVbFCRRBBFMFHFCVbMSHHCSSVBVBCVBVHf#
-#SSHMVRCVBFfMSHfHHMRVfFBBfMHbHVCCfVFMFMfRRHRFFFFSFRbCFVMBSMVFSVbHVVRVbHffMVBMHRCRHFVVCSbFBBRHSbVCbB#
-#CBfVFBbSVSFSMbRfffVCCBHVMbSfMBMfbfRSRRfCMfSRfBMVCBHbBMSMCFRBHVSFBFVMCFVRSFVBVHfCSBRRCMMCVBfVBMbSRS#
-#MFVCCVBFfFfSRbFBSSHHFRMRBVFBBBbFVSfFFSfbHSbVRfSfCVVbBMbHRHMFCHHHVHBbHVVFRfMVFFBbRRMMBfSFSCbFVbFFCV#
-#fCSSRSHFBVffMFSHBfMFHfFSbfVSVMSBHbMMCVVBHbMBfHfCRHCSFFSfMRMfFSBSBbRHMfSHCbfSbMVBRVBFSbCMfFRSbSVfVF#
-#FVCSFRCbFVBfCffHbfVCRHBFCSFMCVFMFfFbRFVVMHBCCBbfSbfbCVBHBBHbfHVHMMVVffFVCRFFMRVCRSRfBBfRCVBBBSbffV#
-#CSbSSBCFfMfCfFVRFVMBCHMVMSbBVbSSFMVRFHVfSfMbHCCCSMSCbHSVCbSSVSRbFSbfBMfHSffHRbSbbSFFHVSfRHBRHRHFSR#
-#HBVCRHMfVMMHSHbBFRfBMBVFbRbHfCFRRffHbMSBVCfFFHRbFSMCSBRCCHRCSbffCBCBCSSbRSfbFbSfRBfHRHBbFVMMCBCHRC#
-#VfVbSRbMVMFbVHFVRVMRFFFfHCbbSHHRVFBBBBbHBSbMCBRVRHbHMCHCRMMRVSbFCFbCRBFRHbBBHRRMMRRVfCSFVbBfMSBSBb#
-#CVRbVHMfMbRBCCSfSFBFMFVRBBfbSFFSVSfbfFfVfHBHBHVRHBFHSBRBBbFCFFfHFBVVbbHBBHVbHbSMHVVRffBFCBCMbRfHVF#
-#MBRRBbRfFVbRBbVHBRCMRSfRFCfHFHCBbSRbRVMFFSHHMHfbBHCHfMSMHFbfBRFSVbFMMVRbRVVCFHSfHfBbFRCSCVfHVCbHHC#
-#bBHBFCHBfCMRCVMHCbRRHCHfbBSMfBCRRBVVCfBVbVSBRHBfMfCMfbSCFfCVBMCBMHMCbVBBFCBRCFMHHCRRFMBMRVHRBSCfHb#
-#MBRfBHRSFFfFSCFVHMbBbSHBRffMBHbBSRRCfFMbBCVHHCCVfFFCFVBSVBFfHHHVHbBbBBSFHCBHFBSSbCMVVMBbCbVMbCfMCR#
-#HCCVVRVSSBVBMVBFVMFMRCRSffbbFFBCRRMFSRCRMHbbBMVBMFBFRMfCFCBSRMFMRSbSfCfffRVSBfVMHMbFbVSFHVfBbRFBff#
-#bfMbRFbfFHMHRSSfVCFSbCCCRVVCCHSFSRSSVBbMHHCSSBSVBSbfCBFCVfBFSCFFfRCMVfRMRFFSBMRffMMSMHBRbFRMFVMbVH#
-#MMfBfCBMCfSFSBHfCVSbfBRMMCHBfbHMCMbMSBVRCCMCCFMVVCbVBFMbfbBMFFSRFCRfHVSSFVVHVbBRMbfRHFCbFSRHSVCfRF#
-#bCMbSbHbBbfBMVbbfSFMbbSBMRSFSCSRMRSfFVRMVRVFCFRHRSHRFMBVMHbBBRHMBCBbSbbSRBMVVMCMfSVbbBCVSRSRBbRRCF#
-#fVMHCbVRRRCFBHBbVbFHBMfVfCHbCBVbfSMMCCHRBFVbHFBMVRSBFfBCfMVBBMBVHMFCBfVRRRBbMSSFHMVHbMbFHFBHCSRMfC#
-#SMRRCbVHBSMMVFVfSVfHSRbVRBBMfbfMfVCRCbBbCSVFRMMSHbFCSVBRMFBbfBfRHFHSBbFCHHCHBVVRFBVFbMRSfVBVHRCVRb#
-#fRbHSRbSCRbMCfHFbMBVVbCBRbBbCHHSfSHFMVMHVVHbBRSfCFMMbMBCRCbBbSbfCRbVCCCMFfFfBfFBbVCBMfCBCCFFFRRHVS#
-#ffMfHFFbBbVMMRMbfRCMHbBFfVbHbBSMFFCBCRFMVbffVMRSCfSMfFMVFRHMVFfHRbfRfRfMMFFHBMSMVFHFSFSVBfSRMHBHVS#
-#FCBfRCFFRRCVbHSfffbHHfCSCFRBRMCMCMbMBBffFfHSBbCHSBMVHbFCCFfbFbHMHBHFfBBfVFbbHbCFCVRHCVCHbSRVRbSMbF#
-#SFVFFHCRBfFVSMffHHBCCRbRHMRMBRbFFCHVffMHSCFfHbSRFCbSfCFFSFCHVfFCbbMBMSVRRMRFfCSMBRHMVRVRHBFCBRBCBS#
-#SCFSfCCRMRSHBCRHHfCSfMMBRFfBBffbfBbBMFMSBHFMSbbCMSVbMMRSVCbfbBVSVBSSSRVFRbfCfFbbHMHfFMfRCHfFFMVSHC#
-#BCBHRVBffCfBbfFVHBfFSSFSBCHfRBbfFfVCVFfFRFBVVCfVSCCCBVHbHfMBfRSMHFbMFSRHRMMfFCffFSBbBCRBSHbHFCCBbH#
-#SMFVCfRbRfFRVRCCBBHMCBBBHCCBCbFFbHfSRHfVfHVfBCMCCBBCHbHVVfBSHCRHVBCCVMCHCCbBHVCSHfVRVBHHMCFRRVMCVM#
-#VfMHRSHSHCFCRFfFRBMCSRCfFFCfCSMHMVRFBfVHCRCVRfHfRFHCfMVbHFSBVCCfVbfCSbMRHFBfMFCHMMbRfSffBfHSBfVVRC#
-#fFHSCHSfCBSfHBHfSbMRRSVHHbfbBFfbMbRHVBbVRRHHRMRffRMVBFBffFHRffBHRBFbBBMCBRCbBbRbRRbVbRBBMSVBBSBCVF#
-#BVFHMFRVRHfBRfFSfbVHCBMbMRMFbMSBSCCSVBVCRBffHBCRBSbCHRbHSVFFBbCHFbHBBCCBbVSbBFFBbfCSSFSfMSSMHRFBRC#
-#RCfBbBMfbRfVHRMfSHFfMfSHVfMMRFfHVBFHVMBffHFfFBfVbbRbHHfHRbCFRbfHMVbRHHVbBRBCbBMHBfVRSfFHMCVbSMfFVC#
-#VSCCSFFBSbHffHRbBCMVBCHBMHMffMBMbCMbbFRVbFFbMCbfMVVRHBSBbFMSVSVVfffCbbbCbVCBFVMBBfVHHfCSbfFBfbbHCF#
-#CHRfMbBRCHfMRHMRbCHRVMMbfHBCHVRFHBfBRbFSHHFfMFCCVbCCRVCVBVSFHfRbVBSFFVRVbHMbSMVFMRRVBfRHHfFHFBMFSS#
-#fFRSFBBMFfSVRHbSSBBRVffBSHFSSVfVfMMbBSHCMRRVFbMVHMBFBbBfFFMCBMMVSFbfVSMCVCfHCMMSSMBHSCFMbVMbRMFMBf#
-#RVVSFFHbCFSCfSHFfbRCSSCMRBbSfMCfFbMBfFCVbVbSCRMHFBbVMbMCBFHHVBbBVHbVBbVRFVMBHBBbFBRbVSHffFRHRSfRfB#
-#bBbCMBFFfMSbFfMHSFRbBBFSMfbSVCRSbHfRSBbbFFBFRRfbCCbVCBfBCfMMFVbbHBVSVSSMSFbRVFSRVSVRBSHMMSRbBRSRBf#
-#fFVfbBfRbBSMFMMRBbMCCRbVVbBHSSbFCBHFHCHSCSFCMHfMHfbFbBRVfSHCHSRBCCfRMCbFRbbbbHMFSfVCMbHfCBfVMSSfFf#
-#BSCSMMRVMBCSHFHCCRSFFMRBBfMHMSFffMRFCCFHCVFMHbbRFHRCFfbMBSVVVbVFMFFHFVMCBFSCfVSbVCRRBBBbfMBRFCbFCB#
-#bHfRHfCfRBSfRFbfbSCRBHMfRbSMVFbVFbbSFMFFVCffRbfMVRfRBFVFbRFMMMRCVCCHCVHFSffVCbBCBMfBHCfbRBffCRffCC#
-#MRMbfHbfMbMfCRMMHFHCRRfHVFMVFCBRHCfBfFFSHRCbBFRfCCbBHRbSRVSbBCFBSfVbbMfBRbSVFHCCfHSbCHHSHfRVbVbFSF#
-#RSCbbFSSCHSSbFRbCSBbHMFCbSHVbFBRRCBVbbCVMCHMFFRfFBHHHBFHVRfCfRMMHCFFSSfCbVFVRVfFVfMVMVMBMSbVFfBHRS#
-#SVRbSfHHRSVfMSfMBRbCVVBVbRCbRVRfMHCBMMSRHfMFRBbRFMfSMHHMBfCfCfVBMRCHRRRbBBbbFVVCVHBBFRSBFCRHSBCSMV#
-#CRbbHBSFRMSCFHbbVRCCRRFSFCRBfCSVVSBFffRRbVfbbRbHCbfBfMFSfSfFfMVbCSBRSHVVSVFHBVfRfVVVBRMbHHfbVMCbBB#
-#MVSfVfCRbFMfFfCFRFRBSBBSFBRbfSCVfFSCRFSCCBbRbFbBBRfMbHfbbRMbfHfSbBMHFCHbBHMSVFBSMCVRHVVfbRHVRfMBHb#
-#BFVCRCSFHFCRCBVbVMBVBFRCMbVVHfHMMbBRbFbHRRHBBVMbMMFHRHffVbVMBMBVCfBBfRVbSFVHfBbBVHHMSCMFHbBBHHfVFb#
-#BMVFfCFCbMbBRCfVVCBbVVfBSRbHMHfFSRSfSCFBSFVSfSBSCCFHfCVMSCSFVHRRSffbRMVfRVVMRSbBMHbVbfVbbFHBVFCHSM#
-#bbfBHMBVfCVHVRRMfBCHbfBfRRSbFHFMCFHCSBFSMFSBHSRSBVCSbFSSBMbBHRFfbCBRbfbRVMCfHSbbFBHHFSFBbbbHfSRHBf#
-#CCCSBBbffBFBVbFFVSFbBMFBFfSCfFBCMHbSffCVbMbFRBHVfBVSFVVbbHMHSfHBVbVVBCfVHBFMRMVFRRMRBbHVRMbHMRfCHB#
-#CFMMFSfHbFfHHFHMCRMCBFRbRfBHCfHRCSSfBRMFHfbCbbCBFbMFBFVHVFCfVSHVBHMRfSRRbfFfCbFVBBRMHbVbFMbSbFFfbS#
-#bHCfCMBbVVMRRBCMVfMFbCVFCbHFSRHfMMFbbVBpHbfbMFBbHBRFHCHSVRbMRMBBHfFMVHHBSbSMVVVFHMVHbHSVfHCfVCfRSS#
-#MHbBVHfHBbBBFffRMVFMHFSVCHHbHSHBFfBbVHbfBBMHfMRSBbSfbSFRMSMbMFbMfHCVfRCVFbVRfBbSFFSRbFSVMbCRfMSRFb#
-#bMVBFBVRHBSFBbSCHSbbHCHHVMVSVbBMSMBbRfVRbbbfHVCCBHRbCBCBMMVSCHbCMbFbRBMbHRMSFVBCVMFfRHCFfHSMHVMFSF#
-#HbbMbfVSMCSbFMFVVHMRVSFHfCVHfSRbRbHMBVCMfRBMfSfSRVRBCCFCBfCBbbfVCFFHBbffFbHFVfbFSbRSFMSMHBMBHVSHSM#
-#bVHFfCMMVSSRffVfHCRRfBBMfVFSCHBFHRRfHCbMbCFFSRHMVfbfCfCBFFHFRMFfMbSfCfBVCCbBFHRRRBSCRRbMFHRBHBSMCf#
-#FVfRfFHFHFVMHRfRCSbCffBbBBRFCBVFVVbBBSFCMHHFSCbCHFbMMRCbBRFBFVBBfBfbfbbHSMfbMfbBMVCSCbfFMSMHSSbMbf#
-#SSSBRBFMMVRMRHVMfFHMSCfVRCfHMVbMHBRCbCFRHMRfFCbHCSfFBbCHbbMSBVSBHMFBFMbHfFFVHSSfMBBVFBBVFHfbVffffR#
-#FVfbCMBVFHSSMFMSVBHVVVCVBRMfVbBfCBCBfHSMMffBVBbVfCfBFfbbSFCVCfHHFbbfFMFFfRFCbBMMRVFCFbRMCBRFbSSFCB#
-#FRfRVfMCFBCBHMCbVbMbHCVHSCHSSCbVBVbHCfRRMfHfVfBCHfFSMSBFCbSRCVCVffBRCVHCHbBCCVFBFFHbVCRHMRbbFffCRV#
-#CHBfbSHSFbVHffBRVVHRSCMfHHFVCCHCVBbSMbbbSFBHSRHCBfVBRVBCBBfHMRRVVRFfHSVFVBMHfRVCbBFfFCHRVbVHfRBffR#
-#fFMHMRSBRHfHRSfFMRCMfVBfMMffRCSSbHHVSbHfFVBRRRVMSMSCRSSFBCfHfbRfCfFFbRHMSFSfSRSFRBCRSbfRRRVVfSRHHb#
-#bFMbVHMBRBSHHRfCHRHbMHbFBbRVMSRMbMRRffbCBfbbHBSSMVbMRSVRbSRBCHVMFBMSHMfSHVVHbHfSRBfHVCfVbMSfbfVCCM#
-#MRSMCVbSSBfBVBHffHFHSRbVMFMbVFbRMMVSBbVFBFMRfCMffHHBbHHBSSfCbHfFFfMVCBBFRbRHMRbBbMbFHCbFFVCSBBMBCV#
-#FCBfHCBVVSRBbRMFCbCbfCCFbbFbCCCMMBBbVHHCSSVFSfRSVRbbMMCRCbSHVRSBVHMMRSbMRfRMbbfSHbMSVffHBSCbMVfFFC#
-#SFBFCRRFMHVBbHVHfFfFFRfRFSfHCfHbMfBVBffVBSBbMBRMVFCVbBfVHMVRMVSSSbSSVRSHfBHSRRHFBHCHSMRHfHHVbHBfCH#
-#fRCCfBCMRFFMbbVbSHSMRVMFMMHSRHbCbCSHBbRRMSbMFCHBbHCVMBVMRRfMMfSMbFBCbbVFBbVFSbHSVMFBffVVfFRBRCBSMV#
-#SVMBMbVfbfCbSbfHSHFFSSbHMfMRSHbRbfVRSfSMRfSHRbHBCSSHMfbbMRVVfCVCVMRBSSfSbfHVbMbFCHCCFfVFHHHMCHCbRb#
-#CRbCbbVFBBFHRMCSSCVMBbCVMSVMbCCMCVSMfSBCFRbCFfSHSRMBfffCbbSVSfSSCHBCRFHHfMSVfFMHSSHHFMCfFRMRHFMCHB#
-#BMCFbfbbbHVCBMBRFfRSSFVHVHCRfRFMRSSFSCbFffRfbCffBBfBFHCfSfRBBFMRVBSMCMSBFMHbFFRRBBFSHFSRHRBHCRFBCB#
-#RCbVfBSMSCRRSSRRMMbfBFVRfMHfMHHVVCbbCSMfBbHVfCFHVVSCRHRRBFCCMSVRMRRFVCHSMVHHbFfMSbRVSFMFSFCfSBVFRb#
-#CSHMCSRHCHVVBSRVRHBBRbfbSHRMfMRSSBCVbRfbHFVBCVSSMVHHfRBBVVSSfCFSSRCRVbCfHMFVFMCVRVfbCfBCSSbFFfSCRS#
-#RBFSbSHMHbRbMFRCFBFSbFHfHbSSbBCRMfCMfVBfSRbbVCBSCMVCbRbbffSRSVHfVHFVfHffVMSVCBCbBRVFBRSbbFRfFbBMSF#
-#bHbHRBCVHBHRFMFCSRHbVbSfFFMFFbffbHHSSCFMRMBMRRfBMRCHRSVVRBBCSVfSHMVbFSVSFFCfbbFFMSSbFMMCbHVCHSbBBV#
-#CSbBCRbfVbMCVMSVFRSCVHRFbRFSfFVfRBSBFfFfFMbFbMFVMCBRFRHFFRSBHMSbVVRVbbVSRbHfFSfFMfFBCMHSCRHbRFfFfC#
-#fbFRMHbRVSCFVBFMMHMBRSHfHCBfHbMfCfCRMFffMMSSSbffFVHBbFfSFSMRCMRbCRfFFRfVfHRbBHRSbMMSFVRRbSBFRBSFVM#
+#   bF   fbV     V b     BC      V        C f F  V  M   HVH V       SHF     BV       b  V b    H   #
+#B           f  Fb     V f  CM  FF    B       B F  B   HM  H C bf M b R  B   S V  S V b HV S    S  #
+# C    VV    F  F     C  C R F f      B M M f   F         F    R         RH     MB H F    bV  Rb SF#
+# C           FSf   HH MF  RM C       B    S    R FH  f   F    F   f  B HF F          b  S fb      #
+#H RM    M HV           f  C b   C     S f    fM S        b C  RH VC   HbH Cf  C V  C    C H V  bB #
+#  CRV  f   fB  fb  M  FB   BR    b     b       CV         H b     VM B R   H  F     C C          H#
+#     F   f  b  b Vf f  bV  RCS fSR  B HSCfC  F M  fM       SC HM   H  F       CH  F C b    S R  fB#
+#   HH   H V V BM  F Sf    V  ff       bf    fb       M   M  f S     SS   b S  R    b   fHB  FCV   #
+# RB   CH        V    H  b  BbHH   f      HfBfB     S  BH b     HB V   V  M     M  F         f HH  #
+#H  b    M  CH bb V CF         M     MfC   M  CB  H B   FM b C     S    H    b  bb   H H   MS   C F#
+#C   F   fM  H  Rb  BH   M M    fM           C V      F   F b  f f    SVVV M    C   fF   f H   R  B#
+# C   BV      C V    H HH H     M  V    FH   R  B C     VHCV         S   M  S    S     HR  H       #
+#F   Rf  C      F F  H   R  R  V C     VSV Rb C Vb  HV   F  R HS VS   SVRR H R  B bC       F  RV S #
+# C    FS   Hb  HbB  f  S   BVV     RVH MR  SC    B         V Rb  M      f f F   Ffff f bR   F VfH #
+#   fCSS    S  M    f Vf B  f     M  BFMF     fB  b f C  b          M F H f     F  b   V  H  V     #
+#M  Sf  M   SFS V  V     F B   VV  HM        MCR S   HbH R  V     B M M     M          f    C  R B #
+#M   B M  V  M  F      F   M  F   S C       M  FH F B   B  M    FCf   B    b     F BC   V C   H    #
+#   SV  fB      B H     HMFSb  S     b      SHR  F   CC V  FS       RF    FB  HB     CS R   H   Rb #
+#   R bMC   R   M     bf      HC      F  R  RV S V F M VBVbVR HR       V       R   B H     H    b  #
+#R      fR  B    bfR fS MB S S     MHS M    B         F  bb  R  Bb bF  C   Sb M  MS   M   F     B  #
+#bSS H  HHbH  b fS   f   VC       F    S   V     HHR b    R HC  M Sb HHC  M  M      H   f  R       #
+#H   f  B VC  C   HC    f         CH  H  Vb  C   bf     HC    F f BHbR  V   H V               H    #
+# C  F   B f      V FF        R   M M  B  f MR   V  H   V    FB   H  f F      F  B V  B  F C b     #
+#         R        B     H  B    H F f    b FS bS C  B FR  F      F  M  V B M    F  B      F     FM#
+#   RFC b V       F       S    H     R    MH                      FRF f C   f HF    C   b    M R b #
+#F  R f   C    HC Vb   V  RH   B FH  S      Sb Hf          S    F  H  C   M    R  C    S H        S#
+#f  S  M          f S Mf  Mf       S R      MM        S  bS      F   VR       FB H b B   C         #
+#  S S  VC  F  B f   VMFb  HMFFR   R b FH                       F V R  MRSH  C    HS M          R M#
+#  f        bVfb CCM   H BV        M  C       bR  CV    V  F CV S  CR   H  H C  RMB    b    B S    #
+# FS b   S  fR f V fCC B R  Mf Fb C CR f f R RM SF   S C  H  M    f   M M S   H  H        M  V     #
+#   R f    Cb b  H     S   S   fS  H  bSS  SM  V R    SR  M  RS    F V C         V        C b     S#
+#     V  HVFB    fV       M      CC    R      R          B   R  M  V            HF S  H S  V    R  #
+# HB       b S B fV  Rf   VB   C   f     R   FC    V B         Vf  B   b  M F C HM b          bMH  #
+# M SMS   VM  S VFB          bV      VM    C  V  f V   S    b b FCf  S     F               C Sf  C #
+#C B   Cb       H         R     S  f f b f  R V     fBfHR B   F    H  B    C   Sf  M  b   M   b  SR#
+#          H       f           f fHF        S     C   SC     B     H    M F    F S FR  bV    b  f  #
+#  Cb     S R     C       VC  C   B  V      B           f   H M R H     HM    f      R     M      V#
+#    V   B   C   C S   FfR    M SH   bVB R     MCRRR BCV F              V     RH S   FfV          B#
+# C  R H HSB  H C   B      M  f     CHff       R   S F     C   H    H            f     B b   S V   #
+#     VH H C M           V    S bFF      V   M     H     MMbF    f           F   b  C  F  RRV C    #
+#   S          F H  S f      bC   V BC f   R   F       MFB  fB  S  V   H   bRMB fB  f b SC  S     B#
+#C MMbfB H b   CF    RC         B  V     Fb         M fH         fB     R       C V   B SF ff   V  #
+#S  B    bS   B    R   bM     FfV f    V f   fb R  S V  MC  B   F  F            RVC  CF  SR  C  B  #
+#     fB          f    V   M    CF   bC   M CH       VV  RF H B M R R b      SSB   S B      bB f S #
+# H  R B S    B     S  FH   C     F   H     H  VVSF    f               b   bR     M B        M    B#
+#CB      C   f VF      M                    fRS  C Cf  FRMH  b S  BB               C   HM  VR      #
+#         B   B F   F     CFB         S FR   B  MFf   S    b R H   C     S   V  CFb    H    f H    #
+#RF Ff R  V R    H      F            V V         B M       M M   B  S   f f b b    CMCCCF  f   C   #
+#FHFR f   FM   R    FF    fH   M S H        b  b       F    C            B F  f   M V R B         B#
+#  fH H     ff    b  S R    bM     H    H    CH   MFH    b    B   F       R     C   bR     B      F#
+# b Vf    BSR C     F f  S BF      f    b    S CF    R V   B            S BV  M  BFCS  b     b     #
+#   C R  CHVV B      b     CC HB b S  M     SR   b   RR    H VBb       BS   C  B             RS H  #
+# f   CH    S  f M      f V M B   bS  b B f  f F b  FC    BHVf            b VMFb S M b  FR f SM   M#
+#S B       RRRH  B    f B  V   C S    V Vbf        M     f  S               BS   fRB R    SH M V   #
+#f    RV f   b    F    C   VV   M R  R   HfHS  R  F  RHB BS F   f     f   bb  B    V   VC f  H    R#
+#V            CB  F      C  R   b      H   CM Bb bM   HVV      C  bF C ff    B                  C R#
+#C B  HF   B R R B  R     M   M ff B   R   M F     C  S        H   f  H    b   S  V F      V     CR#
+#     SS SF   S F     F F   H              b  SV  R     H H   SSF       V   b   f HB  VF f  Fb S  f#
+# R    F C bfC  Vff  RS HS HS     S B V M    M           ffH B      f    F    f   S    b           #
+#f    R           VSb     V V MS  S B  V F  C H    V  F b    H  C  M  M  bS   f CF   BB M    b     #
+#b bVF    R  C   F MR R fBV  f  bfF  C    b V  b  f  V     FH    CH    Mb R   C         F   C  Ff  #
+#  C    V  b    fV MB    M M    C         f HB      f  C    F   f   f        CC  M      V B f     b#
+#M    B  SbV   F            SC    FF   C     b SV BF   b  H      S   C   M F C       b R  S        #
+#  b      H  M  V  F R fF C  H     SHS  b  F f B f M    Hf     RF  B        R    S   f  H        R #
+#     b     V  B  F F  Sf      M         f R   F      B         M SBSM      H  F C RV   C  M     M #
+#    f R  bM  bfS R  H  f CB   C          V  f    S  V    H Rf CH bH  V f CB  FC          R        #
+#VF HH   RB bbF  b f R     F            FF     S  Mf  V  M    fHbRfB  VfbRF  F         H fFM B  M  #
+#M    f   FRF    f    BHF b        FV          MC M   SF V V   CCM         Hb  S  b          C   f #
+# V      V f                S b SC   B     MVH      HBF    S    F   S  fR B H  f   M  HVF fC R     #
+#   S       SS       b MCf      V    b  F   S M V   F C      bM             fH    V    SBFSSfB    H#
+#   C      R    RB FM FCFF F   bR H M  S f  F  F   f     FF  f         f FS R       B  b f    FC  B#
+#V    R bS        HV    H B  b  H     SM   V        C H H  S  H   F   F   f    f F      FV  R  b V #
+#BbCF  F  M  C        F    M     R   H   V RS   f  Cb        f V    R         C   CR    HBMFfRHR  f#
+#      B    Vb   HH       F V    B  V     CC   H  f    V b H    HF       R   b V  b f C B f b B   B#
+#        M     V    B    H       M V       V       F     CSVB   HB       C S    R  bfC   F   b     #
+# fC           F   SV b   f   C  S        fF V   H  M         R   C      f     VF    b      S    FS#
+#   S C          b     C     F  b R HF C     S         F  H    HR B  BV       F       CR      R RV #
+# RRF   H     SF         S b        B  FM       C              S               H  b    BbbCVM VR   #
+#    Vf  S H   V  F  b    VR b  CH         BF C             M H  C F b       H   H S   b   H S FS  #
+#H   C M      R  fF        V V  bB    S         S    RR   f   RV    S V H  R R     V     f  f M   C#
+#      b VF    BS   H B M  H  V  S  R      M      SF  F C   R  RSf  fS   B F VS    R   R  V        #
+#    F      F f  CV MH   R C     S  M  F M   HF M  f     R RH b     b   Bf R B S f   M   RS  f H b #
+# f     f b  BH   f  CF        Fb   b     S  f C  HB    F B fF   b F   R   CB           S      RB M#
+#  F    C         FVCVbSV    B  M    S V   b b    F  CbB         F HHHS    Vb B MC   VBV   fHH  B  #
+#   R         BV F   B   b VSVCb   M R R    S  C H  b     HC    S  M     S  R    HM   b b f      MB#
+#      H  C R  Rb b   bVb  R     f C SV Hb        H VC BHCMBfB M        R    F BS  CM  f  MC    V  #
+# R    bRH R        bF   B      FC V f  BBV B    H    B C f    FRBS   FB  BCB  f    ffB  B   V     #
+#  H   S f    R      b   f      b  R     S  B  MR  H   MF   F   R        BbSVS    Ff     b   Rf   S#
+#    M    C       b  MB         HVM C Sb  F  f bC    F S   f FbF   VH   fM   FC  H   Vf  b V S    M#
+#  V  M  b  f  S fBC MFR  V          VpV   VF F     S      CBC  C M SbH    MM         V     b   H  #
+# S       S     M  C F   R V     bb  b F     VM  V   SH   b    FfVVV RH F  f b C  H M           VV #
+#  F   b        H  H SHH      VR      C b B HS H     Vf CH   C R   fVMB HC bR       RV    BC  R    #
+#Rb     f      RM  b       C    VH FM   Cf    H    F       H         b V  S  f FM     HV b  B  F C #
+#H    b       BS     F  BC       M     C  b Bf     R      b V    V        SVV V V   fHB  FFHR C    #
+# f  SB F      R f BRBMFBM  F    M VS  f V bf M           S C      f          B f       f  BH      #
+#S  V M           RBR  V           Hf  MV  b b B   S   M    S  V     B      F S    fbB   C   R     #
+# V   CCM     BMb C     f     V HFMM   VH B  b  S b  H  VV     C        F    R   R    V  B Sf    b #
+#                 CfR  B   b    S  fF        B bB     f F   M   FM  f C  VRM b MB     S f       S V#
 ####################################################################################################

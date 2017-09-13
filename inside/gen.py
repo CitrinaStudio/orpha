@@ -52,8 +52,12 @@ def gen_map(map_file="default_map"):
         for _ in range(0, header.DEFAULT_WEIGHT_MAP - 2, 1):
             map_natation = nprand.choice(
                 header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL)
+            
+            if random.random() > 0.7:
+                map_strings += map_natation
 
-            map_strings += map_natation
+            else:
+                map_strings += " "
 
         map_strings += "#\n"
 

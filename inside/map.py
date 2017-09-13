@@ -2,8 +2,8 @@
 
 import sqlite3 as sqlite
 
-import inside
 import header
+import inside
 
 # подключение к БД
 
@@ -52,10 +52,17 @@ def get_map_detail(map_arr, coor, player_params):
     if map_notation in header.CONVENTIONAL_NOTATIONAL_ENTER_POINT:
         player_params = list(player_params)
         player_params[4] = "%s, %s" % (coor[0], coor[1])
+        record_exists = str(list(DB.execute("""SELECT count(coor_hash) FROM %s WHERE coor_hash='%s'""" % (header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash))))
+        enter_point_name = ""
 
-        if map_notation == "V":
+        if map_notation == "V" and  record_exists == '[(0,)]':
             enter_point_name = inside.gen.gen_village()
-            DB.execute("""INSERT INTO %s (coor_hash, name) VALUES ('%s', '%s')""" % (header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash, enter_point_name))
+            DB.execute("""INSERT INTO %s (coor_hash, name) VALUES ('%s', '%s')""" % (
+                header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash, enter_point_name))
+            CONNECT.commit()
+        
+        elif map_notation == "V" and  record_exists != '[(0,)]':
+            enter_point_name = list(DB.execute("""SELECT name FROM %s WHERE coor_hash='%s'""" % (header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash)))[0][0]
 
         inside.shell.play_start(
             player_params, recursion_count=1, map_file=enter_point_name, location_shell=" %s " % header.CONVENTIONAL_NOTATIONAL[map_notation])
