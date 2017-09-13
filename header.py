@@ -83,7 +83,7 @@ TABLES_CREATE_COMMANDS = {
     'fields': "CREATE TABLE `fields` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
     'forests': "CREATE TABLE `forests` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
     'bridges': "CREATE TABLE `bridges` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'villages': "CREATE TABLE `villages` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));"
+    'villages': "CREATE TABLE `villages` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));"
 }
 
 
@@ -107,6 +107,7 @@ CONVENTIONAL_NOTATIONAL_ENTER_POINT = ["V"]
 NAME_MAPS_FILES = {
     "V": "village"
 }
+
 
 CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
     "H": "homes",

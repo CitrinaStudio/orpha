@@ -39,7 +39,7 @@ def get_map_detail(map_arr, coor, player_params):
     """Получить детальное описание местности"""
     map_notation = inside.map.get_map_point(
         map_arr, (coor[0], coor[1]))
-    coor_hash = inside.gen.gen_crc32_hash(str(coor))
+    coor_hash = inside.gen.gen_adler32_hash(str(coor))
 
     print(map_notation, coor_hash)
 
@@ -52,5 +52,10 @@ def get_map_detail(map_arr, coor, player_params):
     if map_notation in header.CONVENTIONAL_NOTATIONAL_ENTER_POINT:
         player_params = list(player_params)
         player_params[4] = "%s, %s" % (coor[0], coor[1])
+
+        if map_notation == "V":
+            enter_point_name = inside.gen.gen_village()
+            DB.execute("""INSERT INTO %s (coor_hash, name) VALUES ('%s', '%s')""" % (header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash, enter_point_name))
+
         inside.shell.play_start(
-            player_params, recursion_count=1, map_file=inside.gen.gen_village(), location_shell=" %s " % header.CONVENTIONAL_NOTATIONAL[map_notation])
+            player_params, recursion_count=1, map_file=enter_point_name, location_shell=" %s " % header.CONVENTIONAL_NOTATIONAL[map_notation])
