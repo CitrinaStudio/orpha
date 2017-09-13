@@ -37,7 +37,6 @@ def get_player_spawn(map_arr):
 
 def get_map_detail(map_arr, coor, player_params):
     """Получить детальное описание местности"""
-
     map_notation = inside.map.get_map_point(
         map_arr, (coor[0], coor[1]))
     coor_hash = inside.gen.gen_crc32_hash(str(coor))
@@ -51,8 +50,7 @@ def get_map_detail(map_arr, coor, player_params):
         print(5)
 
     if map_notation in header.CONVENTIONAL_NOTATIONAL_ENTER_POINT:
-        print(000)
         player_params = list(player_params)
         player_params[4] = "%s, %s" % (coor[0], coor[1])
         inside.shell.play_start(
-            player_params, recursion_count=1, map_file=inside.gen.gen_village())
+            player_params, recursion_count=1, map_file=inside.gen.gen_village(), location_shell=" %s " % header.CONVENTIONAL_NOTATIONAL[map_notation])

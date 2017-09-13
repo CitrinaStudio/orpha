@@ -35,7 +35,7 @@ def save_char(player_params, player_coor):
         player_params[2], "%s, %s" % (player_coor[0], player_coor[1]), player_params[5], player_params[6], player_params[7], player_params[8], player_params[9], player_params[10], player_params[11], player_params[12], player_params[1]))
 
 
-def play_start(player_params, debug_mode=0, map_file="default_map", recursion_count=0):
+def play_start(player_params, debug_mode=0, map_file="default_map", recursion_count=0, location_shell=""):
     """Игровой процесс"""
     if debug_mode != 1:
         inside.util.clear()
@@ -48,15 +48,19 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
     elif recursion_count != 0:
         player_coor = list(inside.map.get_player_spawn(map))
+        
     else:
         player_coor = player_params[4].split(",")
         player_coor = [int(player_coor[0]), int(player_coor[1])]
 
     while True:
-        query = string.capwords(input('~> '))
+        query = string.capwords(input('~%s> ' % location_shell))
 
-        if query == 'Save':
+        if query == 'Save' and recursion_count == 0:
             save_char(player_params, player_coor)
+        
+        if query == 'Save' and recursion_count != 0:
+            save_char(player_params, global_player_coor)
 
         elif query == 'Exit' and recursion_count == 0:
             save_char(player_params, player_coor)
@@ -65,7 +69,6 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
             return 0
 
         elif query == 'Exit' and recursion_count != 0:
-            print(000)
             player_coor = global_player_coor
             return 0
 
