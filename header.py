@@ -125,7 +125,7 @@ CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
     "H", "S", "B", "M", "C", "f", "F", "R", "b", "V"]
 
 CONVENTIONAL_NOTATIONAL_VILLAGE = [
-    "H", " "]
+    "H","S", " "]
 
 DEFAULT_PLAYER_X = 0
 DEFAULT_PLAYER_Y = 0

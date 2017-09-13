@@ -101,9 +101,13 @@ def gen_village():
             map_natation = nprand.choice(
                 header.CONVENTIONAL_NOTATIONAL_VILLAGE)
 
-            if map_natation == "H" and random.random() > 0.7:
+            if map_natation == "H" and random.random() > 0.89:
                 map_strings += map_natation
-                
+
+            elif map_natation == "S" and random.random() > 0.95:
+                map_strings += map_natation
+                    
+
             else:
                 map_strings += " "
 
