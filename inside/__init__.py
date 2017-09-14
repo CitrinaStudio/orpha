@@ -6,3 +6,4 @@ import inside.player
 import inside.util
 import inside.shell
 import inside.map
+import inside.db

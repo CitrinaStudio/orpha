@@ -17,9 +17,9 @@ class Players(BaseModel):
 
     name = pw.TextField()
     age = pw.IntegerField()
-    class = pw.TextField()
+    player_class = pw.TextField()
     coordinate = pw.IntegerField()
-    hash = pw.PrimaryKeyField(unique=True, primary_key=True)
+    player_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     hp = pw.IntegerField()
     mp = pw.IntegerField()
     stright = pw.IntegerField()
@@ -30,17 +30,17 @@ class Players(BaseModel):
     cha = pw.IntegerField()
 
 class Lands(BaseModel):
-    name = pw.PrimaryKeyField(unique=True, primary_key=True))
+    name = pw.PrimaryKeyField(unique=True, primary_key=True)
     coor_hash = pw.TextField()
 
 class Bars(BaseModel):
     coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     name = pw.TextField()
-    detail = pw.extField()
+    detail = pw.TextField()
 
 class Homes(BaseModel):
     coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
-    detail = pw.extField()
+    detail = pw.TextField()
 
 class River(BaseModel):
     coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
@@ -72,3 +72,5 @@ class Villages(BaseModel):
     coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     detail = pw.TextField()
     name = pw.TextField()
+
+Villages.create_table()
