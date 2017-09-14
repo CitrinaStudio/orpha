@@ -5,6 +5,7 @@
 try:
     import sqlite3 as sqlite
     import string
+    import json
 
     import header
     import inside
@@ -107,7 +108,8 @@ def new_player():
             header.CLASSES_BONUSES[player_class]['inte'],
             header.CLASSES_ABILITY[player_class]['wis'] +
             header.CLASSES_BONUSES[player_class]['wis'],
-            header.CLASSES_ABILITY[player_class]['cha'] + header.CLASSES_BONUSES[player_class]['cha']))
+            header.CLASSES_ABILITY[player_class]['cha'] + 
+            header.CLASSES_BONUSES[player_class]['cha']))
 
     except sqlite.IntegrityError as err_detail:
         if "UNIQUE" in str(err_detail):

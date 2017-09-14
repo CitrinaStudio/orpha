@@ -1,8 +1,11 @@
 """ Header Module """
 
 import numpy as np
+import os
 
 import inside
+
+PATH_DATA_DB = os.path.join(os.path.dirname(__file__), "db/")
 
 PLAYER_CLASSES = ("Warrior", "Roge", "Mage")
 QUANTITY_PLAYER_CLASSES = len(PLAYER_CLASSES)
@@ -44,6 +47,18 @@ CLASSES_BONUSES = {
     }
 }
 
+STRART_INVENTORY = {
+    'Warrior': {
+        'inventory': 'sword'
+    },
+    'Roge': {
+        'inventory': 'blade'
+    },
+    'Mage': {
+        'inventory': 'scepter'
+    }
+}
+
 CLASSES_ABILITY = {
     'Warrior': {
         'str': np.random.randint(4, 10),
@@ -73,7 +88,7 @@ CLASSES_ABILITY = {
 
 TABLES_CREATE_COMMANDS = {
     'lands': "CREATE TABLE `lands` (`name` TEXT NOT NULL UNIQUE,`entry_point` TEXT NOT NULL UNIQUE);",
-    'players': "CREATE TABLE `players` ( `hash`	TEXT NOT NULL UNIQUE, `name` TEXT UNIQUE NOT NULL, `age` INTEGER NOT NULL, `class` TEXT NOT NULL,	`coor` TEXT NOT NULL, `hp` TEXT NOT NULL, `mp` TEXT NOT NULL, `str` INTEGER NOT NULL, `dex` INTEGER NOT NULL, `con` INTEGER NOT NULL, `inte` INTEGER NOT NULL, `wis` INTEGER NOT NULL,  `cha` INTEGER NOT NULL, PRIMARY KEY(`hash`));",
+    'players': "CREATE TABLE `players` ( `hash`	TEXT NOT NULL UNIQUE, `name` TEXT UNIQUE NOT NULL, `age` INTEGER NOT NULL, `class` TEXT NOT NULL, `coor` TEXT NOT NULL, `hp` TEXT NOT NULL, `mp` TEXT NOT NULL, `str` INTEGER NOT NULL, `dex` INTEGER NOT NULL, `con` INTEGER NOT NULL, `inte` INTEGER NOT NULL, `wis` INTEGER NOT NULL,  `cha` INTEGER NOT NULL, PRIMARY KEY(`hash`));",
     'bars': "CREATE TABLE `bars` (`coor_hash` TEXT NOT NULL UNIQUE,	`name` TEXT NOT NULL, `detail` TEXT, PRIMARY KEY(`coor_hash`));",
     'homes': "CREATE TABLE `homes` (`coor_hash`	TEXT NOT NULL UNIQUE, `detail` TEXT, PRIMARY KEY(`coor_hash`));",
     'rivers': "CREATE TABLE `rivers` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
