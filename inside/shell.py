@@ -19,6 +19,7 @@ def _get_playerlist():
 
     if players == []:
         print("Characters not found!")
+        return 0
 
     else:
 
@@ -43,12 +44,12 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
     map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
     global_player_coor = player_params[4]
 
-    if player_params[4] == "(0, 0)":
+    if player_params[4] == "(0, 0)" and recursion_count == 0:
         player_coor = list(inside.map.get_player_spawn(map))
 
     elif recursion_count != 0:
         player_coor = list(inside.map.get_player_spawn(map))
-        
+
     else:
         player_coor = player_params[4].split(",")
         player_coor = [int(player_coor[0]), int(player_coor[1])]
@@ -56,10 +57,7 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
     while True:
         query = string.capwords(input('~%s> ' % location_shell))
 
-        if query == 'Save' and recursion_count == 0:
-            save_char(player_params, player_coor)
-        
-        if query == 'Save' and recursion_count != 0:
+        if query == 'Save':
             save_char(player_params, global_player_coor)
 
         elif query == 'Exit' and recursion_count == 0:
@@ -200,6 +198,9 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
         elif query in ("Navigate", "Nav"):
             print(player_coor)
 
+        elif query == "Map":
+            inside.map.get_player_map(map, player_coor)
+
         elif query in ("Myparams", "Mp"):
             print("Your params: \n hp: %s\n mp: %s\n\n Abilityes: \n\n str: %s\n dex: %s\n con: %s\n inte: %s\n wis: %s\n cha: %s" %
                   (player_params[5], player_params[6], player_params[7], player_params[8],
@@ -207,8 +208,6 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
         elif query == 'Clear':  # Очищение Шелла
             inside.util.clear()
-
-        CONNECT.commit()
 
 
 def init(debug_mode=0):
@@ -241,37 +240,37 @@ def init(debug_mode=0):
             _get_playerlist()
 
         elif query in ("Loadplayer", 'Lp'):  # Загрузка персонажа
-            _get_playerlist()
+            if _get_playerlist() != 0:
 
-            player_name = input("\nInput character name: ")
+                player_name = input("\nInput character name: ")
 
-            player_params = list(DB.execute(
-                "select * from players where name='%s'" % player_name))
+                player_params = list(DB.execute(
+                    "select * from players where name='%s'" % player_name))
 
-            try:
-                play_start(player_params[0])
+                try:
+                    play_start(player_params[0])
 
-            except IndexError:
-                inside.util.cprint("Player not found! Try again", "red")
+                except IndexError:
+                    inside.util.cprint("Player not found! Try again", "red")
 
-                while_exit_status = 0
+                    while_exit_status = 0
 
-                while while_exit_status != 1:
-                    _get_playerlist()
+                    while while_exit_status != 1:
+                        _get_playerlist()
 
-                    player_name = input("\nInput character name: ")
+                        player_name = input("\nInput character name: ")
 
-                    player_params = list(DB.execute(
-                        "select * from players where name='%s'" % player_name))
+                        player_params = list(DB.execute(
+                            "select * from players where name='%s'" % player_name))
 
-                    try:
-                        play_start(player_params[0])
+                        try:
+                            play_start(player_params[0])
 
-                    except IndexError:
-                        inside.util.cprint("Player not found! Try again", "red")
+                        except IndexError:
+                            inside.util.cprint("Player not found! Try again", "red")
 
-                    else:
-                        while_exit_status = 1
+                        else:
+                            while_exit_status = 1
 
         else:
             inside.util.cprint(

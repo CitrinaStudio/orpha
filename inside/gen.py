@@ -52,7 +52,7 @@ def gen_map(map_file="default_map"):
         for _ in range(0, header.DEFAULT_WEIGHT_MAP - 2, 1):
             map_natation = nprand.choice(
                 header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL)
-            
+
             if random.random() > 0.7:
                 map_strings += map_natation
 
@@ -68,7 +68,8 @@ def gen_map(map_file="default_map"):
 
     while valid_spawn_point != 1:
         if map_strings[random_spawn_point] == "#":
-                random_spawn_point = nprand.randint(0, header.DEFAULT_WEIGHT_MAP * header.DEFAULT_HEIGHT_MAP)
+            random_spawn_point = nprand.randint(
+                0, header.DEFAULT_WEIGHT_MAP * header.DEFAULT_HEIGHT_MAP)
 
         else:
             map_strings = map_strings[:random_spawn_point] + \
@@ -79,29 +80,29 @@ def gen_map(map_file="default_map"):
 
 
 def gen_detail_map(map_arr):
-    
+
     for y in range(0, len(map_arr), 1):
 
         for x in range(0, len(map_arr[y]), 1):
             if map_arr[x][y] != "p" and map_arr[x][y] != "#":
                 print(True)
-            
+
+
 def gen_village():
-    
+
     name = gen_name(64)
-    
+
     gamemap = open("inside/maps/%s" % name, "w")
-    
+
     map_strings = ""
 
     map_strings += "#" * header.DEFAULT_WEIGHT_MAP_VILLAGE + "\n"
-
 
     for _ in range(0, header.DEFAULT_QUANTITY_MAP_STRING_VILLAGE - 2, 1):
         map_strings += "#"
 
         for x in range(0, header.DEFAULT_WEIGHT_MAP_VILLAGE - 2, 1):
-            
+
             map_natation = nprand.choice(
                 header.CONVENTIONAL_NOTATIONAL_VILLAGE)
 
@@ -109,8 +110,7 @@ def gen_village():
                 map_strings += map_natation
 
             elif map_natation == "S" and random.random() > 0.923:
-                map_strings += map_natation 
-                    
+                map_strings += map_natation
 
             else:
                 map_strings += " "
@@ -119,12 +119,14 @@ def gen_village():
 
     map_strings += "#" * header.DEFAULT_WEIGHT_MAP_VILLAGE + "\n"
 
-    random_spawn_point = nprand.randint(0, header.DEFAULT_HEIGHT_MAP_VILLAGE * header.DEFAULT_WEIGHT_MAP_VILLAGE)
+    random_spawn_point = nprand.randint(
+        0, header.DEFAULT_HEIGHT_MAP_VILLAGE * header.DEFAULT_WEIGHT_MAP_VILLAGE)
     valid_spawn_point = 0
 
     while valid_spawn_point != 1:
         if map_strings[random_spawn_point] == "#":
-                random_spawn_point = nprand.randint(0, header.DEFAULT_HEIGHT_MAP_VILLAGE * header.DEFAULT_WEIGHT_MAP_VILLAGE)
+            random_spawn_point = nprand.randint(
+                0, header.DEFAULT_HEIGHT_MAP_VILLAGE * header.DEFAULT_WEIGHT_MAP_VILLAGE)
 
         else:
             map_strings = map_strings[:random_spawn_point] + \

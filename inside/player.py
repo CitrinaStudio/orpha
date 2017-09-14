@@ -93,27 +93,28 @@ def new_player():
     try:
         DB.execute("""INSERT INTO players (hash, name, age, class, coor, hp, mp, str, dex, con, inte, wis, cha)
                         VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')""" % (
-                            player_hash, player_name, player_age, player_class,
-                            str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)),
-                            header.DEFAULT_HP + header.CLASSES_BONUSES[player_class]['hp'],
-                            header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp'],
-                            header.CLASSES_ABILITY[player_class]['str'] + header.CLASSES_BONUSES[player_class]['str'],
-                            header.CLASSES_ABILITY[player_class]['dex'] + header.CLASSES_BONUSES[player_class]['dex'], 
-                            header.CLASSES_ABILITY[player_class]['con'] + header.CLASSES_BONUSES[player_class]['con'],
-                            header.CLASSES_ABILITY[player_class]['inte'] + header.CLASSES_BONUSES[player_class]['inte'],
-                            header.CLASSES_ABILITY[player_class]['wis'] + header.CLASSES_BONUSES[player_class]['wis'],
-                            header.CLASSES_ABILITY[player_class]['cha'] +  header.CLASSES_BONUSES[player_class]['cha']))
-                            
-
-
+            player_hash, player_name, player_age, player_class,
+            str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)),
+            header.DEFAULT_HP + header.CLASSES_BONUSES[player_class]['hp'],
+            header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp'],
+            header.CLASSES_ABILITY[player_class]['str'] +
+            header.CLASSES_BONUSES[player_class]['str'],
+            header.CLASSES_ABILITY[player_class]['dex'] +
+            header.CLASSES_BONUSES[player_class]['dex'],
+            header.CLASSES_ABILITY[player_class]['con'] +
+            header.CLASSES_BONUSES[player_class]['con'],
+            header.CLASSES_ABILITY[player_class]['inte'] +
+            header.CLASSES_BONUSES[player_class]['inte'],
+            header.CLASSES_ABILITY[player_class]['wis'] +
+            header.CLASSES_BONUSES[player_class]['wis'],
+            header.CLASSES_ABILITY[player_class]['cha'] + header.CLASSES_BONUSES[player_class]['cha']))
 
     except sqlite.IntegrityError as err_detail:
         if "UNIQUE" in str(err_detail):
             inside.util.cprint("Error!!! Player exist! Try again!", "red")
             exit(1)
-    #inside.log.logging.info("Персонаж создан!")
-    CONNECT.commit()
-    #inside.log.logging.info("Персонаж записан в БД!")
+    else:
+        CONNECT.commit()
 
-#def change_params():
-    '''Функция изменения параметров игрока'''
+# def change_params():
+    #'''Функция изменения параметров игрока'''
