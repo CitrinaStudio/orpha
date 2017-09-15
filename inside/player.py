@@ -44,6 +44,9 @@ def _intput_check_error(err_msg, input_msg):
 
     return var
 
+def db_check():
+    """Проверка существования таблиц"""
+    
 
 def new_player():
     """Создание и запись нового персонажа"""

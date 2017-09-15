@@ -7,7 +7,7 @@ import inside
 
 def _get_playerlist():
     """Функция получения списка персонажей"""
-    players = list(DB.execute("select * from players"))
+    players = list
 
     if players == []:
         print("Characters not found!")

@@ -78,5 +78,6 @@ class Villages(BaseModel):
 
 
 def crt():
+    database.connect()
     database.create_tables([Players, Lands, Bars, Homes, Rivers, Shops,
                             Mountains, Caves, Fields, Forests, Villages])
