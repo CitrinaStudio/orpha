@@ -5,7 +5,7 @@ import os
 
 import inside
 
-PATH_DATA_DB = "game.db"
+PATH_DATA_DB = os.path.join(os.path.dirname(__file__), "db/")
 
 PLAYER_CLASSES = ("Warrior", "Roge", "Mage")
 QUANTITY_PLAYER_CLASSES = len(PLAYER_CLASSES)
