@@ -1,16 +1,8 @@
 """ Shell module """
-import sqlite3 as sqlite
 import string
 
 import header
 import inside
-
-# подключение к БД
-
-CONNECT = sqlite.connect("game.db")
-DB = CONNECT.cursor()
-
-inside.util.db_check()
 
 
 def _get_playerlist():

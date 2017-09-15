@@ -1,16 +1,7 @@
 """ Module for use map """
 
-import sqlite3 as sqlite
-
 import header
 import inside
-
-# подключение к БД
-
-CONNECT = sqlite.connect("game.db")
-DB = CONNECT.cursor()
-
-inside.util.db_check()
 
 
 def get_map_point(map_arr, coor):
