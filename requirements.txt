@@ -1,3 +1,2 @@
 numpy==1.13.1
 colorama==0.3.9
-peewee==2.10.1

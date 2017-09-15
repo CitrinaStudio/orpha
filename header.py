@@ -86,6 +86,21 @@ CLASSES_ABILITY = {
     }
 }
 
+TABLES_CREATE_COMMANDS = {
+    'lands': "CREATE TABLE `lands` (`name` TEXT NOT NULL UNIQUE,`entry_point` TEXT NOT NULL UNIQUE);",
+    'players': "CREATE TABLE `players` ( `hash`	TEXT NOT NULL UNIQUE, `name` TEXT UNIQUE NOT NULL, `age` INTEGER NOT NULL, `class` TEXT NOT NULL, `coor` TEXT NOT NULL, `hp` TEXT NOT NULL, `mp` TEXT NOT NULL, `str` INTEGER NOT NULL, `dex` INTEGER NOT NULL, `con` INTEGER NOT NULL, `inte` INTEGER NOT NULL, `wis` INTEGER NOT NULL,  `cha` INTEGER NOT NULL, PRIMARY KEY(`hash`));",
+    'bars': "CREATE TABLE `bars` (`coor_hash` TEXT NOT NULL UNIQUE,	`name` TEXT NOT NULL, `detail` TEXT, PRIMARY KEY(`coor_hash`));",
+    'homes': "CREATE TABLE `homes` (`coor_hash`	TEXT NOT NULL UNIQUE, `detail` TEXT, PRIMARY KEY(`coor_hash`));",
+    'rivers': "CREATE TABLE `rivers` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'shops': "CREATE TABLE `shops` (`coor_hash` TEXT NOT NULL UNIQUE, `name` TEXT NOT NULL, `detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'mountains': "CREATE TABLE `mountains` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'caves': "CREATE TABLE `caves` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'fields': "CREATE TABLE `fields` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'forests': "CREATE TABLE `forests` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'bridges': "CREATE TABLE `bridges` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'villages': "CREATE TABLE `villages` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));"
+}
+
 
 CONVENTIONAL_NOTATIONAL = {
     "H": "Home",
@@ -108,11 +123,25 @@ NAME_MAPS_FILES = {
     "V": "village"
 }
 
+
+CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
+    "H": "homes",
+    "S": "shops",
+    "B": "bars",
+    "M": "mountains",
+    "C": "caves",
+    "f": "fields",
+    "F": "forests",
+    "R": "rivers",
+    "V": "villages"
+
+}
+
 CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
     "H", "S", "B", "M", "C", "f", "F", "R", "b", "V"]
 
 CONVENTIONAL_NOTATIONAL_VILLAGE = [
-    "H", "S", " "]
+    "H","S", " "]
 
 DEFAULT_PLAYER_X = 0
 DEFAULT_PLAYER_Y = 0
@@ -120,7 +149,7 @@ DEFAULT_PLAYER_Y = 0
 DEFAULT_WEIGHT_MAP = 100
 DEFAULT_HEIGHT_MAP = 100
 
-# Village min 10x20
+#Village min 10x20
 
 DEFAULT_WEIGHT_MAP_VILLAGE = 20
 DEFAULT_HEIGHT_MAP_VILLAGE = 10

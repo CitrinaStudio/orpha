@@ -2,27 +2,24 @@
 
 import peewee as pw
 
-import header
-
-database = pw.SqliteDatabase(header.PATH_DATA_DB)
-
+import header 
 
 class BaseModel(pw.Model):
     """Base class for all models"""
-    coor_hash = pw.TextField(unique=True, primary_key=True)
+    json_meta_obj = pw.TextField()
+    id = pw.PrimaryKeyField(unique=True, primary_key=True)
 
     class Meta:
-        database = database
-
+        database =  pw.SqliteDatabase(header.PATH_DATA_DB)
 
 class Players(BaseModel):
     """Class represents players"""
 
-    name = pw.TextField(unique=True)
+    name = pw.TextField()
     age = pw.IntegerField()
     player_class = pw.TextField()
-    coordinate = pw.TextField()
-    player_hash = pw.TextField(unique=True, primary_key=True)
+    coordinate = pw.IntegerField()
+    player_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     hp = pw.IntegerField()
     mp = pw.IntegerField()
     stright = pw.IntegerField()
@@ -32,51 +29,48 @@ class Players(BaseModel):
     wis = pw.IntegerField()
     cha = pw.IntegerField()
 
-
 class Lands(BaseModel):
     name = pw.PrimaryKeyField(unique=True, primary_key=True)
-
+    coor_hash = pw.TextField()
 
 class Bars(BaseModel):
-    name = pw.TextField(unique=True)
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
+    name = pw.TextField()
     detail = pw.TextField()
-
 
 class Homes(BaseModel):
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     detail = pw.TextField()
 
-
-class Rivers(BaseModel):
-    name = pw.TextField(unique=True)
+class River(BaseModel):
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
+    name = pw.TextField()
     detail = pw.TextField()
 
-
-class Shops(BaseModel):
-    name = pw.TextField(unique=True)
+class Shop(BaseModel):
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
+    name = pw.TextField()
     detail = pw.TextField()
-
 
 class Mountains(BaseModel):
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     detail = pw.TextField()
-
 
 class Caves(BaseModel):
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     detail = pw.TextField()
-
 
 class Fields(BaseModel):
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     detail = pw.TextField()
-
 
 class Forests(BaseModel):
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     detail = pw.TextField()
-
 
 class Villages(BaseModel):
+    coor_hash = pw.PrimaryKeyField(unique=True, primary_key=True)
     detail = pw.TextField()
-    name = pw.TextField(unique=True)
+    name = pw.TextField()
 
-
-def crt():
-    database.create_tables([Players, Lands, Bars, Homes, Rivers, Shops,
-                            Mountains, Caves, Fields, Forests, Villages])
+Villages.create_table()

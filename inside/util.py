@@ -1,23 +1,28 @@
 import os
+import sqlite3 as sqlite
 
 from colorama import Back, Fore, Style, init
 
 import header
 import inside
 
+import sqlite3 as sqlite
+
+CONNECT = sqlite.connect("game.db")
+DB = CONNECT.cursor()
+
 
 init()
 
-
-def cprint(msg, foreground="black", background="white"):  # Функция вывода цветного текста для ошибок
+def cprint(msg, foreground = "black", background = "white"): #Функция вывода цветного текста для ошибок
     fground = foreground.upper()
     bground = background.upper()
     style = getattr(Fore, fground) + getattr(Back, bground)
     print(style + msg + Style.RESET_ALL)
 
 
-def clear():  # Очищение командной строки
-    os.system('cls' if os.name == 'nt' else 'clear')
+def clear(): #Очищение командной строки
+    os.system('cls' if os.name=='nt' else 'clear')
 
 def db_check():
     """Проверка существования таблиц"""
