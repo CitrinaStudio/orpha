@@ -10,6 +10,9 @@ try:
     import header
     import inside
 
+    from header import DB
+    from header import CONNECT
+
 except ImportError as err_detail:
     inside.log.logging.critical('Ошибка импорта.')
     inside.log.logging.critical('Модуль %s не найден!' %
@@ -19,11 +22,6 @@ except ImportError as err_detail:
 else:
     inside.log.logging.info('Импорт дополнительных модулей прошел успешно.')
 
-
-# подключение к БД
-
-CONNECT = sqlite.connect("game.db")
-DB = CONNECT.cursor()
 
 
 def _intput_check_error(err_msg, input_msg):
@@ -50,9 +48,6 @@ def _intput_check_error(err_msg, input_msg):
 
     return var
 
-def db_check():
-    """Проверка существования таблиц"""
-    
 
 def new_player():
     """Создание и запись нового персонажа"""

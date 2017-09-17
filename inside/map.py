@@ -4,13 +4,14 @@ import sqlite3 as sqlite
 
 import header
 import inside
+import random
 
-# подключение к БД
-
-CONNECT = sqlite.connect("game.db")
-DB = CONNECT.cursor()
+from header import DB
+from header import CONNECT
 
 inside.util.db_check()
+
+from numpy import random as nprand
 
 
 def get_map_point(map_arr, coor):
@@ -36,9 +37,25 @@ def get_player_spawn(map_arr):
 
     return player_spawn_coor
 
+def _enemies(player_params, count):
+    for _ in range(0, count, 1):
+        random_enemy = nprand.choice(header.POTENTIAL_ENEMY_LIST)
+        enemy_hp = header.POTENTIAL_ENEMY_STATS[random_enemy]['hp']
+        enemy_mp = header.POTENTIAL_ENEMY_STATS[random_enemy]['mp']
+        enemy_danger_coeff = enemy_hp / enemy_mp
+
+        print("You met the", random_enemy, "," "He has",
+              enemy_hp, "hp and", enemy_mp, "mp.")
+        
+        enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff)
+
+        print(enemy_params)
+        print(int(int(player_params[7] + player_params[9]) / enemy_params[2] + 1))
+        print(player_params[7], player_params[9])
 
 def get_map_detail(map_arr, coor, player_params):
     """Получить детальное описание местности"""
+        
     map_notation = inside.map.get_map_point(
         map_arr, (coor[0], coor[1]))
     coor_hash = inside.gen.gen_adler32_hash(str(coor))
@@ -65,11 +82,27 @@ def get_map_detail(map_arr, coor, player_params):
             enter_point_name = list(DB.execute("""SELECT name FROM %s WHERE coor_hash='%s'""" % (
                 header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash)))[0][0]
 
+        print(player_params)
+
         CONNECT.commit()
 
         inside.shell.play_start(
             player_params, recursion_count=1, map_file=enter_point_name, location_shell=" %s " % header.CONVENTIONAL_NOTATIONAL[map_notation])
 
+        inside.shell.save_char(player_params, coor)
+
+    elif map_notation == "E":
+        
+        random_enemy = nprand.choice(header.POTENTIAL_ENEMY_LIST)
+        enemy_hp = header.POTENTIAL_ENEMY_STATS[random_enemy]['hp']
+        enemy_mp = header.POTENTIAL_ENEMY_STATS[random_enemy]['mp']
+        enemy_danger_coeff = enemy_mp / enemy_hp
+        
+        enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
+
+        inside.shell.battlefield(player_params, enemy_params)
+
+    else:
         inside.shell.save_char(player_params, coor)
 
 

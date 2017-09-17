@@ -2,8 +2,12 @@
 
 import numpy as np
 import os
+import sqlite3 as sqlite
 
 import inside
+
+CONNECT = sqlite.connect("game.db")
+DB = CONNECT.cursor()
 
 PATH_DATA_DB = os.path.join(os.path.dirname(__file__), "db/")
 
@@ -98,7 +102,8 @@ TABLES_CREATE_COMMANDS = {
     'fields': "CREATE TABLE `fields` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
     'forests': "CREATE TABLE `forests` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
     'bridges': "CREATE TABLE `bridges` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'villages': "CREATE TABLE `villages` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));"
+    'villages': "CREATE TABLE `villages` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'enemyes': "CREATE TABLE `enemyes` (`coor_hash` TEXT NOT NULL UNIQUE, `hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));"
 }
 
 
@@ -120,7 +125,8 @@ CONVENTIONAL_NOTATIONAL = {
 CONVENTIONAL_NOTATIONAL_ENTER_POINT = ["V"]
 
 NAME_MAPS_FILES = {
-    "V": "village"
+    "V": "village",
+    "E": "enemy"
 }
 
 
@@ -133,12 +139,36 @@ CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
     "f": "fields",
     "F": "forests",
     "R": "rivers",
-    "V": "villages"
+    "V": "villages",
+    "E": "enemyes"
 
 }
 
+POTENTIAL_ENEMY_STATS = {
+    'Ork': {
+        'hp': np.random.randint(18,20),
+        'mp': np.random.randint(3, 7)
+    },
+    'Gnom mage': {
+        'hp': np.random.randint(10,20),
+        'mp': np.random.randint(7,10)
+    }
+}
+
+MAGIC_SPELLS = {
+    'Iceblast': np.random.randint(3, 5)
+}
+
+MAGIC_SPELLS_NAMES = [
+    'Iceblast'
+]
+
+POTENTIAL_ENEMY_LIST = [
+    'Ork', 'Gnom mage'
+]
+
 CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
-    "H", "S", "B", "M", "C", "f", "F", "R", "b", "V"]
+    "H", "S", "B", "M", "C", "f", "F", "R", "b", "V", "E"]
 
 CONVENTIONAL_NOTATIONAL_VILLAGE = [
     "H","S", " "]

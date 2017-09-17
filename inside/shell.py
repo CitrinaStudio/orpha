@@ -5,17 +5,16 @@ import string
 import header
 import inside
 
-# подключение к БД
-
-CONNECT = sqlite.connect("game.db")
-DB = CONNECT.cursor()
+from header import DB
+from header import CONNECT
 
 inside.util.db_check()
 
+from numpy import random as nprand
 
 def _get_playerlist():
     """Функция получения списка персонажей"""
-    players = list
+    players = list(DB.execute("SELECT * FROM players"))
 
     if players == []:
         print("Characters not found!")
@@ -207,8 +206,45 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
                    player_params[9], player_params[10], player_params[11], player_params[12]))
 
         elif query == 'Clear':  # Очищение Шелла
-            inside.util.clear()
+            inside.util.clear() 
 
+def battlefield(player_params, enemy_params, debug_mode=0):
+    """Сражение"""
+    if debug_mode != 1:
+        inside.util.clear()
+        print("You met the", enemy_params[3])
+
+        print( "He has", enemy_params[0], "hp and", enemy_params[1], "mp.")
+
+    while True:
+        query = string.capwords(input('$ '))
+        if query in ('Attack', 'A'):
+             player_damage = int((player_params[7] + player_params[9]) / (enemy_params[2] * 10))
+             print(player_damage)
+
+        elif query in ("Leave","L"):
+            print("You escaped from the enemy.")
+            return 0
+            
+        elif query == "Help":
+            print ("Attack/At - for make a blow\n Leave/L - for leave from battle\n")
+
+        elif query in ('Magic', 'M'):
+            print("This is your spells: \n")
+
+            for i in range(0, len(header.MAGIC_SPELLS_NAMES), 1):
+                print("№%s %s\n" % (i + 1, header.MAGIC_SPELLS_NAMES[i]))
+
+            spell_choice = string.capwords(input("Input spel name: "))
+
+            if spell_choice in header.MAGIC_SPELLS_NAMES:
+                player_damage =  int((player_params[7] + player_params[9]) / (enemy_params[2] * 10)) + header.MAGIC_SPELLS[spell_choice]
+                print(player_damage)
+                print(enemy_params)
+            
+            else:
+                print("You can't read %s - this is not spell." % spell_choice)
+             
 
 def init(debug_mode=0):
     """Инициальзация командной строки"""
@@ -246,8 +282,9 @@ def init(debug_mode=0):
 
                 player_params = list(DB.execute(
                     "select * from players where name='%s'" % player_name))
+                play_start(player_params[0])
 
-                try:
+                """try:
                     play_start(player_params[0])
 
                 except IndexError:
@@ -270,7 +307,7 @@ def init(debug_mode=0):
                             inside.util.cprint("Player not found! Try again", "red")
 
                         else:
-                            while_exit_status = 1
+                            while_exit_status = 1"""
 
         else:
             inside.util.cprint(
