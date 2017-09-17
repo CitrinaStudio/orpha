@@ -105,7 +105,7 @@ def get_map_detail(map_arr, coor, player_params):
     else:
         inside.shell.save_char(player_params, coor)
 
-
+`  
 def get_player_map(map_arr, coor):
     player_spawn_coor = get_player_spawn(map_arr)
     print("\n".join(map_arr))
