@@ -75,6 +75,7 @@ def get_map_detail(map_arr, coor, player_params):
 
         if map_notation == "V" and record_exists == '[(0,)]':
             enter_point_name = inside.gen.gen_village()
+
             DB.execute("""INSERT INTO %s (coor_hash, name) VALUES ('%s', '%s')""" % (
                 header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash, enter_point_name))
 
