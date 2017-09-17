@@ -47,12 +47,12 @@ def _enemies(player_params, count):
         random_enemy = nprand.choice(header.POTENTIAL_ENEMY_LIST)
         enemy_hp = header.POTENTIAL_ENEMY_STATS[random_enemy]['hp']
         enemy_mp = header.POTENTIAL_ENEMY_STATS[random_enemy]['mp']
-        enemy_danger_coeff = enemy_hp / enemy_mp
+        enemy_danger_coeff = ((enemy_hp / enemy_mp) * 100)
 
         print("You met the", random_enemy, "," "He has",
               enemy_hp, "hp and", enemy_mp, "mp.")
 
-        enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff)
+        enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff,random_enemy)
 
         print(enemy_params)
         print(int(int(player_params[7] + player_params[9]) / enemy_params[2] + 1))
@@ -109,7 +109,7 @@ def get_map_detail(map_arr, coor, player_params):
     else:
         inside.shell.save_char(player_params, coor)
 
-`  
+
 def get_player_map(map_arr, coor):
     player_spawn_coor = tuple(get_player_spawn(map_arr))
 

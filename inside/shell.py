@@ -1,6 +1,7 @@
 """ Shell module """
 import sqlite3 as sqlite
 import string
+import math
 
 import header
 import inside
@@ -214,24 +215,41 @@ def battlefield(player_params, enemy_params, debug_mode=0):
     """Сражение"""
     if debug_mode != 1:
         inside.util.clear()
-        print("You met the", enemy_params[3])
+        print("You is meeting the", enemy_params[3])
 
         print("He has", enemy_params[0], "hp and", enemy_params[1], "mp.")
+
+        enemy_hp = enemy_params[0]
+
+        player_hp = int(player_params[5])
 
     while True:
         query = string.capwords(input('$ '))
         if query in ('Attack', 'A'):
+
             player_damage = int((player_params[7] + player_params[9]) / (enemy_params[2] * 10))
-            print(player_damage)
+            print('You inflicted', player_damage, 'damage.')
+
+            enemy_hp -= player_damage
+
+            print("Enemy have", enemy_hp, "hp." )
+
+            print("You inflicted enemy\'s %s" % nprand.choice(header.BODY_PARTS))
+
+            
 
         elif query in ("Leave", "L"):
             print("You escaped from the enemy.")
             return 0
+        
+        elif query == "Coeff":
+            print(enemy_params[2])
 
         elif query == "Help":
             print("Attack/At - for make a blow\n Leave/L - for leave from battle\n")
 
-        elif query in ('Magic', 'M'):
+        elif query in ('Magic', 'M'): 
+            
             print("This is your spells: \n")
 
             for i in range(0, len(header.MAGIC_SPELLS_NAMES), 1):
@@ -244,9 +262,20 @@ def battlefield(player_params, enemy_params, debug_mode=0):
                     (player_params[7] + player_params[9]) / (enemy_params[2] * 10)) + header.MAGIC_SPELLS[spell_choice]
                 print(player_damage)
                 print(enemy_params)
+                enemy_hp -= player_damage
 
             else:
                 print("You can't read %s - this is not spell." % spell_choice)
+        
+        if enemy_hp <= 0:
+                print("Monster is dead.")
+                return 0
+        
+        else:
+            enemy_damage = int(enemy_params[1] * math.sqrt(enemy_params[2]))
+            player_hp -= enemy_damage
+
+            print(enemy_params[3],"has caused you",enemy_damage,"damage")         
 
 
 def init(debug_mode=0):

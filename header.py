@@ -159,6 +159,16 @@ MAGIC_SPELLS = {
     'Iceblast': np.random.randint(3, 5)
 }
 
+BODY_PARTS = [
+    'leg', 'had', 'hand', 'neck', 'knee'
+]
+
+MAGIC_DAMAGE_DETAIL = {
+    'Iceblast': 'You froze his %s'
+}
+
+
+
 MAGIC_SPELLS_NAMES = [
     'Iceblast'
 ]
