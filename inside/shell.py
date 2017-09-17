@@ -12,6 +12,7 @@ inside.util.db_check()
 
 from numpy import random as nprand
 
+
 def _get_playerlist():
     """Функция получения списка персонажей"""
     players = list(DB.execute("SELECT * FROM players"))
@@ -44,7 +45,7 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
     global_player_coor = player_params[4]
 
     if player_params[4] == "(0, 0)" and recursion_count == 0:
-        player_coor = list(inside.map.get_player_spawn(map))
+        player_coor = inside.map.get_player_spawn(map)
 
     elif recursion_count != 0:
         player_coor = list(inside.map.get_player_spawn(map))
@@ -206,7 +207,8 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
                    player_params[9], player_params[10], player_params[11], player_params[12]))
 
         elif query == 'Clear':  # Очищение Шелла
-            inside.util.clear() 
+            inside.util.clear()
+
 
 def battlefield(player_params, enemy_params, debug_mode=0):
     """Сражение"""
@@ -214,20 +216,20 @@ def battlefield(player_params, enemy_params, debug_mode=0):
         inside.util.clear()
         print("You met the", enemy_params[3])
 
-        print( "He has", enemy_params[0], "hp and", enemy_params[1], "mp.")
+        print("He has", enemy_params[0], "hp and", enemy_params[1], "mp.")
 
     while True:
         query = string.capwords(input('$ '))
         if query in ('Attack', 'A'):
-             player_damage = int((player_params[7] + player_params[9]) / (enemy_params[2] * 10))
-             print(player_damage)
+            player_damage = int((player_params[7] + player_params[9]) / (enemy_params[2] * 10))
+            print(player_damage)
 
-        elif query in ("Leave","L"):
+        elif query in ("Leave", "L"):
             print("You escaped from the enemy.")
             return 0
-            
+
         elif query == "Help":
-            print ("Attack/At - for make a blow\n Leave/L - for leave from battle\n")
+            print("Attack/At - for make a blow\n Leave/L - for leave from battle\n")
 
         elif query in ('Magic', 'M'):
             print("This is your spells: \n")
@@ -238,13 +240,14 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             spell_choice = string.capwords(input("Input spel name: "))
 
             if spell_choice in header.MAGIC_SPELLS_NAMES:
-                player_damage =  int((player_params[7] + player_params[9]) / (enemy_params[2] * 10)) + header.MAGIC_SPELLS[spell_choice]
+                player_damage = int(
+                    (player_params[7] + player_params[9]) / (enemy_params[2] * 10)) + header.MAGIC_SPELLS[spell_choice]
                 print(player_damage)
                 print(enemy_params)
-            
+
             else:
                 print("You can't read %s - this is not spell." % spell_choice)
-             
+
 
 def init(debug_mode=0):
     """Инициальзация командной строки"""
