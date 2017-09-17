@@ -178,7 +178,7 @@ POTENTIAL_ENEMY_LIST = [
 ]
 
 CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
-    "H", "S", "B", "M", "C", "f", "F", "R", "b", "V", "E"]
+    "H", "S", "B", "M", "C", "f", "F", "R", "b", "V", "E", "Ć"]
 
 CONVENTIONAL_NOTATIONAL_VILLAGE = [
     "H", "S", " "]
