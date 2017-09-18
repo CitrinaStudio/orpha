@@ -234,6 +234,9 @@ def battlefield(player_params, enemy_params, debug_mode=0):
     player_mp = int(player_params[6])
     hight_player_mp = player_mp
 
+    player_int = player_params[10]
+    player_wis = player_params[11]
+
     block_enemy_action = 0
 
     player_attacking = False
@@ -246,7 +249,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
         query = string.capwords(input('$ '))
         if query in ('Attack', 'A'):
 
-            player_damage = int((player_params[7] + player_params[9]) / (enemy_params[2] * 10))
+            player_damage = int((player_params[7] + player_params[9]) /
+                                (enemy_params[2] * 10) + (math.sin(nprand.random()) * 10))
             print('You inflicted', player_damage, 'damage.')
 
             enemy_hp -= player_damage
@@ -280,8 +284,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             spell_choice = string.capwords(input("Input spel name: "))
 
             if spell_choice in header.MAGIC_SPELLS_NAMES and player_mp - header.MAGIC_SPELLS[spell_choice][1] >= 0:
-                player_damage = int(
-                    (player_params[7] + player_params[9] + header.MAGIC_SPELLS[spell_choice][0]) / (enemy_params[2] * 10 * math.e))
+                player_damage = math.ceil(
+                    header.MAGIC_SPELLS[spell_choice][0] + player_int + math.cos(player_wis) * 10)
                 print('You inflicted', player_damage, 'damage.')
                 enemy_hp -= player_damage
 
