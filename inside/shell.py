@@ -9,6 +9,8 @@ import inside
 from header import DB
 from header import CONNECT
 
+import math
+
 inside.util.db_check()
 
 from numpy import random as nprand
@@ -79,20 +81,6 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
         elif query in ("North", "N"):  # Передвижение на север
             map_notation = inside.map.get_map_point(
-                map, (player_coor[0], player_coor[1] + 1))
-
-            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
-                print("You can't go to this side. There is a wall.")
-
-            else:
-                player_coor[1] += 1
-                inside.map.get_map_detail(map, player_coor, player_params)
-
-            if debug_mode == 1:
-                print(player_coor)
-
-        elif query in ("South", "S"):  # Передвижение юг
-            map_notation = inside.map.get_map_point(
                 map, (player_coor[0], player_coor[1] - 1))
 
             if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
@@ -100,6 +88,20 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
             else:
                 player_coor[1] -= 1
+                inside.map.get_map_detail(map, player_coor, player_params)
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("South", "S"):  # Передвижение юг
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0], player_coor[1] + 1))
+
+            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[1] += 1
                 inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
@@ -206,7 +208,7 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
             print(player_coor)
 
         elif query == "Map":
-            inside.map.get_player_map(map, player_coor)
+            inside.map.get_player_map(map_file, player_coor)
 
         elif query in ("Myparams", "Mp"):
             _get_player_params(player_params)
@@ -279,7 +281,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
             if spell_choice in header.MAGIC_SPELLS_NAMES and player_mp - header.MAGIC_SPELLS[spell_choice][1] >= 0:
                 player_damage = int(
-                    (player_params[7] + player_params[9]) / (enemy_params[2] * 10)) + header.MAGIC_SPELLS[spell_choice][0]
+                    (player_params[7] + player_params[9] + header.MAGIC_SPELLS[spell_choice][0]) / (enemy_params[2] * 10 * math.e))
                 print('You inflicted', player_damage, 'damage.')
                 enemy_hp -= player_damage
 
@@ -302,6 +304,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
                 print("You have %s mp. You need %s mp" %
                       (player_mp, header.MAGIC_SPELLS[spell_choice][1]))
 
+                player_attacking = False
+
             else:
                 print("You can't read %s - this is not spell." % spell_choice)
 
@@ -317,7 +321,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
             player_attacking = False
 
-        else:
+        elif block_enemy_action > 0 and player_attacking == True:
             block_enemy_action -= 1
             print("Enemy action blocked for %s" % block_enemy_action)
 

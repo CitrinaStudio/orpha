@@ -110,10 +110,11 @@ def get_map_detail(map_arr, coor, player_params):
         inside.shell.save_char(player_params, coor)
 
 
-def get_player_map(map_arr, coor):
-    player_spawn_coor = tuple(get_player_spawn(map_arr))
+def get_player_map(map_file, coor):
+    mod_map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
 
-    map_string = list(map_arr[coor[1]])
+    map_string = list(mod_map[coor[1]])
     map_string[coor[0]] = colored("Y", "green", "on_white")
-    map_arr[coor[1]] = ''.join(map_string)
-    print("\n".join(map_arr))
+    mod_map[coor[1]] = ''.join(map_string)
+
+    print("\n".join(mod_map))

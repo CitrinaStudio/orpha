@@ -79,15 +79,6 @@ def gen_map(map_file="default_map"):
     gamemap.write(map_strings)
 
 
-def gen_detail_map(map_arr):
-
-    for y in range(0, len(map_arr), 1):
-
-        for x in range(0, len(map_arr[y]), 1):
-            if map_arr[x][y] != "p" and map_arr[x][y] != "#":
-                print(True)
-
-
 def gen_village():
 
     name = gen_name(64)

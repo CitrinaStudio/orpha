@@ -9,6 +9,8 @@ import inside
 import sqlite3 as sqlite
 from numpy import random as nprand
 
+import math
+
 CONNECT = sqlite.connect("game.db")
 DB = CONNECT.cursor()
 
@@ -65,6 +67,7 @@ def db_check():
 
 def get_spell_effect(spell, enemy_danger_coeff):
     if spell in header.MAGIC_CATEGORIES["Ice"]:
-        count_block_action = int(nprand.random() * 10 / enemy_danger_coeff)
+        count_block_action = math.ceil(
+            math.e * nprand.random() / enemy_danger_coeff)
         print("You block enemy action in %s moves." % count_block_action)
         return ["block_enemy_action", count_block_action]
