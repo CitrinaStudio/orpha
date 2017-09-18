@@ -52,7 +52,7 @@ def _enemies(player_params, count):
         print("You met the", random_enemy, "," "He has",
               enemy_hp, "hp and", enemy_mp, "mp.")
 
-        enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff,random_enemy)
+        enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
 
         print(enemy_params)
         print(int(int(player_params[7] + player_params[9]) / enemy_params[2] + 1))
@@ -113,5 +113,7 @@ def get_map_detail(map_arr, coor, player_params):
 def get_player_map(map_arr, coor):
     player_spawn_coor = tuple(get_player_spawn(map_arr))
 
+    map_string = list(map_arr[coor[1]])
+    map_string[coor[0]] = colored("Y", "green", "on_white")
+    map_arr[coor[1]] = ''.join(map_string)
     print("\n".join(map_arr))
-    print(map_arr[coor[1]])

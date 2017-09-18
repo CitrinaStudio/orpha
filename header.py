@@ -146,18 +146,19 @@ CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
 
 POTENTIAL_ENEMY_STATS = {
     'Ork': {
-        'hp': np.random.randint(18,20),
+        'hp': np.random.randint(18, 20),
         'mp': np.random.randint(3, 7)
     },
     'Gnom mage': {
-        'hp': np.random.randint(10,20),
-        'mp': np.random.randint(7,10)
+        'hp': np.random.randint(10, 20),
+        'mp': np.random.randint(7, 10)
     }
 }
 
 MAGIC_SPELLS = {
-    'Iceblast': np.random.randint(3, 5)
+    'Iceblast': (np.random.randint(3, 5), 10)
 }
+
 
 BODY_PARTS = [
     'leg', 'had', 'hand', 'neck', 'knee'
@@ -167,7 +168,11 @@ MAGIC_DAMAGE_DETAIL = {
     'Iceblast': 'You froze his %s'
 }
 
+MAGIC_CATEGORIES_NAMES = ["Ice"]
 
+MAGIC_CATEGORIES = {
+    "Ice": ["Iceblast"]
+}
 
 MAGIC_SPELLS_NAMES = [
     'Iceblast'

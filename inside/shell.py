@@ -14,6 +14,12 @@ inside.util.db_check()
 from numpy import random as nprand
 
 
+def _get_player_params(player_params):
+    print("Your params: \n hp: %s\n mp: %s\n\n Abilityes: \n\n str: %s\n dex: %s\n con: %s\n inte: %s\n wis: %s\n cha: %s" %
+          (player_params[5], player_params[6], player_params[7], player_params[8],
+           player_params[9], player_params[10], player_params[11], player_params[12]))
+
+
 def _get_playerlist():
     """Функция получения списка персонажей"""
     players = list(DB.execute("SELECT * FROM players"))
@@ -203,9 +209,7 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
             inside.map.get_player_map(map, player_coor)
 
         elif query in ("Myparams", "Mp"):
-            print("Your params: \n hp: %s\n mp: %s\n\n Abilityes: \n\n str: %s\n dex: %s\n con: %s\n inte: %s\n wis: %s\n cha: %s" %
-                  (player_params[5], player_params[6], player_params[7], player_params[8],
-                   player_params[9], player_params[10], player_params[11], player_params[12]))
+            _get_player_params(player_params)
 
         elif query == 'Clear':  # Очищение Шелла
             inside.util.clear()
@@ -215,13 +219,26 @@ def battlefield(player_params, enemy_params, debug_mode=0):
     """Сражение"""
     if debug_mode != 1:
         inside.util.clear()
-        print("You is meeting the", enemy_params[3])
 
-        print("He has", enemy_params[0], "hp and", enemy_params[1], "mp.")
+    print("You is meeting the", enemy_params[3])
 
-        enemy_hp = enemy_params[0]
+    print("He has", enemy_params[0], "hp and", enemy_params[1], "mp.")
 
-        player_hp = int(player_params[5])
+    enemy_hp = enemy_params[0]
+
+    player_hp = int(player_params[5])
+    hight_player_hp = player_hp
+
+    player_mp = int(player_params[6])
+    hight_player_mp = player_mp
+
+    block_enemy_action = 0
+
+    player_attacking = False
+
+    if player_mp + 1 <= hight_player_mp:
+        player_mp += 1
+        print("\n You take 1 mp. You have %s mp" % player_mp)
 
     while True:
         query = string.capwords(input('$ '))
@@ -232,24 +249,27 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
             enemy_hp -= player_damage
 
-            print("Enemy have", enemy_hp, "hp." )
+            print("Enemy have", enemy_hp, "hp.")
 
             print("You inflicted enemy\'s %s" % nprand.choice(header.BODY_PARTS))
 
-            
+            player_attacking = True
 
         elif query in ("Leave", "L"):
             print("You escaped from the enemy.")
             return 0
-        
+
         elif query == "Coeff":
             print(enemy_params[2])
 
         elif query == "Help":
             print("Attack/At - for make a blow\n Leave/L - for leave from battle\n")
 
-        elif query in ('Magic', 'M'): 
-            
+        elif query in ("Myparams", "Mp"):
+            _get_player_params(player_params)
+
+        elif query in ('Magic', 'M'):
+
             print("This is your spells: \n")
 
             for i in range(0, len(header.MAGIC_SPELLS_NAMES), 1):
@@ -257,25 +277,49 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
             spell_choice = string.capwords(input("Input spel name: "))
 
-            if spell_choice in header.MAGIC_SPELLS_NAMES:
+            if spell_choice in header.MAGIC_SPELLS_NAMES and player_mp - header.MAGIC_SPELLS[spell_choice][1] >= 0:
                 player_damage = int(
-                    (player_params[7] + player_params[9]) / (enemy_params[2] * 10)) + header.MAGIC_SPELLS[spell_choice]
-                print(player_damage)
-                print(enemy_params)
+                    (player_params[7] + player_params[9]) / (enemy_params[2] * 10)) + header.MAGIC_SPELLS[spell_choice][0]
+                print('You inflicted', player_damage, 'damage.')
                 enemy_hp -= player_damage
+
+                print("Enemy have", enemy_hp, "hp.")
+
+                print(header.MAGIC_DAMAGE_DETAIL[spell_choice] % nprand.choice(header.BODY_PARTS))
+
+                spell_effect = inside.util.get_spell_effect(spell_choice, enemy_params[2])
+
+                if spell_effect[0] == "block_enemy_action":
+                    block_enemy_action = spell_effect[1]
+
+                player_attacking = True
+
+                player_mp -= header.MAGIC_SPELLS[spell_choice][1]
+
+                print("You have %s mp." % (player_mp))
+
+            elif player_mp - header.MAGIC_SPELLS[spell_choice][1] < 0:
+                print("You have %s mp. You need %s mp" %
+                      (player_mp, header.MAGIC_SPELLS[spell_choice][1]))
 
             else:
                 print("You can't read %s - this is not spell." % spell_choice)
-        
+
         if enemy_hp <= 0:
-                print("Monster is dead.")
-                return 0
-        
-        else:
+            print("%s is dead." % enemy_params[3])
+            return 0
+
+        elif block_enemy_action == 0 and player_attacking == True:
             enemy_damage = int(enemy_params[1] * math.sqrt(enemy_params[2]))
             player_hp -= enemy_damage
 
-            print(enemy_params[3],"has caused you",enemy_damage,"damage")         
+            print(enemy_params[3], "has caused you", enemy_damage, "damage")
+
+            player_attacking = False
+
+        else:
+            block_enemy_action -= 1
+            print("Enemy action blocked for %s" % block_enemy_action)
 
 
 def init(debug_mode=0):
@@ -314,9 +358,8 @@ def init(debug_mode=0):
 
                 player_params = list(DB.execute(
                     "select * from players where name='%s'" % player_name))
-                play_start(player_params[0])
 
-                """try:
+                try:
                     play_start(player_params[0])
 
                 except IndexError:
@@ -339,7 +382,7 @@ def init(debug_mode=0):
                             inside.util.cprint("Player not found! Try again", "red")
 
                         else:
-                            while_exit_status = 1"""
+                            while_exit_status = 1
 
         else:
             inside.util.cprint(
