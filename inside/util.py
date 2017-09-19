@@ -18,7 +18,8 @@ DB = CONNECT.cursor()
 init()
 
 
-def cprint(msg, foreground="black", background="white"):  # Функция вывода цветного текста для ошибок
+# Функция вывода цветного текста для ошибок
+def cprint(msg, foreground="black", background="white"):
     fground = foreground.upper()
     bground = background.upper()
     style = getattr(Fore, fground) + getattr(Back, bground)
@@ -68,6 +69,6 @@ def db_check():
 def get_spell_effect(spell, enemy_danger_coeff):
     if spell in header.MAGIC_CATEGORIES["Ice"]:
         count_block_action = math.ceil(
-            math.e * nprand.random() / enemy_danger_coeff)
+            math.e * nprand.random() * math.sqrt(enemy_danger_coeff))
         print("You block enemy action in %s moves." % count_block_action)
         return ["block_enemy_action", count_block_action]

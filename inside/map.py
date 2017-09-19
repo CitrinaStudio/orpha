@@ -55,7 +55,8 @@ def _enemies(player_params, count):
         enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
 
         print(enemy_params)
-        print(int(int(player_params[7] + player_params[9]) / enemy_params[2] + 1))
+        print(
+            int(int(player_params[7] + player_params[9]) / enemy_params[2] + 1))
         print(player_params[7], player_params[9])
 
 
@@ -100,7 +101,7 @@ def get_map_detail(map_arr, coor, player_params):
         random_enemy = nprand.choice(header.POTENTIAL_ENEMY_LIST)
         enemy_hp = header.POTENTIAL_ENEMY_STATS[random_enemy]['hp']
         enemy_mp = header.POTENTIAL_ENEMY_STATS[random_enemy]['mp']
-        enemy_danger_coeff = enemy_mp / enemy_hp
+        enemy_danger_coeff = enemy_hp / enemy_mp
 
         enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
 

@@ -213,6 +213,10 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
         elif query in ("Myparams", "Mp"):
             _get_player_params(player_params)
 
+        elif query == "Oksik":
+            print(type(player_params[6]))
+            print(player_params)
+
         elif query == 'Clear':  # Очищение Шелла
             inside.util.clear()
 
@@ -237,6 +241,14 @@ def battlefield(player_params, enemy_params, debug_mode=0):
     player_int = player_params[10]
     player_wis = player_params[11]
 
+    player_str = player_params[7]
+    player_con = player_params[9]
+
+    player_coeff = (player_int + player_wis + player_str + player_con) / math.pi
+
+    enemy_danger_coeff = enemy_params[2] / player_coeff
+    print(enemy_danger_coeff, player_coeff)
+
     block_enemy_action = 0
 
     player_attacking = False
@@ -249,15 +261,16 @@ def battlefield(player_params, enemy_params, debug_mode=0):
         query = string.capwords(input('$ '))
         if query in ('Attack', 'A'):
 
-            player_damage = int((player_params[7] + player_params[9]) /
-                                (enemy_params[2] * 10) + (math.sin(nprand.random()) * 10))
+            player_damage = math.ceil((player_str + player_con) /
+                                      ((enemy_danger_coeff * 10) + (math.sin(nprand.random()) * 10)) * 10)
             print('You inflicted', player_damage, 'damage.')
 
             enemy_hp -= player_damage
 
             print("Enemy have", enemy_hp, "hp.")
 
-            print("You inflicted enemy\'s %s" % nprand.choice(header.BODY_PARTS))
+            print("You inflicted enemy\'s %s" %
+                  nprand.choice(header.BODY_PARTS))
 
             player_attacking = True
 
@@ -285,15 +298,17 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
             if spell_choice in header.MAGIC_SPELLS_NAMES and player_mp - header.MAGIC_SPELLS[spell_choice][1] >= 0:
                 player_damage = math.ceil(
-                    header.MAGIC_SPELLS[spell_choice][0] + player_int + math.cos(player_wis) * 10)
+                    header.MAGIC_SPELLS[spell_choice][0] + player_int)
                 print('You inflicted', player_damage, 'damage.')
                 enemy_hp -= player_damage
 
                 print("Enemy have", enemy_hp, "hp.")
 
-                print(header.MAGIC_DAMAGE_DETAIL[spell_choice] % nprand.choice(header.BODY_PARTS))
+                print(header.MAGIC_DAMAGE_DETAIL[
+                      spell_choice] % nprand.choice(header.BODY_PARTS))
 
-                spell_effect = inside.util.get_spell_effect(spell_choice, enemy_params[2])
+                spell_effect = inside.util.get_spell_effect(
+                    spell_choice, enemy_danger_coeff)
 
                 if spell_effect[0] == "block_enemy_action":
                     block_enemy_action = spell_effect[1]
@@ -318,7 +333,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             return 0
 
         elif block_enemy_action == 0 and player_attacking == True:
-            enemy_damage = int(enemy_params[1] * math.sqrt(enemy_params[2]))
+            enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
             player_hp -= enemy_damage
 
             print(enemy_params[3], "has caused you", enemy_damage, "damage")
@@ -387,7 +402,8 @@ def init(debug_mode=0):
                             play_start(player_params[0])
 
                         except IndexError:
-                            inside.util.cprint("Player not found! Try again", "red")
+                            inside.util.cprint(
+                                "Player not found! Try again", "red")
 
                         else:
                             while_exit_status = 1
