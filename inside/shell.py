@@ -244,10 +244,9 @@ def battlefield(player_params, enemy_params, debug_mode=0):
     player_str = player_params[7]
     player_con = player_params[9]
 
-    player_coeff = (player_int + player_wis + player_str + player_con) / math.pi
+    player_coeff = math.cos(player_int + player_wis + player_str + player_con)
 
     enemy_danger_coeff = enemy_params[2] / player_coeff
-    print(enemy_danger_coeff, player_coeff)
 
     block_enemy_action = 0
 
@@ -262,7 +261,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
         if query in ('Attack', 'A'):
 
             player_damage = math.ceil((player_str + player_con) /
-                                      ((enemy_danger_coeff * 10) + (math.sin(nprand.random()) * 10)) * 10)
+                                      enemy_danger_coeff * nprand.random())
+
             print('You inflicted', player_damage, 'damage.')
 
             enemy_hp -= player_damage
