@@ -156,7 +156,9 @@ POTENTIAL_ENEMY_STATS = {
 }
 
 MAGIC_SPELLS = {
-    'Iceblast': (np.random.randint(3, 5), 10)
+    'Iceblast': (np.random.randint(3, 5), 10),
+    'Fireball':(np.random.randint(3, 5), 10),
+    'Waterpillar':()
 }
 
 
@@ -165,17 +167,24 @@ BODY_PARTS = [
 ]
 
 MAGIC_DAMAGE_DETAIL = {
-    'Iceblast': 'You froze his %s'
+    'Iceblast': 'You froze his %s',
+    'Fireball': 'You burn his %s'
 }
 
-MAGIC_CATEGORIES_NAMES = ["Ice"]
+MAGIC_CATEGORIES_NAMES = ["Ice", "Fire","Water","Iron"]
 
-MAGIC_CATEGORIES = {
-    "Ice": ["Iceblast"]
+MAGIC_CATEGORIES = 
+    "Ice": ["Iceblast"],
+    "Fire": ["Fireball"],
+    "Water":["Waterpillar"],
+    "Iron":["Ironfist"]
 }
 
 MAGIC_SPELLS_NAMES = [
-    'Iceblast'
+    'Iceblast',
+    'Fireball',
+    'Waterpillar',
+    'Ironfist'
 ]
 
 POTENTIAL_ENEMY_LIST = [
