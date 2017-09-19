@@ -292,7 +292,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             print("This is your spells: \n")
 
             for i in range(0, len(header.MAGIC_SPELLS_NAMES), 1):
-                print("№%s %s\n" % (i + 1, header.MAGIC_SPELLS_NAMES[i]))
+                print("№%s %s| MP Cost: %s | Damage Bonus: %s \n" % (
+                    i + 1, header.MAGIC_SPELLS_NAMES[i], header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]][1], header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]][0]))
 
             spell_choice = string.capwords(input("Input spel name: "))
 
@@ -312,7 +313,9 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
                 if spell_effect[0] == "block_enemy_action":
                     block_enemy_action = spell_effect[1]
-
+                    continue
+                else:
+                    pass
                 player_attacking = True
 
                 player_mp -= header.MAGIC_SPELLS[spell_choice][1]
@@ -321,7 +324,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
             elif player_mp - header.MAGIC_SPELLS[spell_choice][1] < 0:
                 print("You have %s mp. You need %s mp" %
-                      (player_mp, header.MAGIC_SPELLS[spell_choice][1]))
+                      (player_mp, header.MAGIC_SPELLS[spell_choice][1] - player_mp))
 
                 player_attacking = False
 
@@ -336,7 +339,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
             player_hp -= enemy_damage
 
-            print(enemy_params[3], "has caused you", enemy_damage, "damage")
+            print(enemy_params[3], "has caused you", enemy_damage, "damage.")
 
             player_attacking = False
 
@@ -382,6 +385,8 @@ def init(debug_mode=0):
                 player_params = list(DB.execute(
                     "select * from players where name='%s'" % player_name))
 
+                play_start(player_params[0])
+                """
                 try:
                     play_start(player_params[0])
 
@@ -407,6 +412,7 @@ def init(debug_mode=0):
 
                         else:
                             while_exit_status = 1
+                """
 
         else:
             inside.util.cprint(

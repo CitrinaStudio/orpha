@@ -72,3 +72,12 @@ def get_spell_effect(spell, enemy_danger_coeff):
             math.e * nprand.random() * math.sqrt(enemy_danger_coeff))
         print("You block enemy action in %s moves." % count_block_action)
         return ["block_enemy_action", count_block_action]
+
+    if spell in header.MAGIC_CATEGORIES["Iron"]:
+        count_block_action = math.ceil(
+            math.e * nprand.random() * math.sqrt(enemy_danger_coeff))
+        print("You block enemy action in %s moves." % count_block_action)
+        return ["block_enemy_action", count_block_action]
+
+    else:
+        return ("", 0)
