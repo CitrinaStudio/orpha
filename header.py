@@ -11,7 +11,7 @@ DB = CONNECT.cursor()
 
 PATH_DATA_DB = os.path.join(os.path.dirname(__file__), "db/")
 
-PLAYER_CLASSES = ("Warrior", "Roge", "Mage")
+PLAYER_CLASSES = ["Mage"]
 QUANTITY_PLAYER_CLASSES = len(PLAYER_CLASSES)
 
 DEFAULT_MP = 10
@@ -157,9 +157,9 @@ POTENTIAL_ENEMY_STATS = {
 
 MAGIC_SPELLS = {
     'Iceblast': (np.random.randint(3, 5), 5),
-    'Fireball':(np.random.randint(4, 6), 6),
-    'Waterpillar':(np.random.randint(4, 7), 7),
-    'Ironfist':(np.random.randint(5, 11), 9)
+    'Fireball': (np.random.randint(4, 6), 6),
+    'Waterpillar': (np.random.randint(4, 7), 7),
+    'Ironfist': (np.random.randint(5, 11), 9)
 }
 
 
@@ -174,13 +174,13 @@ MAGIC_DAMAGE_DETAIL = {
     'Waterpillar': "You wet enemy\'s %s."
 }
 
-MAGIC_CATEGORIES_NAMES = ["Ice", "Fire","Water","Iron"]
+MAGIC_CATEGORIES_NAMES = ["Ice", "Fire", "Water", "Iron"]
 
 MAGIC_CATEGORIES = {
     "Ice": ["Iceblast"],
     "Fire": ["Fireball"],
-    "Water":["Waterpillar"],
-    "Iron":["Ironfist"]
+    "Water": ["Waterpillar"],
+    "Iron": ["Ironfist"]
 }
 
 MAGIC_SPELLS_NAMES = [

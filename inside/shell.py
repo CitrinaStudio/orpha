@@ -263,13 +263,13 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             player_damage = math.ceil((player_str + player_con) /
                                       enemy_danger_coeff * nprand.random())
 
-            print('You inflicted', player_damage, 'damage.')
+            print('\nYou inflicted', player_damage, 'damage.')
 
             enemy_hp -= player_damage
 
             print("Enemy have", enemy_hp, "hp.")
 
-            print("You inflicted enemy\'s %s" %
+            print("You inflicted enemy\'s %s\n" %
                   nprand.choice(header.BODY_PARTS))
 
             player_attacking = True
@@ -293,20 +293,24 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
             for i in range(0, len(header.MAGIC_SPELLS_NAMES), 1):
                 print("№%s %s| MP Cost: %s | Damage Bonus: %s \n" % (
-                    i + 1, header.MAGIC_SPELLS_NAMES[i], header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]][1], header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]][0]))
+                    i + 1, header.MAGIC_SPELLS_NAMES[i],
+                    header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]][1],
+                    header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]][0]))
 
             spell_choice = string.capwords(input("Input spel name: "))
 
-            if spell_choice in header.MAGIC_SPELLS_NAMES and player_mp - header.MAGIC_SPELLS[spell_choice][1] >= 0:
+            spell_cost = header.MAGIC_SPELLS[spell_choice][1]
+
+            if spell_choice in header.MAGIC_SPELLS_NAMES and player_mp - spell_cost >= 0:
                 player_damage = math.ceil(
                     header.MAGIC_SPELLS[spell_choice][0] + player_int)
-                print('You inflicted', player_damage, 'damage.')
+                print('\nYou inflicted', player_damage, 'damage.')
                 enemy_hp -= player_damage
 
                 print("Enemy have", enemy_hp, "hp.")
 
                 print(header.MAGIC_DAMAGE_DETAIL[
-                      spell_choice] % nprand.choice(header.BODY_PARTS))
+                    spell_choice] % nprand.choice(header.BODY_PARTS))
 
                 spell_effect = inside.util.get_spell_effect(
                     spell_choice, enemy_danger_coeff)
@@ -320,7 +324,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
                 player_mp -= header.MAGIC_SPELLS[spell_choice][1]
 
-                print("You have %s mp." % (player_mp))
+                print("You have %s mp.\n" % (player_mp))
 
             elif player_mp - header.MAGIC_SPELLS[spell_choice][1] < 0:
                 print("You have %s mp. You need %s mp" %
@@ -335,7 +339,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             print("%s is dead." % enemy_params[3])
             return 0
 
-        elif block_enemy_action == 0 and player_attacking == True:
+        elif block_enemy_action == 0 and player_attacking:
             enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
             player_hp -= enemy_damage
 
@@ -343,7 +347,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
             player_attacking = False
 
-        elif block_enemy_action > 0 and player_attacking == True:
+        elif block_enemy_action > 0 and player_attacking:
             block_enemy_action -= 1
             print("Enemy action blocked for %s" % block_enemy_action)
 
@@ -356,7 +360,12 @@ def init(debug_mode=0):
     while True:
         query = string.capwords(input('$ '))
         if query == 'Help':  # Команда, выводящая помощь
-            inside.util.cprint('Commands:\n Clear - For clear console \n Newplayer - Creating new player\n Infoclasses - Information about classes\n Quit - exit from shell\n Loadplayer - loading your player\n Listplayers - list of available players', 'white', 'black')
+            inside.util.cprint('''Commands:\n Clear - For clear console \n
+               Newplayer - Creating new player\n
+               Infoclasses - Information about classes\n
+               Quit - exit from shell\n
+               Loadplayer - loading your player\n
+               Listplayers - list of available players''', 'white', 'black')
 
         elif query == 'Clear':  # Очистка командной строки
             inside.util.clear()
