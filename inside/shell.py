@@ -232,6 +232,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
     enemy_hp = enemy_params[0]
 
+    mboss_hp = enemy_params[0]
+
     player_hp = int(player_params[5])
     hight_player_hp = player_hp
 
@@ -247,6 +249,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
     player_coeff = math.cos(player_int + player_wis + player_str + player_con)
 
     enemy_danger_coeff = enemy_params[2] / player_coeff
+
+    mboss_danger_coeff = enemy_params[2] / player_coeff
 
     block_enemy_action = 0
 
@@ -339,15 +343,24 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             print("%s is dead." % enemy_params[3])
             return 0
 
-        elif block_enemy_action == 0 and player_attacking:
-            enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
-            player_hp -= enemy_damage
+        elif block_enemy_action == 0 and player_attacking == True:
+            
+            if enemy_params[3] in header.POTENTIAL_ENEMY_LIST:
+                enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
+                player_hp -= enemy_damage
 
-            print(enemy_params[3], "has caused you", enemy_damage, "damage.")
+                print(enemy_params[3], "has caused you", enemy_damage, "damage.")
 
-            player_attacking = False
+                player_attacking = False
+            else:
+                enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
+                player_hp -= enemy_damage
 
-        elif block_enemy_action > 0 and player_attacking:
+                print(enemy_params[3], "has caused you", enemy_damage, "damage by", nprand.choice(header.MAGIC_MBOSS_SPELLS))
+
+                player_attacking = False
+
+        elif block_enemy_action > 0 and player_attacking == True:
             block_enemy_action -= 1
             print("Enemy action blocked for %s" % block_enemy_action)
 

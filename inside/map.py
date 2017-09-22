@@ -97,15 +97,29 @@ def get_map_detail(map_arr, coor, player_params):
         inside.shell.save_char(player_params, coor)
 
     elif map_notation == "E":
+        
+        enemy_random = nprand.randint(1, 100)
 
-        random_enemy = nprand.choice(header.POTENTIAL_ENEMY_LIST)
-        enemy_hp = header.POTENTIAL_ENEMY_STATS[random_enemy]['hp']
-        enemy_mp = header.POTENTIAL_ENEMY_STATS[random_enemy]['mp']
-        enemy_danger_coeff = enemy_hp / enemy_mp
+        if enemy_random < 80:
+            random_enemy = nprand.choice(header.POTENTIAL_ENEMY_LIST)
+            enemy_hp = header.POTENTIAL_ENEMY_STATS[random_enemy]['hp']
+            enemy_mp = header.POTENTIAL_ENEMY_STATS[random_enemy]['mp']
+            enemy_danger_coeff = enemy_hp / enemy_mp
 
-        enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
+            enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
 
-        inside.shell.battlefield(player_params, enemy_params)
+            inside.shell.battlefield(player_params, enemy_params)
+        
+        else:
+            
+            random_mboss = nprand.choice(header.POTENTIAL_MBOSS_LIST)
+            mboss_hp = header.POTENTIAL_MBOSS_STATS[random_mboss]['hp']
+            mboss_mp = header.POTENTIAL_MBOSS_STATS[random_mboss]['mp']
+            mboss_danger_coeff = mboss_hp / mboss_mp
+
+            enemy_params = (mboss_hp, mboss_mp, mboss_danger_coeff, random_mboss)
+
+            inside.shell.battlefield(player_params, enemy_params)
 
     else:
         inside.shell.save_char(player_params, coor)

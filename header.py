@@ -155,6 +155,21 @@ POTENTIAL_ENEMY_STATS = {
     }
 }
 
+POTENTIAL_MBOSS_STATS = {
+    'Sentinel ice': {
+        'hp': np.random.randint(23, 25),
+        'mp': np.random.randint(6, 9)
+    },
+    'Singular lanaya': {
+        'hp': np.random.randint(15, 25),
+        'mp': np.random.randint(9, 13)
+    }
+}
+
+MAGIC_MBOSS_SPELLS = [
+    'Meteor', 'Ice walk'
+]
+
 MAGIC_SPELLS = {
     'Iceblast': (np.random.randint(3, 5), 5),
     'Fireball': (np.random.randint(4, 6), 6),
@@ -192,6 +207,10 @@ MAGIC_SPELLS_NAMES = [
 
 POTENTIAL_ENEMY_LIST = [
     'Ork', 'Gnom mage'
+]
+
+POTENTIAL_MBOSS_LIST = [
+    'Sentinel ice', 'Singular lanaya'
 ]
 
 CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
