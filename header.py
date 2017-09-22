@@ -149,22 +149,12 @@ POTENTIAL_ENEMY_STATS = {
         'hp': np.random.randint(18, 20),
         'mp': np.random.randint(3, 7)
     },
-    'Gnom mage': {
+    'Gnom': {
         'hp': np.random.randint(10, 20),
         'mp': np.random.randint(7, 10)
     }
 }
 
-POTENTIAL_MBOSS_STATS = {
-    'Sentinel ice': {
-        'hp': np.random.randint(23, 25),
-        'mp': np.random.randint(6, 9)
-    },
-    'Singular lanaya': {
-        'hp': np.random.randint(15, 25),
-        'mp': np.random.randint(9, 13)
-    }
-}
 
 MAGIC_MBOSS_SPELLS = [
     'Meteor', 'Ice walk'
@@ -189,14 +179,15 @@ MAGIC_DAMAGE_DETAIL = {
     'Waterpillar': "You wet enemy\'s %s."
 }
 
-MAGIC_CATEGORIES_NAMES = ["Ice", "Fire", "Water", "Iron"]
-
 MAGIC_CATEGORIES = {
     "Ice": ["Iceblast"],
     "Fire": ["Fireball"],
     "Water": ["Waterpillar"],
     "Iron": ["Ironfist"]
 }
+
+MAGIC_CATEGORIES_NAMES = list(MAGIC_CATEGORIES.keys())
+
 
 MAGIC_SPELLS_NAMES = [
     'Iceblast',
@@ -205,13 +196,17 @@ MAGIC_SPELLS_NAMES = [
     'Ironfist'
 ]
 
-POTENTIAL_ENEMY_LIST = [
-    'Ork', 'Gnom mage'
-]
+POTENTIAL_ENEMY_LIST = list(POTENTIAL_ENEMY_STATS.keys())
 
-POTENTIAL_MBOSS_LIST = [
-    'Sentinel ice', 'Singular lanaya'
-]
+POTENTIAL_MBOSS_PREFIX_STATS = {
+    "Ice": (np.random.randint(3, 5), np.random.randint(3, 15)),
+    "Fire": (np.random.randint(4, 6), np.random.randint(4, 13)),
+    "Water": (np.random.randint(3, 4), np.random.randint(5, 14)),
+    "Magma": (np.random.randint(5, 6), np.random.randint(3, 15)),
+    "Earth": (np.random.randint(3, 4), np.random.randint(6, 15))
+}
+
+POTENTIAL_MBOSS_PREFIX_LIST = list(POTENTIAL_MBOSS_PREFIX_STATS.keys())
 
 CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
     "H", "S", "B", "M", "C", "f", "F", "R", "b", "V", "E", "Ć"]

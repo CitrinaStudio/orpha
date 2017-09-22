@@ -111,13 +111,14 @@ def get_map_detail(map_arr, coor, player_params):
             inside.shell.battlefield(player_params, enemy_params)
         
         else:
-            
-            random_mboss = nprand.choice(header.POTENTIAL_MBOSS_LIST)
-            mboss_hp = header.POTENTIAL_MBOSS_STATS[random_mboss]['hp']
-            mboss_mp = header.POTENTIAL_MBOSS_STATS[random_mboss]['mp']
+            print(header.POTENTIAL_MBOSS_PREFIX_LIST)
+            random_prefix_mboss = nprand.choice(header.POTENTIAL_MBOSS_PREFIX_LIST)
+            random_mboss = nprand.choice(header.POTENTIAL_ENEMY_LIST)
+            mboss_hp = header.POTENTIAL_ENEMY_STATS[random_mboss]['hp'] + header.POTENTIAL_MBOSS_PREFIX_STATS[random_prefix_mboss][0]
+            mboss_mp = header.POTENTIAL_ENEMY_STATS[random_mboss]['mp'] + header.POTENTIAL_MBOSS_PREFIX_STATS[random_prefix_mboss][1]
             mboss_danger_coeff = mboss_hp / mboss_mp
 
-            enemy_params = (mboss_hp, mboss_mp, mboss_danger_coeff, random_mboss)
+            enemy_params = (mboss_hp, mboss_mp, mboss_danger_coeff, random_prefix_mboss + " " + random_mboss)
 
             inside.shell.battlefield(player_params, enemy_params)
 
