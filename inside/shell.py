@@ -137,39 +137,6 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
         elif query in ("Northwest", "Nw"):  # Передвижение на Северо - запад
             map_notation = inside.map.get_map_point(
-                map, (player_coor[0] - 1, player_coor[1] - 1))
-
-            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
-                print("You can't go to this side. There is a wall.")
-
-            else:
-                player_coor[0] -= 1
-                player_coor[1] -= 1
-                inside.map.get_map_detail(map, player_coor, player_params)
-
-            if debug_mode == 1:
-                print(player_coor)
-
-        elif query in ("Recurslevel", "Rl"):
-            print("Current rec. level: %s" % recursion_count)
-
-        elif query in ("Northeast", "Ne"):  # Передвижение на Северо - восток
-            map_notation = inside.map.get_map_point(
-                map, (player_coor[0] + 1, player_coor[1] - 1))
-
-            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
-                print("You can't go to this side. There is a wall.")
-
-            else:
-                player_coor[0] += 1
-                player_coor[1] -= 1
-                inside.map.get_map_detail(map, player_coor, player_params)
-
-            if debug_mode == 1:
-                print(player_coor)
-
-        elif query in ("Southwest", "Sw"):  # Передвижение Юго - запад
-            map_notation = inside.map.get_map_point(
                 map, (player_coor[0] - 1, player_coor[1] + 1))
 
             if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
@@ -183,7 +150,10 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
             if debug_mode == 1:
                 print(player_coor)
 
-        elif query in ("Southeast", "Se"):  # Передвижение на юго - восток
+        elif query in ("Recurslevel", "Rl"):
+            print("Current rec. level: %s" % recursion_count)
+
+        elif query in ("Northeast", "Ne"):  # Передвижение на Северо - восток
             map_notation = inside.map.get_map_point(
                 map, (player_coor[0] + 1, player_coor[1] + 1))
 
@@ -193,6 +163,36 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
             else:
                 player_coor[0] += 1
                 player_coor[1] += 1
+                inside.map.get_map_detail(map, player_coor, player_params)
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("Southwest", "Sw"):  # Передвижение Юго - запад
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] - 1, player_coor[1] - 1))
+
+            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] -= 1
+                player_coor[1] -= 1
+                inside.map.get_map_detail(map, player_coor, player_params)
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("Southeast", "Se"):  # Передвижение на юго - восток
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] + 1, player_coor[1] - 1))
+
+            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] -= 1
+                player_coor[1] -= 1
                 inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
@@ -317,7 +317,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
                     spell_choice] % nprand.choice(header.BODY_PARTS))
 
                 spell_effect = inside.util.get_spell_effect(
-                    spell_choice, math.fabs(enemy_danger_coeff))
+                    spell_choice, enemy_danger_coeff)
 
                 if spell_effect[0] == "block_enemy_action":
                     block_enemy_action = spell_effect[1]
@@ -346,8 +346,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
         elif block_enemy_action == 0 and player_attacking == True:
             
             if enemy_params[3] in header.POTENTIAL_ENEMY_LIST:
-                print(enemy_danger_coeff)
-                enemy_damage = math.ceil(enemy_params[1] * math.sqrt(enemy_danger_coeff))
+                enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
                 player_hp -= enemy_damage
 
                 print(enemy_params[3], "has caused you", enemy_damage, "damage.")

@@ -87,7 +87,7 @@ def gen_village():
 
     name = gen_name(64)
 
-    gamemap = open("inside/maps/villages/%s" % name, "w")
+    gamemap = open("inside/maps/%s" % name, "w")
 
     map_strings = ""
 
@@ -132,14 +132,10 @@ def gen_village():
 
     return name
 
-def _gen_dung_room(area=0):
-    pass
-    
-
 def gen_dungeon():
 
     dungeon_name = str(nprand.choice(header.DUNGEON_PREFIX) + nprand.choice(header.DUNGEON_TYPE)) + str(" of "+ "".join(header.DUNGEON_SUFFIX.generate_text()))
 
-    gamemap = open("inside/maps/dungeons/%s" % gen_name(100), "w")
+    gamemap = open("inside/maps/%s" % gen_name(100), "w")
 
-    
+    print(dungeon_name)
