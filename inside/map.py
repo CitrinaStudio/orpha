@@ -122,6 +122,9 @@ def get_map_detail(map_arr, coor, player_params):
 
             inside.shell.battlefield(player_params, enemy_params)
 
+    elif map_notation == "D":
+        pass
+
     else:
         inside.shell.save_char(player_params, coor)
 

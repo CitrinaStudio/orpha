@@ -53,7 +53,11 @@ def gen_map(map_file="default_map"):
             map_natation = nprand.choice(
                 header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL)
 
-            if random.random() > 0.7:
+            if map_natation == "D" and nprand.random() > 0.965:
+                map_strings += map_natation
+            
+
+            elif map_natation != "D" and nprand.random() > 0.7:
                 map_strings += map_natation
 
             else:
@@ -127,3 +131,11 @@ def gen_village():
     gamemap.write(map_strings)
 
     return name
+
+def gen_dungeon():
+
+    dungeon_name = str(nprand.choice(header.DUNGEON_PREFIX) + nprand.choice(header.DUNGEON_TYPE)) + str(" of "+ "".join(header.DUNGEON_SUFFIX.generate_text()))
+
+    gamemap = open("inside/maps/%s" % gen_name(100), "w")
+
+    print(dungeon_name)

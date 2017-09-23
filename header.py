@@ -5,6 +5,7 @@ import os
 import sqlite3 as sqlite
 
 import inside
+import smarkov
 
 CONNECT = sqlite.connect("game.db")
 DB = CONNECT.cursor()
@@ -103,7 +104,8 @@ TABLES_CREATE_COMMANDS = {
     'forests': "CREATE TABLE `forests` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
     'bridges': "CREATE TABLE `bridges` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
     'villages': "CREATE TABLE `villages` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'enemyes': "CREATE TABLE `enemyes` (`coor_hash` TEXT NOT NULL UNIQUE, `hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));"
+    'enemyes': "CREATE TABLE `enemyes` (`coor_hash` TEXT NOT NULL UNIQUE, `hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
+    'dungeons': "CREATE TABLE `dungeons` (`coor_hash` TEXT NOT NULL UNIQUE, `hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));"
 }
 
 
@@ -140,7 +142,8 @@ CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
     "F": "forests",
     "R": "rivers",
     "V": "villages",
-    "E": "enemyes"
+    "E": "enemyes",
+    "D": "dungeons"
 
 }
 
@@ -209,7 +212,7 @@ POTENTIAL_MBOSS_PREFIX_STATS = {
 POTENTIAL_MBOSS_PREFIX_LIST = list(POTENTIAL_MBOSS_PREFIX_STATS.keys())
 
 CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
-    "H", "S", "B", "M", "C", "f", "F", "R", "b", "V", "E", "Ć"]
+    "H", "S", "B", "M", "C", "f", "F", "R", "b", "V", "E", "Ć", "D"]
 
 CONVENTIONAL_NOTATIONAL_VILLAGE = [
     "H", "S", " "]
@@ -227,3 +230,16 @@ DEFAULT_HEIGHT_MAP_VILLAGE = 10
 
 DEFAULT_QUANTITY_MAP_STRING = DEFAULT_HEIGHT_MAP
 DEFAULT_QUANTITY_MAP_STRING_VILLAGE = DEFAULT_HEIGHT_MAP_VILLAGE
+
+DUNGEON_PREFIX = smarkov.Markov([
+    'Dark', 'Little', 'Singular', 'Blood', 'Frozen', 'Ice', 'Fire', 'Dead', 'Vampire', 'Wolf', 'Fucking', 'Gay'
+])
+
+DUNGEON_TYPE = [
+    ' castle', ' gates', ' house', ' house'
+]
+
+
+DUNGEON_SUFFIX = smarkov.Markov([
+    'Ilya', 'Dionis', 'Leena', 'Lanaya', 'Raxar', 'Lisa Su'
+])

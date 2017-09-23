@@ -50,6 +50,7 @@ def db_check():
             DB.execute("SELECT * FROM bridges")
             DB.execute("SELECT * FROM villages")
             DB.execute("SELECT * FROM enemyes")
+            DB.execute("SELECT * FROM dungeons")
 
         except sqlite.OperationalError as err_detail:
 
