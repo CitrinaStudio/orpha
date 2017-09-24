@@ -1,20 +1,19 @@
 """ Module for use map """
 
-import sqlite3 as sqlite
-
 import header
 import inside
 import random
 
-from header import DB
-from header import CONNECT
 
 from colorama import init
 from termcolor import colored
+from tinydb import TinyDB, Query
+
+
+TDB = TinyDB("game.json")
+
 
 init()
-
-inside.util.db_check()
 
 from numpy import random as nprand
 
@@ -42,62 +41,57 @@ def get_player_spawn(map_arr):
     return list(player_spawn_coor)
 
 
-def _enemies(player_params, count):
-    for _ in range(0, count, 1):
-        random_enemy = nprand.choice(header.POTENTIAL_ENEMY_LIST)
-        enemy_hp = header.POTENTIAL_ENEMY_STATS[random_enemy]['hp']
-        enemy_mp = header.POTENTIAL_ENEMY_STATS[random_enemy]['mp']
-        enemy_danger_coeff = ((enemy_hp / enemy_mp) * 100)
-
-        print("You met the", random_enemy, "," "He has",
-              enemy_hp, "hp and", enemy_mp, "mp.")
-
-        enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
-
-        print(enemy_params)
-        print(
-            int(int(player_params[7] + player_params[9]) / enemy_params[2] + 1))
-        print(player_params[7], player_params[9])
-
-
-def get_map_detail(map_arr, coor, player_params):
+def get_map_detail(map_arr, coor, player_params, motion_vector=""):
     """Получить детальное описание местности"""
 
     map_notation = inside.map.get_map_point(
         map_arr, (coor[0], coor[1]))
     coor_hash = inside.gen.gen_adler32_hash(str(coor))
 
-    print(map_notation, coor_hash)
-
     if map_notation in header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES:
-        print(list(DB.execute("SELECT * FROM %s WHERE coor_hash='%s'" %
-                              (header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash))))
+        print("You is on %s" % header.CONVENTIONAL_NOTATIONAL[map_notation])
+
+    if map_notation in header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL:
+        if motion_vector == "right":
+            print("You see %s" % header.CONVENTIONAL_NOTATIONAL[inside.map.get_map_point(
+                map_arr, (coor[0] + 1, coor[1]))])
+        elif motion_vector == "left":
+            print("You see %s" % header.CONVENTIONAL_NOTATIONAL[inside.map.get_map_point(
+                map_arr, (coor[0] - 1, coor[1]))])
+        elif motion_vector == "top":
+            print("You see %s" % header.CONVENTIONAL_NOTATIONAL[inside.map.get_map_point(
+                map_arr, (coor[0], coor[1] - 1))])
+        elif motion_vector == "bottom":
+            print("You see %s" % header.CONVENTIONAL_NOTATIONAL[inside.map.get_map_point(
+                map_arr, (coor[0], coor[1] + 1))])
+
+    else:
+        print("You see the wall!")
 
     if map_notation in header.CONVENTIONAL_NOTATIONAL_ENTER_POINT:
-        player_params = list(player_params)
-        player_params[4] = "%s, %s" % (coor[0], coor[1])
-        record_exists = str(list(DB.execute("""SELECT count(coor_hash) FROM %s WHERE coor_hash='%s'""" % (
-            header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash))))
+        player_params["coor"] = "%s, %s" % (coor[0], coor[1])
+        table = TDB.table(header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation])
+        record_exists = table.search(Query().coor_hash == coor_hash)
+        print(record_exists)
         enter_point_name = ""
 
-        if map_notation == "V" and record_exists == '[(0,)]':
+        if map_notation == "V" and record_exists == []:
             enter_point_name = inside.gen.gen_village()
 
-            DB.execute("""INSERT INTO %s (coor_hash, name) VALUES ('%s', '%s')""" % (
-                header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash, enter_point_name))
+            table.insert({"coor_hash": coor_hash, "name": enter_point_name})
 
-        elif map_notation == "V" and record_exists != '[(0,)]':
-            enter_point_name = list(DB.execute("""SELECT name FROM %s WHERE coor_hash='%s'""" % (
-                header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation], coor_hash)))[0][0]
+        elif map_notation == "V" and record_exists != []:
+            enter_point_name = record_exists[0]["name"]
 
-        CONNECT.commit()
         inside.shell.play_start(
             player_params, recursion_count=1, map_file=enter_point_name, location_shell=" %s " % header.CONVENTIONAL_NOTATIONAL[map_notation])
 
         inside.shell.save_char(player_params, coor)
 
+        return header.CONVENTIONAL_NOTATIONAL[map_notation]
+
     elif map_notation == "E":
-        
+
         enemy_random = nprand.randint(1, 100)
 
         if enemy_random < 80:
@@ -108,25 +102,39 @@ def get_map_detail(map_arr, coor, player_params):
 
             enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
 
-            inside.shell.battlefield(player_params, enemy_params)
-        
+            player_battle_result = inside.shell.battlefield(player_params, enemy_params)
+
         else:
             print(header.POTENTIAL_MBOSS_PREFIX_LIST)
             random_prefix_mboss = nprand.choice(header.POTENTIAL_MBOSS_PREFIX_LIST)
             random_mboss = nprand.choice(header.POTENTIAL_ENEMY_LIST)
-            mboss_hp = header.POTENTIAL_ENEMY_STATS[random_mboss]['hp'] + header.POTENTIAL_MBOSS_PREFIX_STATS[random_prefix_mboss][0]
-            mboss_mp = header.POTENTIAL_ENEMY_STATS[random_mboss]['mp'] + header.POTENTIAL_MBOSS_PREFIX_STATS[random_prefix_mboss][1]
+            mboss_hp = header.POTENTIAL_ENEMY_STATS[random_mboss]['hp'] + \
+                header.POTENTIAL_MBOSS_PREFIX_STATS[random_prefix_mboss][0]
+            mboss_mp = header.POTENTIAL_ENEMY_STATS[random_mboss]['mp'] + \
+                header.POTENTIAL_MBOSS_PREFIX_STATS[random_prefix_mboss][1]
             mboss_danger_coeff = mboss_hp / mboss_mp
 
-            enemy_params = (mboss_hp, mboss_mp, mboss_danger_coeff, random_prefix_mboss + " " + random_mboss)
+            enemy_params = (mboss_hp, mboss_mp, mboss_danger_coeff,
+                            random_prefix_mboss + " " + random_mboss)
 
-            inside.shell.battlefield(player_params, enemy_params)
+            player_battle_result = inside.shell.battlefield(player_params, enemy_params)
+
+        if player_battle_result[0] == "player_die":
+            query = Query()
+            players = TDB.table("players")
+            players.update({"coor": player_battle_result[1]}, query.name == player_params["name"])
+            player_coor_temple = [int(player_battle_result[1].split(
+                ",")[0]), int(player_battle_result[1].split(",")[1])]
+
+            return player_coor_temple
 
     elif map_notation == "D":
         pass
 
     else:
         inside.shell.save_char(player_params, coor)
+
+    return coor
 
 
 def get_player_map(map_file, coor):

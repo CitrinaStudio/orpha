@@ -3,15 +3,12 @@
 # Проверка существования модулей:
 
 try:
-    import sqlite3 as sqlite
     import string
-    import json
 
     import header
     import inside
-
-    from header import DB
-    from header import CONNECT
+    from tinydb import TinyDB, Query
+    from numpy import random as nprand
 
 except ImportError as err_detail:
     inside.log.logging.critical('Ошибка импорта.')
@@ -22,6 +19,7 @@ except ImportError as err_detail:
 else:
     inside.log.logging.info('Импорт дополнительных модулей прошел успешно.')
 
+TDB = TinyDB("game.json")  # TinyDB
 
 
 def _intput_check_error(err_msg, input_msg):
@@ -89,32 +87,34 @@ def new_player():
         (player_name, player_class, player_age))
 
     # Попытка записи в БД и проверка существования идентичного персонажа
-    try:
-        DB.execute("""INSERT INTO players (hash, name, age, class, coor, hp, mp, str, dex, con, inte, wis, cha)
-                        VALUES ('%s', '%s', %s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')""" % (
-            player_hash, player_name, player_age, player_class,
-            str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)),
-            header.DEFAULT_HP + header.CLASSES_BONUSES[player_class]['hp'],
-            header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp'],
-            header.CLASSES_ABILITY[player_class]['str'] +
-            header.CLASSES_BONUSES[player_class]['str'],
-            header.CLASSES_ABILITY[player_class]['dex'] +
-            header.CLASSES_BONUSES[player_class]['dex'],
-            header.CLASSES_ABILITY[player_class]['con'] +
-            header.CLASSES_BONUSES[player_class]['con'],
-            header.CLASSES_ABILITY[player_class]['inte'] +
-            header.CLASSES_BONUSES[player_class]['inte'],
-            header.CLASSES_ABILITY[player_class]['wis'] +
-            header.CLASSES_BONUSES[player_class]['wis'],
-            header.CLASSES_ABILITY[player_class]['cha'] + 
-            header.CLASSES_BONUSES[player_class]['cha']))
+    players = Query()
+    PLAYERS_TABLE = TDB.table("players")
 
-    except sqlite.IntegrityError as err_detail:
-        if "UNIQUE" in str(err_detail):
-            inside.util.cprint("Error!!! Player exist! Try again!", "red")
-            exit(1)
+    if PLAYERS_TABLE.search(players.name == player_name) == []:
+
+        PLAYERS_TABLE.insert({"hash": player_hash, "name": player_name, "age": player_age, "class": player_class,
+                              "coor": str((header.DEFAULT_PLAYER_X, header.DEFAULT_PLAYER_Y)),
+                              "hp": header.DEFAULT_HP + header.CLASSES_BONUSES[player_class]['hp'] + header.CLASSES_ABILITY[player_class]['hp'] + nprand.randint(5, 10),
+                              "mp": header.DEFAULT_MP + header.CLASSES_BONUSES[player_class]['mp'] + header.CLASSES_ABILITY[player_class]['mp'],
+                              "str": header.CLASSES_ABILITY[player_class]['str'] +
+                              header.CLASSES_BONUSES[player_class]['str'],
+                              "dex": header.CLASSES_ABILITY[player_class]['dex'] +
+                              header.CLASSES_BONUSES[player_class]['dex'],
+                              "con": header.CLASSES_ABILITY[player_class]['con'] +
+                              header.CLASSES_BONUSES[player_class]['con'],
+                              "int": header.CLASSES_ABILITY[player_class]['inte'] +
+                              header.CLASSES_BONUSES[player_class]['inte'],
+                              "wis": header.CLASSES_ABILITY[player_class]['wis'] +
+                              header.CLASSES_BONUSES[player_class]['wis'],
+                              "cha": header.CLASSES_ABILITY[player_class]['cha'] +
+                              header.CLASSES_BONUSES[player_class]['cha'],
+                              "inventory": {},
+                              "spells": header.MAGIC_SPELLS_NAMES})
     else:
-        CONNECT.commit()
+        inside.util.cprint("Player with name '%s' exists!" %
+                           player_name, foreground="red", background="white")
+    return player_name
+
 
 # def change_params():
     #'''Функция изменения параметров игрока'''
