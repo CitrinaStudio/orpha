@@ -216,3 +216,6 @@ DUNGEON_TYPE = [
 DUNGEON_SUFFIX = smarkov.Markov([
     'Ilya', 'Dionis', 'Leena', 'Lanaya', 'Raxar', 'Lisa Su'
 ])
+
+MAPS_PATH = "maps/%s"
+M_P = "maps/"

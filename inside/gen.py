@@ -38,10 +38,10 @@ def gen_name(size):
         string.ascii_uppercase + string.digits) for _ in range(size)))
 
 
-def gen_map(map_file="default_map"):
+def gen_map(map_file="default_map", maps_path=header.MAPS_PATH):
     """ Генерация карты """
 
-    gamemap = open("inside/maps/%s" % map_file, "w")
+    gamemap = open(maps_path % map_file, "w")
 
     valid_spawn_point = 0
 
@@ -102,11 +102,11 @@ def gen_map(map_file="default_map"):
     gamemap.write(map_strings)
 
 
-def gen_village():
+def gen_village(maps_path=header.MAPS_PATH):
 
     name = gen_name(64)
 
-    gamemap = open("inside/maps/%s" % name, "w")
+    gamemap = open(maps_path % name, "w")
 
     map_strings = ""
 
@@ -152,11 +152,11 @@ def gen_village():
     return name
 
 
-def gen_dungeon():
+def gen_dungeon(maps_path=header.MAPS_PATH):
 
     dungeon_name = str(nprand.choice(header.DUNGEON_PREFIX) + nprand.choice(header.DUNGEON_TYPE)
                        ) + str(" of " + "".join(header.DUNGEON_SUFFIX.generate_text()))
 
-    gamemap = open("inside/maps/%s" % gen_name(100), "w")
+    gamemap = open(maps_path % gen_name(100), "w")
 
     print(dungeon_name)

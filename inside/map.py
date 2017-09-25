@@ -88,7 +88,7 @@ def get_map_detail(map_arr, coor, player_params, motion_vector=""):
 
         inside.shell.save_char(player_params, coor)
 
-        return header.CONVENTIONAL_NOTATIONAL[map_notation]
+        return coor
 
     elif map_notation == "E":
 
@@ -137,8 +137,8 @@ def get_map_detail(map_arr, coor, player_params, motion_vector=""):
     return coor
 
 
-def get_player_map(map_file, coor):
-    mod_map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
+def get_player_map(map_file, coor, maps_path=header.MAPS_PATH):
+    mod_map = open(maps_path % map_file, "r").read().split(("\n"))
 
     map_string = list(mod_map[coor[1]])
     map_string[coor[0]] = colored("Y", "green", "on_white")

@@ -48,12 +48,12 @@ def save_char(player_params, player_coor):
                     "dex": player_params["dex"], "con": player_params["con"], "int": player_params["int"], "wis": player_params["wis"], "cha": player_params["cha"], "name": player_params["name"]}, query.name == player_params["name"])
 
 
-def play_start(player_params, debug_mode=0, map_file="default_map", recursion_count=0, location_shell=""):
+def play_start(player_params, debug_mode=0, maps_path=header.MAPS_PATH, map_file="default_map", recursion_count=0, location_shell=""):
     """Игровой процесс"""
     if debug_mode != 1:
         inside.util.clear()
 
-    map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
+    map = open(maps_path % map_file, "r").read().split(("\n"))
     global_player_coor = player_params["coor"]
 
     if player_params["coor"] == "(0, 0)" and recursion_count == 0:
