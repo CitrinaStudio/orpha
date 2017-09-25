@@ -138,7 +138,7 @@ def get_map_detail(map_arr, coor, player_params, motion_vector=""):
 
 
 def get_player_map(map_file, coor, maps_path=header.MAPS_PATH):
-    mod_map = open(maps_path % map_file, "r").read().split(("\n"))
+    mod_map = open(maps_path % map_file, "r", encoding="utf-8").read().split(("\n"))
 
     map_string = list(mod_map[coor[1]])
     map_string[coor[0]] = colored("Y", "green", "on_white")

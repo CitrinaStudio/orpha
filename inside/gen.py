@@ -28,7 +28,7 @@ def gen_crc32_hash(params):
 def gen_md5_hash_file(file_name):
     """ Генерация md5 """
 
-    return hashlib.md5(open(file_name, 'rb').read()).hexdigest()
+    return hashlib.md5(open(file_name, 'rb', encoding="utf-8").read()).hexdigest()
 
 
 def gen_name(size):
@@ -41,7 +41,7 @@ def gen_name(size):
 def gen_map(map_file="default_map", maps_path=header.MAPS_PATH):
     """ Генерация карты """
 
-    gamemap = open(maps_path % map_file, "w")
+    gamemap = open(maps_path % map_file, "w", encoding="utf-8")
 
     valid_spawn_point = 0
 
@@ -106,7 +106,7 @@ def gen_village(maps_path=header.MAPS_PATH):
 
     name = gen_name(64)
 
-    gamemap = open(maps_path % name, "w")
+    gamemap = open(maps_path % name, "w", encoding="utf-8")
 
     map_strings = ""
 
@@ -157,6 +157,6 @@ def gen_dungeon(maps_path=header.MAPS_PATH):
     dungeon_name = str(nprand.choice(header.DUNGEON_PREFIX) + nprand.choice(header.DUNGEON_TYPE)
                        ) + str(" of " + "".join(header.DUNGEON_SUFFIX.generate_text()))
 
-    gamemap = open(maps_path % gen_name(100), "w")
+    gamemap = open(maps_path % gen_name(100), "w", encoding="utf-8")
 
     print(dungeon_name)

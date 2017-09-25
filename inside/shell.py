@@ -53,7 +53,7 @@ def play_start(player_params, debug_mode=0, maps_path=header.MAPS_PATH, map_file
     if debug_mode != 1:
         inside.util.clear()
 
-    map = open(maps_path % map_file, "r").read().split(("\n"))
+    map = open(maps_path % map_file, "r", encoding="utf-8").read().split(("\n"))
     global_player_coor = player_params["coor"]
 
     if player_params["coor"] == "(0, 0)" and recursion_count == 0:
