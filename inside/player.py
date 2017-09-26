@@ -52,33 +52,7 @@ def new_player():
 
     player_name = input("Input name: ")
 
-    print("Please, choice your class: \n\n")
-
-    for i in range(0, header.QUANTITY_PLAYER_CLASSES, 1):
-        # Вывод списка классов
-        print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i])
-
-    player_class = string.capwords(input("\nInput your class: "))
-
-    while_exit = 0  # Для того, чтобы выйти из цикла, токо тогда, когда не словим исключение
-
-    # Проверка существования класса
-    if player_class not in header.PLAYER_CLASSES:
-
-        while while_exit != 1:
-            inside.util.cprint(
-                "Sorry, but you input invalid class. Try again.", "red")
-
-            print("Please, choice your class: \n")
-
-            for i in range(0, header.QUANTITY_PLAYER_CLASSES, 1):
-                # Вывод списка классов
-                print("№" + str(i + 1) + " " + header.PLAYER_CLASSES[i])
-
-            player_class = string.capwords(input("\nInput your class: "))
-
-            if player_class in header.PLAYER_CLASSES:
-                while_exit = 1
+    player_class = "Mage"
 
     player_age = _intput_check_error(
         "Sorry, but you input invalid age. Please, try again.", "Input age: ")

@@ -1,3 +1,5 @@
+#!/bin/python3
+
 """Test module"""
 
 import inside

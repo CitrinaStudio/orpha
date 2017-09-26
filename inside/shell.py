@@ -6,6 +6,12 @@ import header
 import inside
 
 from tinydb import TinyDB, Query
+from inside.util import cprint
+
+from termcolor import colored
+from colorama import init
+
+init()
 
 TDB = TinyDB("game.json")
 
@@ -16,9 +22,12 @@ from numpy import random as nprand
 
 
 def _get_player_params(player_params):
-    print("Your params: \n hp: %s\n mp: %s\n\n Abilityes: \n\n str: %s\n dex: %s\n con: %s\n inte: %s\n wis: %s\n cha: %s" %
-          (player_params["hp"], player_params["mp"], player_params["str"], player_params["dex"],
-           player_params["con"], player_params["int"], player_params["wis"], player_params["cha"]))
+    print("\n%s\n Health Point: %s\n Magic Point: %s\n\n%s\n\n Strength: %s\n Dexterity: %s\n Constitution: %s\n Intellect: %s\n Wisdom: %s\n Charisma: %s" %
+          (colored('Your params:', "blue", "on_white"), player_params["hp"],
+           player_params["mp"], colored("Abilityes:", "blue", "on_white"),
+           player_params["str"], player_params["dex"],
+           player_params["con"], player_params["int"],
+           player_params["wis"], player_params["cha"]))
 
 
 def _get_playerlist():
@@ -36,8 +45,8 @@ def _get_playerlist():
         print("Character list:")
 
         for i in range(0, len(players), 1):
-            print("№ %d  Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s " % (
-                i + 1, players_exists["name"], players_exists["age"], players_exists["class"], players_exists["coor"], players_exists["hp"], players_exists["mp"]))
+            print("Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s " % (
+                  colored(players_exists["name"], "green", "on_blue"), players_exists["age"], players_exists["class"], players_exists["coor"], players_exists["hp"], players_exists["mp"]))
 
 
 def save_char(player_params, player_coor):
@@ -302,8 +311,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             print("This is your spells: \n")
 
             for i in range(0, len(header.MAGIC_SPELLS_NAMES), 1):
-                print("№%s %s| MP Cost: %s | Damage Bonus: %s | Minimal Player Coefficent: %s\n" % (
-                    i + 1, header.MAGIC_SPELLS_NAMES[i],
+                print("%s| MP Cost: %s | Damage Bonus: %s | Minimal Player Coefficent: %s\n" % (
+                    colored(header.MAGIC_SPELLS_NAMES[i], "blue", "on_white"),
                     header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]]["spell_cost"],
                     header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]]["damage_bonus"],
                     header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]]["min_player_coeff"]))
@@ -338,7 +347,6 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
                     if spell_effect[0] == "block_enemy_action":
                         block_enemy_action = spell_effect[1]
-                        continue
                     else:
                         pass
                     player_attacking = True
