@@ -100,7 +100,8 @@ def get_map_detail(map_arr, coor, player_params, motion_vector=""):
             enemy_mp = header.POTENTIAL_ENEMY_STATS[random_enemy]['mp']
             enemy_danger_coeff = enemy_hp / enemy_mp
 
-            enemy_params = (enemy_hp, enemy_mp, enemy_danger_coeff, random_enemy)
+            enemy_params = {"hp": enemy_hp, "mp": enemy_mp, "coeff": enemy_danger_coeff,
+                            "name": random_enemy}
 
             player_battle_result = inside.shell.battlefield(player_params, enemy_params)
 
@@ -114,8 +115,8 @@ def get_map_detail(map_arr, coor, player_params, motion_vector=""):
                 header.POTENTIAL_MBOSS_PREFIX_STATS[random_prefix_mboss][1]
             mboss_danger_coeff = mboss_hp / mboss_mp
 
-            enemy_params = (mboss_hp, mboss_mp, mboss_danger_coeff,
-                            random_prefix_mboss + " " + random_mboss)
+            enemy_params = {"hp": mboss_hp, "mp": mboss_mp, "coeff": mboss_danger_coeff,
+                            "name": random_prefix_mboss + " " + random_mboss}
 
             player_battle_result = inside.shell.battlefield(player_params, enemy_params)
 

@@ -84,7 +84,7 @@ def play_start(player_params, debug_mode=0, maps_path=header.MAPS_PATH, map_file
         elif query == 'Exit' and recursion_count == 0:
             save_char(player_params, player_coor)
 
-            inside.util.cprint('Exit to main menu.', 'green', 'black')
+            cprint('Exit to main menu.', 'green', 'black')
             return 0
 
         elif query == 'Exit' and recursion_count != 0:
@@ -238,13 +238,12 @@ def battlefield(player_params, enemy_params, debug_mode=0):
     if debug_mode != 1:
         inside.util.clear()
 
-    print("You is meeting the", enemy_params[3])
+    print("You is meeting the", enemy_params["name"])
 
-    print("He has", enemy_params[0], "hp and", enemy_params[1], "mp.")
+    print("He has", enemy_params["hp"], "hp and", enemy_params["mp"], "mp.")
 
-    enemy_hp = enemy_params[0]
-
-    mboss_hp = enemy_params[0]
+    enemy_hp = enemy_params["hp"]
+    enemy_mp = enemy_params["mp"]
 
     player_hp = int(player_params["hp"])
     hight_player_hp = player_hp
@@ -260,7 +259,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
     player_coeff = round(player_hp / player_mp, 1)
 
-    enemy_danger_coeff = round(math.fabs(enemy_params[2] / player_coeff), 1)
+    enemy_danger_coeff = round(math.fabs(enemy_params["coeff"] / player_coeff), 1)
 
     block_enemy_action = 0
 
@@ -271,20 +270,21 @@ def battlefield(player_params, enemy_params, debug_mode=0):
         print("\n You take 1 mp. You have %s mp" % player_mp)
 
     while True:
-        query = string.capwords(input('$ '))
+        query = string.capwords(input("[Enemy: %s | HP: %s | MP: %s]$ " % (
+            enemy_params["name"], enemy_hp, enemy_mp)))
         if query in ('Attack', 'A'):
 
             player_damage = math.ceil((player_str + player_con) /
                                       enemy_danger_coeff * nprand.random())
 
-            print('\nYou inflicted', player_damage, 'damage.')
+            cprint('\nYou inflicted' + str(player_damage) + 'damage.', "red")
 
             enemy_hp -= player_damage
 
-            print("Enemy have", enemy_hp, "hp.")
+            cprint("Enemy have " + str(enemy_hp) + " hp.",  "red")
 
-            print("You inflicted enemy\'s %s\n" %
-                  nprand.choice(header.BODY_PARTS))
+            cprint("You inflicted enemy\'s %s" %
+                   nprand.choice(header.BODY_PARTS),  "red")
 
             player_attacking = True
 
@@ -293,7 +293,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             return 0
 
         elif query == "Coeff":
-            print(enemy_params[2])
+            print(enemy_params["coeff"])
 
         elif query == "Help":
             print("Attack/At - for make a blow\n Leave/L - for leave from battle\n")
@@ -322,8 +322,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             try:
                 spell_cost = header.MAGIC_SPELLS[spell_choice]["spell_cost"]
             except KeyError:
-                inside.util.cprint("Spell not found!", foreground="red", background="white")
-                print("You can't read %s - this is not spell." % spell_choice)
+                cprint("Spell not found!", foreground="red", background="white")
+                cprint("You can't read %s - this is not spell." % spell_choice)
 
             else:
 
@@ -334,10 +334,10 @@ def battlefield(player_params, enemy_params, debug_mode=0):
                 elif spell_choice in header.MAGIC_SPELLS_NAMES and player_mp - spell_cost >= 0:
                     player_damage = math.ceil(
                         header.MAGIC_SPELLS[spell_choice]["damage_bonus"] + player_int)
-                    print('\nYou inflicted', player_damage, 'damage.')
+                    cprint('\nYou inflicted ' + str(player_damage) + ' damage.', "red")
                     enemy_hp -= player_damage
 
-                    print("Enemy have", enemy_hp, "hp.")
+                    cprint("Enemy have " + str(enemy_hp) + " hp.", "red")
 
                     print(header.MAGIC_DAMAGE_DETAIL[
                         spell_choice] % nprand.choice(header.BODY_PARTS))
@@ -362,24 +362,24 @@ def battlefield(player_params, enemy_params, debug_mode=0):
                     player_attacking = False
 
         if enemy_hp <= 0:
-            print("%s is dead." % enemy_params[3])
+            print("%s is dead." % enemy_params["name"])
             return ["enemy_dead"]
 
         elif block_enemy_action == 0 and player_attacking == True:
 
-            if enemy_params[3] in header.POTENTIAL_ENEMY_LIST:
-                enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
+            if enemy_params["name"] in header.POTENTIAL_ENEMY_LIST:
+                enemy_damage = int(enemy_params["mp"] * math.sqrt(enemy_danger_coeff))
                 player_hp -= enemy_damage
 
-                print(enemy_params[3], "has caused you", enemy_damage, "damage.")
+                print(enemy_params["name"], "has caused you", enemy_damage, "damage.")
                 print("You have %s hp" % player_hp)
 
                 player_attacking = False
             else:
-                enemy_damage = int(enemy_params[1] * math.sqrt(enemy_danger_coeff))
+                enemy_damage = int(enemy_params["hp"] * math.sqrt(enemy_danger_coeff))
                 player_hp -= enemy_damage
 
-                print(enemy_params[3], "has caused you", enemy_damage,
+                print(enemy_params["name"], "has caused you", enemy_damage,
                       "damage by", nprand.choice(header.MAGIC_MBOSS_SPELLS))
 
                 print("You have %s hp" % player_hp)
@@ -394,8 +394,8 @@ def battlefield(player_params, enemy_params, debug_mode=0):
             temples = TDB.table("temples")
             temples_count = len(temples.all())
             choiced_temple = nprand.choice(temples.all())
-            inside.util.cprint("Unfortunately, you have died. You awake are transferred to the random temple.",
-                               foreground="white", background="black")
+            cprint("Unfortunately, you have died. You awake are transferred to the random temple.",
+                   foreground="white", background="black")
             return ("player_die", choiced_temple["coor"])
 
 
@@ -407,7 +407,7 @@ def init(debug_mode=0):
     while True:
         query = string.capwords(input('$ '))
         if query == 'Help':  # Команда, выводящая помощь
-            inside.util.cprint('''Commands:\n Clear - For clear console \n
+            cprint('''Commands:\n Clear - For clear console \n
                Newplayer - Creating new player\n
                Infoclasses - Information about classes\n
                Quit - exit from shell\n
@@ -426,7 +426,7 @@ def init(debug_mode=0):
 
         elif query == 'Quit':  # Выход
             inside.util.clear()
-            inside.util.cprint('Good Bye!', 'green', 'black')
+            cprint('Good Bye!', 'green', 'black')
             exit(0)
 
         elif query in ('Infoclasses', 'In'):  # Вывод информации о классах
@@ -451,8 +451,8 @@ def init(debug_mode=0):
                     play_start(player_params[0])
 
                 else:
-                    inside.util.cprint("Player not found! Try again", "red")
+                    cprint("Player not found! Try again", "red")
 
         else:
-            inside.util.cprint(
+            cprint(
                 'Error! Command not found. Please type "help" ', 'red')
