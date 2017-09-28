@@ -1,0 +1,5 @@
+#!/bin/python3
+
+import os
+
+os.system('powershell orpha' if os.name == 'nt' else 'xterm ./orpha')
