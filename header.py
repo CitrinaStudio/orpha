@@ -1,15 +1,18 @@
 """ Header Module """
 
-import numpy as np
 import os
 
-import inside
+import numpy as np
 import smarkov
+from tinydb import Query, TinyDB
 
-from tinydb import TinyDB, Query
+MAPS_PATH = "maps/%s"
+M_P = "maps/"
+TUTORIAL_MAP = "maps/tutorial/%s"
 
 
 TDB = TinyDB("game.json")
+
 
 PATH_DATA_DB = os.path.join(os.path.dirname(__file__), "db/")
 
@@ -216,7 +219,3 @@ DUNGEON_TYPE = [
 DUNGEON_SUFFIX = smarkov.Markov([
     'Ilya', 'Dionis', 'Leena', 'Lanaya', 'Raxar', 'Lisa Su'
 ])
-
-MAPS_PATH = "maps/%s"
-M_P = "maps/"
-TUTORIAL_MAP = "maps/tutorial/%s"
