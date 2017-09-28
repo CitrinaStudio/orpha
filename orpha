@@ -2,11 +2,12 @@
 
 """Test module"""
 
-import inside
-import header
-import os
 import glob
+import os
 import sys
+
+import header
+import inside
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "reset":
@@ -19,5 +20,5 @@ if len(sys.argv) > 1:
     elif os.path.isdir("maps/") == False and sys.argv[1] == "gen":
         os.mkdir("maps/")
         inside.gen.gen_map(map_file="default_map")
-else:
-    inside.shell.init()
+    elif sys.argv[1] == "shell":
+        inside.shell.init()
