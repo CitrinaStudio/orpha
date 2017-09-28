@@ -1,23 +1,42 @@
 """ Shell module """
-import sqlite3 as sqlite
 import string
+import math
 
 import header
 import inside
 
-# подключение к БД
+from tinydb import TinyDB, Query
+from inside.util import cprint
 
-CONNECT = sqlite.connect("game.db")
-DB = CONNECT.cursor()
+from termcolor import colored
+from colorama import init
 
-inside.util.db_check()
+init()
+
+TDB = TinyDB("game.json")
+
+
+import math
+
+from numpy import random as nprand
+
+
+def _get_player_params(player_params):
+    print("\n%s\n Health Point: %s\n Magic Point: %s\n\n%s\n\n Strength: %s\n Dexterity: %s\n Constitution: %s\n Intellect: %s\n Wisdom: %s\n Charisma: %s" %
+          (colored('Your params:', "blue", "on_white"), player_params["hp"],
+           player_params["mp"], colored("Abilityes:", "blue", "on_white"),
+           player_params["str"], player_params["dex"],
+           player_params["con"], player_params["int"],
+           player_params["wis"], player_params["cha"]))
 
 
 def _get_playerlist():
     """Функция получения списка персонажей"""
-    players = list
+    players = TDB.table("players")
 
-    if players == []:
+    try:
+        players_exists = players.all()[0]
+    except IndexError:
         print("Characters not found!")
         return 0
 
@@ -26,32 +45,34 @@ def _get_playerlist():
         print("Character list:")
 
         for i in range(0, len(players), 1):
-            print("№ %d  Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s " % (
-                i + 1, players[i][1], players[i][2], players[i][3], players[i][4], players[i][5], players[i][6]))
+            print("Name: %s | Years old: %s | Class: %s | Coordinates: %s | HP: %s | MP: %s " % (
+                  colored(players_exists["name"], "green", "on_blue"), players_exists["age"], players_exists["class"], players_exists["coor"], players_exists["hp"], players_exists["mp"]))
 
 
 def save_char(player_params, player_coor):
     """Функця сохранения персонажа"""
-    DB.execute("UPDATE players SET age = %s, coor = '%s', hp = %s, mp = %s, str =%s, dex =%s, con =%s, inte =%s, wis =%s, cha =%s WHERE name='%s'" % (
-        player_params[2], "%s, %s" % (player_coor[0], player_coor[1]), player_params[5], player_params[6], player_params[7], player_params[8], player_params[9], player_params[10], player_params[11], player_params[12], player_params[1]))
+    query = Query()
+    players = TDB.table("players")
+    players.update({"age": player_params["age"], "coor": "%s, %s" % (player_coor[0], player_coor[1]), "hp": player_params["hp"], "mp": player_params["mp"], "str": player_params["str"],
+                    "dex": player_params["dex"], "con": player_params["con"], "int": player_params["int"], "wis": player_params["wis"], "cha": player_params["cha"], "name": player_params["name"]}, query.name == player_params["name"])
 
 
-def play_start(player_params, debug_mode=0, map_file="default_map", recursion_count=0, location_shell=""):
+def play_start(player_params, debug_mode=0, maps_path=header.MAPS_PATH, map_file="default_map", recursion_count=0, location_shell=""):
     """Игровой процесс"""
     if debug_mode != 1:
         inside.util.clear()
 
-    map = open("inside/maps/%s" % map_file, "r").read().split(("\n"))
-    global_player_coor = player_params[4]
+    map = open(maps_path % map_file, "r", encoding="utf-8").read().split(("\n"))
+    global_player_coor = player_params["coor"]
 
-    if player_params[4] == "(0, 0)" and recursion_count == 0:
-        player_coor = list(inside.map.get_player_spawn(map))
+    if player_params["coor"] == "(0, 0)" and recursion_count == 0:
+        player_coor = inside.map.get_player_spawn(map)
 
     elif recursion_count != 0:
         player_coor = list(inside.map.get_player_spawn(map))
 
     else:
-        player_coor = player_params[4].split(",")
+        player_coor = player_params["coor"].split(",")
         player_coor = [int(player_coor[0]), int(player_coor[1])]
 
     while True:
@@ -63,7 +84,7 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
         elif query == 'Exit' and recursion_count == 0:
             save_char(player_params, player_coor)
 
-            inside.util.cprint('Exit to main menu.', 'green', 'black')
+            cprint('Exit to main menu.', 'green', 'black')
             return 0
 
         elif query == 'Exit' and recursion_count != 0:
@@ -72,20 +93,6 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
         elif query in ("North", "N"):  # Передвижение на север
             map_notation = inside.map.get_map_point(
-                map, (player_coor[0], player_coor[1] + 1))
-
-            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
-                print("You can't go to this side. There is a wall.")
-
-            else:
-                player_coor[1] += 1
-                inside.map.get_map_detail(map, player_coor, player_params)
-
-            if debug_mode == 1:
-                print(player_coor)
-
-        elif query in ("South", "S"):  # Передвижение юг
-            map_notation = inside.map.get_map_point(
                 map, (player_coor[0], player_coor[1] - 1))
 
             if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
@@ -93,7 +100,23 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
             else:
                 player_coor[1] -= 1
-                inside.map.get_map_detail(map, player_coor, player_params)
+                player_coor = inside.map.get_map_detail(
+                    map, player_coor, player_params, motion_vector="top")
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("South", "S"):  # Передвижение юг
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0], player_coor[1] + 1))
+
+            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[1] += 1
+                player_coor = inside.map.get_map_detail(
+                    map, player_coor, player_params, motion_vector="bottom")
 
             if debug_mode == 1:
                 print(player_coor)
@@ -107,7 +130,8 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
             else:
                 player_coor[0] -= 1
-                inside.map.get_map_detail(map, player_coor, player_params)
+                player_coor = inside.map.get_map_detail(
+                    map, player_coor, player_params, motion_vector="left")
 
             if debug_mode == 1:
                 print(player_coor)
@@ -121,45 +145,13 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
 
             else:
                 player_coor[0] += 1
-                inside.map.get_map_detail(map, player_coor, player_params)
+                player_coor = inside.map.get_map_detail(
+                    map, player_coor, player_params, motion_vector="right")
 
             if debug_mode == 1:
                 print(player_coor)
 
         elif query in ("Northwest", "Nw"):  # Передвижение на Северо - запад
-            map_notation = inside.map.get_map_point(
-                map, (player_coor[0] - 1, player_coor[1] + 1))
-
-            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
-                print("You can't go to this side. There is a wall.")
-
-            else:
-                player_coor[0] -= 1
-                player_coor[1] += 1
-                inside.map.get_map_detail(map, player_coor, player_params)
-
-            if debug_mode == 1:
-                print(player_coor)
-
-        elif query in ("Recurslevel", "Rl"):
-            print("Current rec. level: %s" % recursion_count)
-
-        elif query in ("Northeast", "Ne"):  # Передвижение на Северо - восток
-            map_notation = inside.map.get_map_point(
-                map, (player_coor[0] + 1, player_coor[1] + 1))
-
-            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
-                print("You can't go to this side. There is a wall.")
-
-            else:
-                player_coor[0] += 1
-                player_coor[1] += 1
-                inside.map.get_map_detail(map, player_coor, player_params)
-
-            if debug_mode == 1:
-                print(player_coor)
-
-        elif query in ("Southwest", "Sw"):  # Передвижение Юго - запад
             map_notation = inside.map.get_map_point(
                 map, (player_coor[0] - 1, player_coor[1] - 1))
 
@@ -169,12 +161,15 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
             else:
                 player_coor[0] -= 1
                 player_coor[1] -= 1
-                inside.map.get_map_detail(map, player_coor, player_params)
+                player_coor = inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
 
-        elif query in ("Southeast", "Se"):  # Передвижение на юго - восток
+        elif query in ("Recurslevel", "Rl"):
+            print("Current rec. level: %s" % recursion_count)
+
+        elif query in ("Northeast", "Ne"):  # Передвижение на Северо - восток
             map_notation = inside.map.get_map_point(
                 map, (player_coor[0] + 1, player_coor[1] - 1))
 
@@ -182,9 +177,39 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
                 print("You can't go to this side. There is a wall.")
 
             else:
-                player_coor[0] -= 1
+                player_coor[0] += 1
                 player_coor[1] -= 1
-                inside.map.get_map_detail(map, player_coor, player_params)
+                player_coor = inside.map.get_map_detail(map, player_coor, player_params)
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("Southwest", "Sw"):  # Передвижение Юго - запад
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] - 1, player_coor[1] + 1))
+
+            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] -= 1
+                player_coor[1] += 1
+                player_coor = inside.map.get_map_detail(map, player_coor, player_params)
+
+            if debug_mode == 1:
+                print(player_coor)
+
+        elif query in ("Southeast", "Se"):  # Передвижение на юго - восток
+            map_notation = inside.map.get_map_point(
+                map, (player_coor[0] + 1, player_coor[1] + 1))
+
+            if map_notation == "#":  # Если персонаж упирается в стену, то дальше ему нельзя идти
+                print("You can't go to this side. There is a wall.")
+
+            else:
+                player_coor[0] += 1
+                player_coor[1] += 1
+                player_coor = inside.map.get_map_detail(map, player_coor, player_params)
 
             if debug_mode == 1:
                 print(player_coor)
@@ -199,15 +224,179 @@ def play_start(player_params, debug_mode=0, map_file="default_map", recursion_co
             print(player_coor)
 
         elif query == "Map":
-            inside.map.get_player_map(map, player_coor)
+            inside.map.get_player_map(map_file, player_coor)
 
         elif query in ("Myparams", "Mp"):
-            print("Your params: \n hp: %s\n mp: %s\n\n Abilityes: \n\n str: %s\n dex: %s\n con: %s\n inte: %s\n wis: %s\n cha: %s" %
-                  (player_params[5], player_params[6], player_params[7], player_params[8],
-                   player_params[9], player_params[10], player_params[11], player_params[12]))
+            _get_player_params(player_params)
 
         elif query == 'Clear':  # Очищение Шелла
             inside.util.clear()
+
+
+def battlefield(player_params, enemy_params, debug_mode=0):
+    """Сражение"""
+    if debug_mode != 1:
+        inside.util.clear()
+
+    print("You is meeting the", enemy_params["name"])
+
+    print("He has", enemy_params["hp"], "hp and", enemy_params["mp"], "mp.")
+
+    enemy_hp = enemy_params["hp"]
+    enemy_mp = enemy_params["mp"]
+
+    player_hp = int(player_params["hp"])
+    hight_player_hp = player_hp
+
+    player_mp = int(player_params["mp"])
+    hight_player_mp = player_mp
+
+    player_int = player_params["int"]
+    player_wis = player_params["wis"]
+
+    player_str = player_params["str"]
+    player_con = player_params["con"]
+
+    player_coeff = round(player_hp / player_mp, 1)
+
+    enemy_danger_coeff = round(math.fabs(enemy_params["coeff"] / player_coeff), 1)
+
+    block_enemy_action = 0
+
+    player_attacking = False
+
+    if player_mp + 1 <= hight_player_mp:
+        player_mp += 1
+        print("\n You take 1 mp. You have %s mp" % player_mp)
+
+    while True:
+        query = string.capwords(input("[Enemy: %s | HP: %s | MP: %s]$ " % (
+            enemy_params["name"], enemy_hp, enemy_mp)))
+        if query in ('Attack', 'A'):
+
+            player_damage = math.ceil((player_str + player_con) /
+                                      enemy_danger_coeff * nprand.random())
+
+            cprint('\nYou inflicted' + str(player_damage) + 'damage.', "red")
+
+            enemy_hp -= player_damage
+
+            cprint("Enemy have " + str(enemy_hp) + " hp.",  "red")
+
+            cprint("You inflicted enemy\'s %s" %
+                   nprand.choice(header.BODY_PARTS),  "red")
+
+            player_attacking = True
+
+        elif query in ("Leave", "L"):
+            print("You escaped from the enemy.")
+            return 0
+
+        elif query == "Coeff":
+            print(enemy_params["coeff"])
+
+        elif query == "Help":
+            print("Attack/At - for make a blow\n Leave/L - for leave from battle\n")
+
+        elif query == "Pass":
+            player_attacking = True
+
+        elif query in ("Myparams", "Mp"):
+            print("\nHP: %s \nMP: %s \n" % (player_hp, player_mp))
+
+        elif query in ('Magic', 'M'):
+            print("\nEnemy coefficent: %s | Your player coefficent: %s | You have: %s MP and %s HP\n" %
+                  (enemy_danger_coeff, player_coeff, player_mp, player_hp))
+
+            print("This is your spells: \n")
+
+            for i in range(0, len(header.MAGIC_SPELLS_NAMES), 1):
+                print("%s| MP Cost: %s | Damage Bonus: %s | Minimal Player Coefficent: %s\n" % (
+                    colored(header.MAGIC_SPELLS_NAMES[i], "blue", "on_white"),
+                    header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]]["spell_cost"],
+                    header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]]["damage_bonus"],
+                    header.MAGIC_SPELLS[header.MAGIC_SPELLS_NAMES[i]]["min_player_coeff"]))
+
+            spell_choice = string.capwords(input("Input spel name: "))
+
+            try:
+                spell_cost = header.MAGIC_SPELLS[spell_choice]["spell_cost"]
+            except KeyError:
+                cprint("Spell not found!", foreground="red", background="white")
+                cprint("You can't read %s - this is not spell." % spell_choice)
+
+            else:
+
+                if player_coeff < header.MAGIC_SPELLS[spell_choice]["min_player_coeff"]:
+                    print("Sorry. Your player coefficent is %s, but '%s' spell required minimal coefficent not less %s." % (
+                        player_coeff, spell_choice,  header.MAGIC_SPELLS[spell_choice]["min_player_coeff"]))
+
+                elif spell_choice in header.MAGIC_SPELLS_NAMES and player_mp - spell_cost >= 0:
+                    player_damage = math.ceil(
+                        header.MAGIC_SPELLS[spell_choice]["damage_bonus"] + player_int)
+                    cprint('\nYou inflicted ' + str(player_damage) + ' damage.', "red")
+                    enemy_hp -= player_damage
+
+                    cprint("Enemy have " + str(enemy_hp) + " hp.", "red")
+
+                    print(header.MAGIC_DAMAGE_DETAIL[
+                        spell_choice] % nprand.choice(header.BODY_PARTS))
+
+                    spell_effect = inside.util.get_spell_effect(
+                        spell_choice, enemy_danger_coeff)
+
+                    if spell_effect[0] == "block_enemy_action":
+                        block_enemy_action = spell_effect[1]
+                    else:
+                        pass
+                    player_attacking = True
+
+                    player_mp -= spell_cost
+
+                    print("You have %s mp.\n" % (player_mp))
+
+                elif player_mp - spell_cost < 0:
+                    print("You have %s mp. You need %s mp" %
+                          (player_mp, spell_cost - player_mp))
+
+                    player_attacking = False
+
+        if enemy_hp <= 0:
+            print("%s is dead." % enemy_params["name"])
+            return ["enemy_dead"]
+
+        elif block_enemy_action == 0 and player_attacking == True:
+
+            if enemy_params["name"] in header.POTENTIAL_ENEMY_LIST:
+                enemy_damage = int(enemy_params["mp"] * math.sqrt(enemy_danger_coeff))
+                player_hp -= enemy_damage
+
+                print(enemy_params["name"], "has caused you", enemy_damage, "damage.")
+                print("You have %s hp" % player_hp)
+
+                player_attacking = False
+            else:
+                enemy_damage = int(enemy_params["hp"] * math.sqrt(enemy_danger_coeff))
+                player_hp -= enemy_damage
+
+                print(enemy_params["name"], "has caused you", enemy_damage,
+                      "damage by", nprand.choice(header.MAGIC_MBOSS_SPELLS))
+
+                print("You have %s hp" % player_hp)
+
+                player_attacking = False
+
+        elif block_enemy_action > 0 and player_attacking == True:
+            block_enemy_action -= 1
+            print("Enemy action blocked for %s" % block_enemy_action)
+
+        if player_hp <= 0:
+            temples = TDB.table("temples")
+            temples_count = len(temples.all())
+            choiced_temple = nprand.choice(temples.all())
+            cprint("Unfortunately, you have died. You awake are transferred to the random temple.",
+                   foreground="white", background="black")
+            return ("player_die", choiced_temple["coor"])
 
 
 def init(debug_mode=0):
@@ -218,17 +407,26 @@ def init(debug_mode=0):
     while True:
         query = string.capwords(input('$ '))
         if query == 'Help':  # Команда, выводящая помощь
-            inside.util.cprint('Commands:\n Clear - For clear console \n Newplayer - Creating new player\n Infoclasses - Information about classes\n Quit - exit from shell\n Loadplayer - loading your player\n Listplayers - list of available players', 'white', 'black')
+            cprint('''Commands:\n Clear - For clear console \n
+               Newplayer - Creating new player\n
+               Infoclasses - Information about classes\n
+               Quit - exit from shell\n
+               Loadplayer - loading your player\n
+               Listplayers - list of available players''', 'white', 'black')
 
         elif query == 'Clear':  # Очистка командной строки
             inside.util.clear()
 
         elif query in ('Newplayer', 'Np'):  # Создание нового персонажа
-            inside.player.new_player()
+            name = inside.player.new_player()
+            query = Query()
+            players = TDB.table("players")
+            new_player_params = players.search(query.name == name)[0]
+            _get_player_params(new_player_params)
 
         elif query == 'Quit':  # Выход
             inside.util.clear()
-            inside.util.cprint('Good Bye!', 'green', 'black')
+            cprint('Good Bye!', 'green', 'black')
             exit(0)
 
         elif query in ('Infoclasses', 'In'):  # Вывод информации о классах
@@ -244,34 +442,17 @@ def init(debug_mode=0):
 
                 player_name = input("\nInput character name: ")
 
-                player_params = list(DB.execute(
-                    "select * from players where name='%s'" % player_name))
+                query = Query()
+                players = TDB.table("players")
+                player_params = players.search(query.name == player_name)
 
-                try:
+                if player_params != []:
+
                     play_start(player_params[0])
 
-                except IndexError:
-                    inside.util.cprint("Player not found! Try again", "red")
-
-                    while_exit_status = 0
-
-                    while while_exit_status != 1:
-                        _get_playerlist()
-
-                        player_name = input("\nInput character name: ")
-
-                        player_params = list(DB.execute(
-                            "select * from players where name='%s'" % player_name))
-
-                        try:
-                            play_start(player_params[0])
-
-                        except IndexError:
-                            inside.util.cprint("Player not found! Try again", "red")
-
-                        else:
-                            while_exit_status = 1
+                else:
+                    cprint("Player not found! Try again", "red")
 
         else:
-            inside.util.cprint(
+            cprint(
                 'Error! Command not found. Please type "help" ', 'red')

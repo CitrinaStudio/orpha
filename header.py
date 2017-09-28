@@ -4,10 +4,16 @@ import numpy as np
 import os
 
 import inside
+import smarkov
+
+from tinydb import TinyDB, Query
+
+
+TDB = TinyDB("game.json")
 
 PATH_DATA_DB = os.path.join(os.path.dirname(__file__), "db/")
 
-PLAYER_CLASSES = ("Warrior", "Roge", "Mage")
+PLAYER_CLASSES = ["Mage"]
 QUANTITY_PLAYER_CLASSES = len(PLAYER_CLASSES)
 
 DEFAULT_MP = 10
@@ -77,6 +83,8 @@ CLASSES_ABILITY = {
         'cha': np.random.randint(2, 5)
     },
     'Mage': {
+        'hp': np.random.randint(2, 6),
+        'mp': np.random.randint(5, 10),
         'str': np.random.randint(2, 6),
         'dex': np.random.randint(2, 5),
         'con': np.random.randint(2, 5),
@@ -84,21 +92,6 @@ CLASSES_ABILITY = {
         'wis': np.random.randint(5, 10),
         'cha': np.random.randint(2, 6)
     }
-}
-
-TABLES_CREATE_COMMANDS = {
-    'lands': "CREATE TABLE `lands` (`name` TEXT NOT NULL UNIQUE,`entry_point` TEXT NOT NULL UNIQUE);",
-    'players': "CREATE TABLE `players` ( `hash`	TEXT NOT NULL UNIQUE, `name` TEXT UNIQUE NOT NULL, `age` INTEGER NOT NULL, `class` TEXT NOT NULL, `coor` TEXT NOT NULL, `hp` TEXT NOT NULL, `mp` TEXT NOT NULL, `str` INTEGER NOT NULL, `dex` INTEGER NOT NULL, `con` INTEGER NOT NULL, `inte` INTEGER NOT NULL, `wis` INTEGER NOT NULL,  `cha` INTEGER NOT NULL, PRIMARY KEY(`hash`));",
-    'bars': "CREATE TABLE `bars` (`coor_hash` TEXT NOT NULL UNIQUE,	`name` TEXT NOT NULL, `detail` TEXT, PRIMARY KEY(`coor_hash`));",
-    'homes': "CREATE TABLE `homes` (`coor_hash`	TEXT NOT NULL UNIQUE, `detail` TEXT, PRIMARY KEY(`coor_hash`));",
-    'rivers': "CREATE TABLE `rivers` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'shops': "CREATE TABLE `shops` (`coor_hash` TEXT NOT NULL UNIQUE, `name` TEXT NOT NULL, `detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'mountains': "CREATE TABLE `mountains` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'caves': "CREATE TABLE `caves` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'fields': "CREATE TABLE `fields` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'forests': "CREATE TABLE `forests` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'bridges': "CREATE TABLE `bridges` (`coor_hash` TEXT NOT NULL UNIQUE,`detail` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));",
-    'villages': "CREATE TABLE `villages` (`coor_hash` TEXT NOT NULL UNIQUE,`name` TEXT NOT NULL, PRIMARY KEY(`coor_hash`));"
 }
 
 
@@ -114,13 +107,18 @@ CONVENTIONAL_NOTATIONAL = {
     "b": "little Bridge",
     "p": "Player spawn",
     " ": "***Wind***",
-    "V": "Village"
+    "V": "Village",
+    "Ć": "Temple",
+    "p": "Player Spawn",
+    "E": "Enemy",
+    "#": "Wall"
 }
 
 CONVENTIONAL_NOTATIONAL_ENTER_POINT = ["V"]
 
 NAME_MAPS_FILES = {
-    "V": "village"
+    "V": "village",
+    "E": "enemy"
 }
 
 
@@ -129,30 +127,95 @@ CONVENTIONAL_NOTATIONAL_TABLES_NAMES = {
     "S": "shops",
     "B": "bars",
     "M": "mountains",
-    "C": "caves",
-    "f": "fields",
-    "F": "forests",
     "R": "rivers",
-    "V": "villages"
+    "V": "villages",
+    "E": "enemyes",
+    "D": "dungeons",
+    "Ć": "temples"
 
 }
 
-CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = [
-    "H", "S", "B", "M", "C", "f", "F", "R", "b", "V"]
+POTENTIAL_ENEMY_STATS = {
+    'Ork': {
+        'hp': np.random.randint(18, 20),
+        'mp': np.random.randint(3, 7)
+    },
+    'Gnom': {
+        'hp': np.random.randint(10, 20),
+        'mp': np.random.randint(7, 10)
+    }
+}
+
+
+MAGIC_MBOSS_SPELLS = [
+    'Meteor', 'Ice walk'
+]
+
+MAGIC_SPELLS = {  # DEFAULT PLAYER SPELLS
+    'Iceblast': {"damage_bonus": np.random.randint(3, 5), "spell_cost": 5, "min_player_coeff": .0, "category": "Ice"},
+    'Fireball': {"damage_bonus": np.random.randint(4, 6), "spell_cost": 6, "min_player_coeff": .0, "category": "Fire"},
+    'Waterpillar': {"damage_bonus": np.random.randint(4, 7), "spell_cost": 7, "min_player_coeff": .0, "category": "Water"},
+    'Ironfist': {"damage_bonus": np.random.randint(5, 11), "spell_cost": 9, "min_player_coeff": .0, "category": "Iron"}
+}
+
+
+BODY_PARTS = [
+    'leg', 'had', 'hand', 'neck', 'knee'
+]
+
+MAGIC_DAMAGE_DETAIL = {
+    'Iceblast': 'You froze his %s',
+    'Fireball': 'You burn his %s',
+    'Ironfist': "You held down the enemy\'s %s.",
+    'Waterpillar': "You wet enemy\'s %s."
+}
+
+
+MAGIC_SPELLS_NAMES = list(MAGIC_SPELLS.keys())
+
+POTENTIAL_ENEMY_LIST = list(POTENTIAL_ENEMY_STATS.keys())
+
+POTENTIAL_MBOSS_PREFIX_STATS = {
+    "Ice": (np.random.randint(3, 5), np.random.randint(3, 15)),
+    "Fire": (np.random.randint(4, 6), np.random.randint(4, 13)),
+    "Water": (np.random.randint(3, 4), np.random.randint(5, 14)),
+    "Magma": (np.random.randint(5, 6), np.random.randint(3, 15)),
+    "Earth": (np.random.randint(3, 4), np.random.randint(6, 15))
+}
+
+POTENTIAL_MBOSS_PREFIX_LIST = list(POTENTIAL_MBOSS_PREFIX_STATS.keys())
+
+CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL = list(CONVENTIONAL_NOTATIONAL.keys())
 
 CONVENTIONAL_NOTATIONAL_VILLAGE = [
-    "H","S", " "]
+    "H", "S", " "]
 
 DEFAULT_PLAYER_X = 0
 DEFAULT_PLAYER_Y = 0
 
-DEFAULT_WEIGHT_MAP = 100
-DEFAULT_HEIGHT_MAP = 100
+DEFAULT_WEIGHT_MAP = 50
+DEFAULT_HEIGHT_MAP = 20
 
-#Village min 10x20
+# Village min 10x20
 
 DEFAULT_WEIGHT_MAP_VILLAGE = 20
 DEFAULT_HEIGHT_MAP_VILLAGE = 10
 
 DEFAULT_QUANTITY_MAP_STRING = DEFAULT_HEIGHT_MAP
 DEFAULT_QUANTITY_MAP_STRING_VILLAGE = DEFAULT_HEIGHT_MAP_VILLAGE
+
+DUNGEON_PREFIX = smarkov.Markov([
+    'Dark', 'Little', 'Singular', 'Blood', 'Frozen', 'Ice', 'Fire', 'Dead', 'Vampire', 'Wolf', 'Fucking', 'Gay'
+])
+
+DUNGEON_TYPE = [
+    ' castle', ' gates', ' house', ' house'
+]
+
+
+DUNGEON_SUFFIX = smarkov.Markov([
+    'Ilya', 'Dionis', 'Leena', 'Lanaya', 'Raxar', 'Lisa Su'
+])
+
+MAPS_PATH = "maps/%s"
+M_P = "maps/"

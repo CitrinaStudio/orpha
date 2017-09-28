@@ -1,59 +1,42 @@
 import os
-import sqlite3 as sqlite
 
 from colorama import Back, Fore, Style, init
 
 import header
-import inside
+from numpy import random as nprand
 
-import sqlite3 as sqlite
-
-CONNECT = sqlite.connect("game.db")
-DB = CONNECT.cursor()
+import math
 
 
 init()
 
-def cprint(msg, foreground = "black", background = "white"): #Функция вывода цветного текста для ошибок
+
+# Функция вывода цветного текста для ошибок
+def cprint(msg, foreground="black", background="white"):
     fground = foreground.upper()
     bground = background.upper()
     style = getattr(Fore, fground) + getattr(Back, bground)
     print(style + msg + Style.RESET_ALL)
 
 
-def clear(): #Очищение командной строки
-    os.system('cls' if os.name=='nt' else 'clear')
+def clear():  # Очищение командной строки
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-def db_check():
-    """Проверка существования таблиц"""
 
-    check_table_ok = 0
+def get_spell_effect(spell, enemy_danger_coeff):
+    enemy_danger_coeff = math.fabs(enemy_danger_coeff)
 
-    while check_table_ok != 1:
-        try:
-            DB.execute("SELECT * FROM players")
-            DB.execute("SELECT * FROM lands")
-            DB.execute("SELECT * FROM bars")
-            DB.execute("SELECT * FROM homes")
-            DB.execute("SELECT * FROM rivers")
-            DB.execute("SELECT * FROM shops")
-            DB.execute("SELECT * FROM mountains")
-            DB.execute("SELECT * FROM caves")
-            DB.execute("SELECT * FROM fields")
-            DB.execute("SELECT * FROM forests")
-            DB.execute("SELECT * FROM bridges")
-            DB.execute("SELECT * FROM villages")
+    if header.MAGIC_SPELLS[spell]["category"] == "Ice":
+        count_block_action = math.ceil(
+            math.e * nprand.random() * math.sqrt(enemy_danger_coeff))
+        print("You block enemy action in %s moves." % count_block_action)
+        return ["block_enemy_action", count_block_action]
 
-        except sqlite.OperationalError as err_detail:
+    if header.MAGIC_SPELLS[spell]["category"] == "Iron":
+        count_block_action = math.ceil(
+            math.e * nprand.random() * math.sqrt(enemy_danger_coeff))
+        print("You block enemy action in %s moves." % count_block_action)
+        return ["block_enemy_action", count_block_action]
 
-            table_name = str(err_detail).split(": ")[1]
-
-            inside.log.logging.error("Структра БД повреждена!")
-            inside.log.logging.error("Таблица %s не найдена!" % table_name)
-            DB.execute(header.TABLES_CREATE_COMMANDS[table_name])
-
-            inside.log.logging.info("Таблица %s успешно создана" % table_name)
-
-        else:
-            inside.log.logging.info("С БД всё хорошо!")
-            check_table_ok = 1
+    else:
+        return ("", 0)

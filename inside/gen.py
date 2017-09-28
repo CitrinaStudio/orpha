@@ -6,8 +6,11 @@ import string
 import zlib
 
 from numpy import random as nprand
+from tinydb import TinyDB, Query
 
 import header
+
+TDB = TinyDB("game.json")  # TinyDB
 
 
 def gen_adler32_hash(params):
@@ -25,7 +28,7 @@ def gen_crc32_hash(params):
 def gen_md5_hash_file(file_name):
     """ Генерация md5 """
 
-    return hashlib.md5(open(file_name, 'rb').read()).hexdigest()
+    return hashlib.md5(open(file_name, 'rb', encoding="utf-8").read()).hexdigest()
 
 
 def gen_name(size):
@@ -35,26 +38,47 @@ def gen_name(size):
         string.ascii_uppercase + string.digits) for _ in range(size)))
 
 
-def gen_map(map_file="default_map"):
+def gen_map(map_file="default_map", maps_path=header.MAPS_PATH):
     """ Генерация карты """
 
-    gamemap = open("inside/maps/%s" % map_file, "w")
+    gamemap = open(maps_path % map_file, "w", encoding="utf-8")
 
-    player_spawn = 0
+    valid_spawn_point = 0
 
     map_strings = ""
 
     map_strings += "#" * header.DEFAULT_WEIGHT_MAP + "\n"
 
-    for _ in range(0, header.DEFAULT_QUANTITY_MAP_STRING - 2, 1):
+    for y in range(1, header.DEFAULT_QUANTITY_MAP_STRING - 2, 1):
         map_strings += "#"
 
-        for _ in range(0, header.DEFAULT_WEIGHT_MAP - 2, 1):
-            map_natation = nprand.choice(
+        for x in range(1, header.DEFAULT_WEIGHT_MAP - 2, 1):
+            map_notation = nprand.choice(
                 header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL)
 
-            if random.random() > 0.7:
-                map_strings += map_natation
+            if map_notation == "p" and valid_spawn_point != 1:
+                valid_spawn_point = 1
+                map_strings += map_notation
+
+            elif map_notation == "p" and valid_spawn_point == 1:
+                map_strings += " "
+
+            elif map_notation == "D" and nprand.random() > 0.965:
+                map_strings += map_notation
+
+            elif map_notation == "Ć" and nprand.random() > 0.9:
+                map_strings += map_notation
+                temples = TDB.table(header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notation])
+                count_temples = Query()
+                id = len(temples.all()) + 1
+                print(id)
+                temples.insert({"id": id, "coor": "%s, %s" % (x, y)})
+
+            elif map_notation == "#":
+                map_strings += " "
+
+            elif map_notation != "D" and map_notation != "Ć" and nprand.random() > 0.7:
+                map_strings += map_notation
 
             else:
                 map_strings += " "
@@ -64,7 +88,6 @@ def gen_map(map_file="default_map"):
     map_strings += "#" * header.DEFAULT_WEIGHT_MAP + "\n"
 
     random_spawn_point = nprand.randint(0, header.DEFAULT_WEIGHT_MAP * header.DEFAULT_HEIGHT_MAP)
-    valid_spawn_point = 0
 
     while valid_spawn_point != 1:
         if map_strings[random_spawn_point] == "#":
@@ -79,20 +102,11 @@ def gen_map(map_file="default_map"):
     gamemap.write(map_strings)
 
 
-def gen_detail_map(map_arr):
-
-    for y in range(0, len(map_arr), 1):
-
-        for x in range(0, len(map_arr[y]), 1):
-            if map_arr[x][y] != "p" and map_arr[x][y] != "#":
-                print(True)
-
-
-def gen_village():
+def gen_village(maps_path=header.MAPS_PATH):
 
     name = gen_name(64)
 
-    gamemap = open("inside/maps/%s" % name, "w")
+    gamemap = open(maps_path % name, "w", encoding="utf-8")
 
     map_strings = ""
 
@@ -103,14 +117,14 @@ def gen_village():
 
         for x in range(0, header.DEFAULT_WEIGHT_MAP_VILLAGE - 2, 1):
 
-            map_natation = nprand.choice(
+            map_notation = nprand.choice(
                 header.CONVENTIONAL_NOTATIONAL_VILLAGE)
 
-            if map_natation == "H" and random.random() > 0.76:
-                map_strings += map_natation
+            if map_notation == "H" and random.random() > 0.76:
+                map_strings += map_notation
 
-            elif map_natation == "S" and random.random() > 0.923:
-                map_strings += map_natation
+            elif map_notation == "S" and random.random() > 0.923:
+                map_strings += map_notation
 
             else:
                 map_strings += " "
@@ -136,3 +150,13 @@ def gen_village():
     gamemap.write(map_strings)
 
     return name
+
+
+def gen_dungeon(maps_path=header.MAPS_PATH):
+
+    dungeon_name = str(nprand.choice(header.DUNGEON_PREFIX) + nprand.choice(header.DUNGEON_TYPE)
+                       ) + str(" of " + "".join(header.DUNGEON_SUFFIX.generate_text()))
+
+    gamemap = open(maps_path % gen_name(100), "w", encoding="utf-8")
+
+    print(dungeon_name)
