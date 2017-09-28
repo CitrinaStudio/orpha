@@ -20,5 +20,8 @@ if len(sys.argv) > 1:
     elif os.path.isdir("maps/") == False and sys.argv[1] == "gen":
         os.mkdir("maps/")
         inside.gen.gen_map(map_file="default_map")
-    elif sys.argv[1] == "shell":
+
+    else:
         inside.shell.init()
+else:
+    inside.shell.init()
