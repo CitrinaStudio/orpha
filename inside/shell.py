@@ -57,11 +57,16 @@ def save_char(player_params, player_coor):
                     "dex": player_params["dex"], "con": player_params["con"], "int": player_params["int"], "wis": player_params["wis"], "cha": player_params["cha"], "name": player_params["name"]}, query.name == player_params["name"])
 
 
-def play_start(player_params, debug_mode=0, maps_path=header.MAPS_PATH, map_file="default_map", recursion_count=0, location_shell=""):
+def play_start(player_params, debug_mode=0, maps_path=header.MAPS_PATH, map_file="default_map", recursion_count=0, mode='global', location_shell=""):
     """Игровой процесс"""
     if debug_mode != 1:
         inside.util.clear()
-
+    
+    if mode == 'global':
+        cprint("Welcome to our beautiful fantasy world!", "green", "black")
+    elif mode == 'village':
+        cprint("Welcome to the village", "green", "black")
+    
     map = open(maps_path % map_file, "r", encoding="utf-8").read().split(("\n"))
     global_player_coor = player_params["coor"]
 
@@ -400,6 +405,7 @@ def battlefield(player_params, enemy_params, debug_mode=0):
 
 
 def init(debug_mode=0):
+    
     """Инициальзация командной строки"""
     if debug_mode != 1:
         inside.util.clear()
@@ -416,6 +422,9 @@ def init(debug_mode=0):
 
         elif query == 'Clear':  # Очистка командной строки
             inside.util.clear()
+
+        elif query =='Tutprial':
+            inside.shell.game_tutorial()
 
         elif query in ('Newplayer', 'Np'):  # Создание нового персонажа
             name = inside.player.new_player()

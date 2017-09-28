@@ -219,3 +219,4 @@ DUNGEON_SUFFIX = smarkov.Markov([
 
 MAPS_PATH = "maps/%s"
 M_P = "maps/"
+TUTORIAL_MAP = "maps/tutorial/%s"
