@@ -9,8 +9,6 @@ import math
 
 
 init()
-
-
 # Функция вывода цветного текста для ошибок
 def cprint(msg, foreground="black", background="white"):
     fground = foreground.upper()
