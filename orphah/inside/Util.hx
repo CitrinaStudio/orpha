@@ -1,10 +1,11 @@
-package orphah.inside;
+package inside;
 
 import Sys;
-import hx.strings.ansi.Ansi;
+import hx.strings.*;
+import ANSI;
 import Math;
 
-import orphah.Header.*;
+import Header;
 
 class Util {
     static function clear(){
@@ -15,24 +16,24 @@ class Util {
         }
     };
 
-    static function cprint(msg:String, bg, fg) {
-        var stdout = Sys.stdout();
-        stdout.writeString(Ansi.fg(fg));
-        stdout.writeString(Ansi.bg(bg));
-        stdout.writeString(msg + "\n"); 
-        stdout.writeString(Ansi.attr(RESET));
+    static function cprint(msg:String, bold_include, fg) {
+        Sys.println(ANSI.set(fg, bold_include) + '${msg}' + ANSI.set(DefaultForeground, BoldOff));
     };
 
     static function get_spell_effect(spell:String, enemy_danger_coeff:Float) {
         var enemy_danger_coeff:Float = Math.abs(enemy_danger_coeff);
-        
-        
-        trace(enemy_danger_coeff);
-    }
+
+        if(Header.MAGIC_SPELLS()[spell]["category"] == "Ice"){
+          var count_block_action = Math.ceil(
+            Math.PI * Random.float(0, 0.2) * Math.sqrt(enemy_danger_coeff));
+          cprint('You block enemy action in ${count_block_action} moves.', Bold, Blue);
+        }
+    };
+
     static function main() {
-        trace("Hello, world");
-        cprint("Masx", BLACK, GREEN);
-        get_spell_effect("sd", -48.124124124152123522);
-        trace(CLL);
-    }
+        var g:Array<Dynamic> = [334, 34, 35, "asf"];
+        Sys.println(g);
+        cprint("Masx", Bold, Green);
+        get_spell_effect("Iceblast", -48.124124124152123522);
+    };
 }
