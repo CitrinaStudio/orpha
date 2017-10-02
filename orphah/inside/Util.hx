@@ -7,8 +7,10 @@ import Math;
 
 import Header;
 
-class Util {
-    static function clear(){
+using Lambda;
+
+class Util { //Class for Utils functions
+    static function clear(): Void{ // Function for clear console
         var answer_code:Int = Sys.command("cls");
 
         if (answer_code == 127){
@@ -16,23 +18,20 @@ class Util {
         }
     };
 
-    static function cprint(msg:String, bold_include, fg) {
-        Sys.println(ANSI.set(fg, bold_include) + '${msg}' + ANSI.set(DefaultForeground, BoldOff));
+    static function cprint(msg:String, bold_include, fg, bg): Void{ //Function for color print
+        Sys.println(ANSI.set(fg, bg, bold_include) + '${msg}' + ANSI.set(DefaultForeground, DefaultBackground, BoldOff));
     };
 
-    static function get_spell_effect(spell:String, enemy_danger_coeff:Float) {
+    static function get_spell_effect(spell:String, enemy_danger_coeff:Float): Array<Dynamic> { //Function for get effect of casted spell
         var enemy_danger_coeff:Float = Math.abs(enemy_danger_coeff);
 
-        if(Header.MAGIC_SPELLS()[spell]["category"] == "Ice"){
+        if(["Iron", "Ice"].has(Header.MAGIC_SPELLS()[spell]["category"])){
           var count_block_action = Math.ceil(
             Math.PI * Random.float(0, 0.2) * Math.sqrt(enemy_danger_coeff));
-          cprint('You block enemy action in ${count_block_action} moves.', Bold, Blue);
-        }
-    };
-
-    static function main() {
-        cprint("Masx", Bold, Green);
-        get_spell_effect("Iceblast", -48.124124124152123522);
-        Sys.println(Header.QUANTITY_PLAYER_CLASSES());
+          cprint('You block enemy action in ${count_block_action} moves.', Bold, Blue, DefaultBackground);
+          return ["block_enemy_action", count_block_action];
+        }else{
+          return ["", 0];
+        };
     };
 }

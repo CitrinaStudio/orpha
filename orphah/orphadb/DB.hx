@@ -1,0 +1,5 @@
+package orphadb;
+
+class DB {
+  
+}

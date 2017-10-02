@@ -2,6 +2,8 @@ package;
 
 import Random;
 
+import markov.namegen.Model;
+
 class Header{
     //public inline var MAGIC_MBOSS_SPELLS
 
@@ -72,17 +74,16 @@ class Header{
         ],
         "Roge"=> [
           'inventory'=> 'blade',
-          
+
         ],
         "Mage"=> [
           'inventory'=> 'scepter',
-          
+
         ]
       ];
     };
     public static inline function CLASSES_ABILITY(): Map<String, Map<String, Int>> {
       return [
-        [
         "Warrior"=> [
           'str'=> 7, 'dex'=> 3,
           'con'=> 6, 'inte'=> 2,
@@ -97,8 +98,6 @@ class Header{
           'str'=> 4, 'dex'=> 5,
           'con'=> 4, 'inte'=> 3,
           'wis'=> 3, 'cha'=> 3
-      ]
-    
       ]
     ];
   };
@@ -117,7 +116,6 @@ class Header{
         " "=> "***Wind***",
         "V"=> "Village",
         "Ć"=> "Temple",
-        "p"=> "Player Spawn",
         "E"=> "Enemy",
         "#"=> "Wall"
       ];
@@ -144,7 +142,7 @@ class Header{
         "Ć"=> "temples"
       ];
     };
-    public static inline function POTENTIAL_ENEMY_STATS(): Map<String Map<String, Int>> {
+    public static inline function POTENTIAL_ENEMY_STATS(): Map<String, Map<String, Int>> {
       return [
         'Ork'=> [
           'hp'=> 19,
@@ -153,7 +151,7 @@ class Header{
         'Gnom'=> [
           'hp'=> 17,
           'mp'=> 9
-        ];
+        ]
       ];
     };
     public static inline function MAGIC_MBOSS_SPELLS(): Array<String> {
@@ -162,11 +160,50 @@ class Header{
     public static inline function BODY_PARTS(): Array<String> {
       return ['leg', 'had', 'hand', 'neck', 'knee'];
     };
-    public static inline function POTENTIAL_MBOSS_PREFIX_STATS(): Map<String, Int> {
+    public static inline function POTENTIAL_MBOSS_PREFIX_STATS(): Map<String, Array<Int>> {
       return[
         "Ice"=> [4, 7],
-        "Fire"=> []
-      ]
-    }
+        "Fire"=> [5, 10],
+        "Water" => [4, 8],
+        "Magma" => [6, 11],
+        "Earth" => [4, 9]
+      ];
+    };
+    public static inline function CONVENTIONAL_NOTATIONAL_VILLAGE(): Array<String> {
+      return ["H", "S", " "];
+    };
+    public static inline function DEFAULT_PLAYER_X(): Int{
+      return 0;
+    };
+    public static inline function DEFAULT_PLAYER_Y(): Int{
+      return 0;
+    };
+    public static inline function DEFAULT_WEIGHT_MAP(): Int{
+      return 50;
+    };
+    public static inline function DEFAULT_HEIGHT_MAP(): Int{
+      return 20;
+    };
+    public static inline function DEFAULT_WEIGHT_MAP_VILLAGE(): Int{
+      return 20;
+    };
+    public static inline function DEFAULT_HEIGHT_MAP_VILLAGE(): Int{
+      return 10;
+    };
+    public static inline function DEFAULT_QUANTITY_MAP_STRING(): Int{
+      return DEFAULT_HEIGHT_MAP();
+    };
+    public static inline function DEFAULT_QUANTITY_MAP_STRING_VILLAGE(): Int{
+      return DEFAULT_HEIGHT_MAP_VILLAGE();
+    };
+    public static inline function DUNGEON_PREFIX(): Array<String>{
+      return ['Dark', 'Little', 'Singular', 'Blood', 'Frozen', 'Ice', 'Fire', 'Dead', 'Vampire', 'Wolf', 'Fucking', 'Gay'];
+    };
+    public static inline function DUNGEON_TYPE(): Array<String>{
+      return [' castle', ' gates', ' house', ' house'];
+    };
+    public static inline function DUNGEON_SUFFIX(): Array<String>{
+      return ['Ilya', 'Dionis', 'Leena', 'Lanaya', 'Raxar', 'Lisa Su'];
+    };
 
 }
