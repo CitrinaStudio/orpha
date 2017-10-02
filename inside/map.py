@@ -1,26 +1,23 @@
 """ Module for use map """
 
-import header
-import inside
 import random
 
-
 from colorama import init
+from numpy import random as nprand
 from termcolor import colored
-from tinydb import TinyDB, Query
+from tinydb import Query, TinyDB
 
+import header
+import inside
 
 TDB = TinyDB("game.json")
 
 
 init()
 
-from numpy import random as nprand
-
 
 def get_map_point(map_arr, coor):
     """ Получить значение, находящееся по заданным кооринатам """
-
     return map_arr[coor[1]][coor[0]]
 
 

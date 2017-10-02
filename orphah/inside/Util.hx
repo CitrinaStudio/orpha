@@ -10,7 +10,7 @@ import Header;
 using Lambda;
 
 class Util { //Class for Utils functions
-    static function clear(): Void{ // Function for clear console
+    public static function clear(): Void{ // Function for clear console
         var answer_code:Int = Sys.command("cls");
 
         if (answer_code == 127){
@@ -18,11 +18,11 @@ class Util { //Class for Utils functions
         }
     };
 
-    static function cprint(msg:String, bold_include, fg, bg): Void{ //Function for color print
+    public static function cprint(msg:String, bold_include, fg, bg): Void{ //Function for color print
         Sys.println(ANSI.set(fg, bg, bold_include) + '${msg}' + ANSI.set(DefaultForeground, DefaultBackground, BoldOff));
     };
 
-    static function get_spell_effect(spell:String, enemy_danger_coeff:Float): Array<Dynamic> { //Function for get effect of casted spell
+    public static function get_spell_effect(spell:String, enemy_danger_coeff:Float): Array<Dynamic> { //Function for get effect of casted spell
         var enemy_danger_coeff:Float = Math.abs(enemy_danger_coeff);
 
         if(["Iron", "Ice"].has(Header.MAGIC_SPELLS()[spell]["category"])){
