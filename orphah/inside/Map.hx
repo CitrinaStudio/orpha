@@ -32,12 +32,16 @@ class Map{
 
   public static function get_map_detail(map_arr:Array<String>, coor:Array<Int>, player_params:StringMap<Dynamic>, motion_vector:String): Array<Int>{
     var coor_hash: Bytes = Bytes.ofString("sdf");
-    Sys.println(coor_hash);
+    var map_notation: String = get_map_point(map_arr, coor);
+
+    Sys.println(Header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL());
+
     return [0, 0];
   };
 
   static function main() : Void {
-    Sys.println(get_player_spawn(["asfasf", "fdsdgsdgsdg", "sdgfsdgsdg", "asfpagsdg"]));
+    Sys.println(get_map_detail(["asfasf", "fdsdgsdgsdg", "sdgfsdgsdg", "asfpagsdg"], [5, 0], ["asf"=>"sdg"], "left"));
     Util.cprint("asf", Bold, Black, WhiteBack);
+
   };
 }

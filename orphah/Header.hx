@@ -6,6 +6,14 @@ import markov.namegen.Model;
 
 class Header{
     //public inline var MAGIC_MBOSS_SPELLS
+    private static inline function keys(map_var:Map<String,Dynamic>) : Array<String> {
+        var iter_keys: Iterator<String> = map_var.keys();
+        var keys: Array<String> = [];
+        for (key in iter_keys){
+          keys.push(key);
+        };
+        return keys;
+    };
 
     public static inline function MAGIC_SPELLS(): Map<String, Map<String,Dynamic>>{
       return [
@@ -141,6 +149,9 @@ class Header{
         "D"=> "dungeons",
         "Ć"=> "temples"
       ];
+    };
+    public static inline function CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL(): Array<String>{
+      return keys(CONVENTIONAL_NOTATIONAL_TABLES_NAMES());
     };
     public static inline function POTENTIAL_ENEMY_STATS(): Map<String, Map<String, Int>> {
       return [
