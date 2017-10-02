@@ -56,7 +56,7 @@ CLASSES_BONUSES = {
     }
 }
 
-STRART_INVENTORY = {
+START_INVENTORY = {
     'Warrior': {
         'inventory': 'sword'
     },

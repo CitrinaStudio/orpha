@@ -31,9 +31,8 @@ class Util {
     };
 
     static function main() {
-        var g:Array<Dynamic> = [334, 34, 35, "asf"];
-        Sys.println(g);
         cprint("Masx", Bold, Green);
         get_spell_effect("Iceblast", -48.124124124152123522);
+        Sys.println(Header.QUANTITY_PLAYER_CLASSES());
     };
 }
