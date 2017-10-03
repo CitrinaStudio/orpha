@@ -38,7 +38,8 @@ class Map{
 
     return [0, 0];
   };
-
+  
+  
   static function main() : Void {
     Sys.println(get_map_detail(["asfasf", "fdsdgsdgsdg", "sdgfsdgsdg", "asfpagsdg"], [5, 0], ["asf"=>"sdg"], "left"));
     Util.cprint("asf", Bold, Black, WhiteBack);
