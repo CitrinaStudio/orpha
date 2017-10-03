@@ -1,7 +1,6 @@
 package inside;
 
 import Sys;
-import hx.strings.*;
 import ANSI;
 import Math;
 

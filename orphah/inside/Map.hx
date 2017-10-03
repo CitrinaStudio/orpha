@@ -35,31 +35,31 @@ class Map{
     var map_notation: String = get_map_point(map_arr, coor);
 
     if (Header.keys(Header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES()).has(map_notation)) {
-      println('You is on ${Header.CONVENTIONAL_NOTATIONAL[map_notation]}');
+      Sys.println('You is on ${Header.CONVENTIONAL_NOTATIONAL()[map_notation]}');
     }
 
-    if (Header.keys(Header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL()).has(map_notational)) {
+    if (Header.CONVENTIONAL_NOTATIONAL_WITHOUT_DETAIL().has(map_notation)) {
       if (motion_vector == "right") {
-        println('You see ${Header.CONVENTIONAL_NOTATIONAL[get_map_point(map_arr, (coor[0] + 1, coor[1]))]}');
+        Sys.println('You see ${Header.CONVENTIONAL_NOTATIONAL[get_map_point(map_arr, [coor[0] + 1, coor[1]])]}');
       };
       else if (motion_vector == "left") {
-        println('You see ${Header.CONVENTIONAL_NOTATIONAL[get_map_point(map_arr, (coor[0] - 1, coor[1]))]}');
+        Sys.println('You see ${Header.CONVENTIONAL_NOTATIONAL[get_map_point(map_arr, [coor[0] - 1, coor[1]])]}');
       };
       else if (motion_vector == "top") {
-        println('You see ${Header.CONVENTIONAL_NOTATIONAL[get_map_point(map_arr, (coor[0], coor[1] + 1))]}');
+        Sys.println('You see ${Header.CONVENTIONAL_NOTATIONAL[get_map_point(map_arr, [coor[0], coor[1] + 1])]}');
       };
       else if (motion_vector == "bottom") {
-        println('You see ${Header.CONVENTIONAL_NOTATIONAL[get_map_point(map_arr, (coor[0], coor[1] - 1))]}');
+        Sys.println('You see ${Header.CONVENTIONAL_NOTATIONAL[get_map_point(map_arr, [coor[0], coor[1] - 1])]}');
       };
     }
     else{
-      println('You see the wall!');
+      Sys.println('You see the wall!');
     }
 
-    if (Header.keys(Header.CONVENTIONAL_NOTATIONAL_ENTER_POINT()).has(map_notation)) {
-      player_params['coor'] = '${coor[0]}, ${coor[1]}';
+    if (Header.CONVENTIONAL_NOTATIONAL_ENTER_POINT().has(map_notation)) {
+      player_params.set('coor', '${coor[0]}, ${coor[1]}');
       //var table:String = (Header.CONVENTIONAL_NOTATIONAL_TABLES_NAMES[map_notational])
-      //var record_exist: = 
+      //var record_exist: =
       //var enter_point_name:String = '';
 
         //if ()
@@ -69,10 +69,10 @@ class Map{
 
     return [0, 0];
   };
-  
-  
+
+
   static function main() : Void {
-    Sys.println(get_map_detail(["asfasf", "fdsdgsdgsdg", "sdgfsdgsdg", "asfpagsdg"], [5, 0], ["asf"=>"sdg"], "left"));
+    Sys.println(get_map_detail(["asfasf", "fdsdgsdgsdg", "sdgfsdgsdg", "asfpagsdg"], [5, 0], ["asf"=>"sdg", "coor"=>['6, 7']], "left"));
     Util.cprint("asf", Bold, Black, WhiteBack);
 
   };
