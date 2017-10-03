@@ -6,7 +6,7 @@ import markov.namegen.Model;
 
 class Header{
     //public inline var MAGIC_MBOSS_SPELLS
-    private static inline function keys(map_var:Map<String,Dynamic>) : Array<String> {
+    public static inline function keys(map_var:Map<String,Dynamic>) : Array<String> {
         var iter_keys: Iterator<String> = map_var.keys();
         var keys: Array<String> = [];
         for (key in iter_keys){
