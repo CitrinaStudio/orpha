@@ -23,7 +23,7 @@ TDB = TinyDB("game.json")  # TinyDB
 
 
 def _intput_check_error(err_msg, input_msg):
-    """Проверка введенного занчения"""
+    """Проверка введенного значения"""
 
     try:
         var = int(input(input_msg))
