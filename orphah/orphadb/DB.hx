@@ -1,5 +1,5 @@
 package orphadb;
 
-class DB {
+class Player {
   
 }

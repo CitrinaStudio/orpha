@@ -7,6 +7,7 @@ import Random;
 import HaxeLow;
 import Sys;
 import haxe.io.Input;
+var name : String;
 
 class Player {
 
