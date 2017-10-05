@@ -1,5 +1,18 @@
 {
-     "inside.Player" : [
-
+     "orphadb.TablePlayer" : [
+         {
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 1977
+            ,"pCha" : 89
+            ,"pCon" : 68
+            ,"pDex" : 65
+            ,"pInt" : 87
+            ,"pStr" : 56
+            ,"pWis" : null
+            ,"pHp" : 68
+            ,"pMp" : 78
+            ,"pClass" : null
+            ,"pName" : "Test"
+        }
     ]
 }

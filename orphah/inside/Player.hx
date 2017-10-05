@@ -2,7 +2,7 @@ package inside;
 
 import String;
 import inside.Util;
-import orphadb;
+import orphadb.Table;
 import Header;
 import Random;
 import HaxeLow;
@@ -18,10 +18,10 @@ class Player {
         userInput = Sys.stdin().readLine();
         Sys.println('Your name is ${userInput}');
         var db = new HaxeLow('db.json');
-        var players = db.col(Tables.Player);
+        var players = db.col(TablePlayer);
         Sys.println(db);
         Sys.println(players);
-        players.push(new Tables.Player("Test", 1977));
+        players.push(new TablePlayer("Test", 1977, 54, 68, 78, 56, 65, 68 , 87, 8, 89));
         db.save();
 
         return 0;
