@@ -2,17 +2,17 @@
      "orphadb.TablePlayer" : [
          {
              "_hxcls" : "orphadb.TablePlayer"
-            ,"pAge" : 1977
-            ,"pCha" : 89
-            ,"pCon" : 68
-            ,"pDex" : 65
-            ,"pInt" : 87
-            ,"pStr" : 56
-            ,"pWis" : null
-            ,"pHp" : 68
-            ,"pMp" : 78
+            ,"pAge" : 0
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
             ,"pClass" : null
-            ,"pName" : "Test"
+            ,"pName" : "asf"
         }
     ]
 }
