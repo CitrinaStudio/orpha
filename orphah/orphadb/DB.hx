@@ -1,5 +1,0 @@
-package orphadb;
-
-class Player {
-  
-}
