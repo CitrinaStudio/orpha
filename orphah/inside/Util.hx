@@ -33,4 +33,14 @@ class Util { //Class for Utils functions
           return ["", 0];
         };
     };
+
+    public static function inputInt(msg: String) : Int {
+      Sys.print(msg);
+      return Sys.stdin().readUInt16();
+    };
+
+    public static function inputString(msg: String) : String {
+      Sys.print(msg);
+      return Sys.stdin().readLine();
+    };
 }

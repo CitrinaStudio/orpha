@@ -13,6 +13,187 @@
             ,"pMp" : 0
             ,"pClass" : null
             ,"pName" : "asf"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 0
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "wdfsdf"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 0
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "fds"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 0
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "fsdf"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 0
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "dsfg"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 0
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "dsfsdf"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 0
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "ывап"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 168440885
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "df"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 896676983
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "sddg"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 168440883
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "sdg"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 52
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "dsg"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 52
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "dfgdf"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 13877
+            ,"pCha" : 0
+            ,"pCon" : 0
+            ,"pDex" : 0
+            ,"pInt" : 0
+            ,"pStr" : 0
+            ,"pWis" : 0
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pClass" : null
+            ,"pName" : "dgd"
+            ,"pCoordinate" : null
         }
     ]
 }

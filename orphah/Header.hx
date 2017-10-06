@@ -216,5 +216,17 @@ class Header{
     public static inline function DUNGEON_SUFFIX(): Array<String>{
       return ['Ilya', 'Dionis', 'Leena', 'Lanaya', 'Raxar', 'Lisa Su'];
     };
-
 }
+
+typedef Coordinate = {
+    x: Int, y: Int
+};
+
+typedef Abilities = {
+  pWis : Int, pStr : Int, pInt : Int, pDex : Int, pCon : Int, pCha : Int
+};
+
+typedef Params = {
+  pName: String, ?pAge: Int,
+  ?pClass: String, pHp: Int, pMp: Int,
+  ?Ability: Abilities,  ?pCoordinate: Coordinate};
