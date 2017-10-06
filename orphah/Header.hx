@@ -57,19 +57,19 @@ class Header{
         "Warrior"=> [
           'hp'=> 5, 'mp'=> 0,
           'str'=> 5, 'dex'=> 1,
-          'con'=> 1, 'inte'=> 1,
+          'con'=> 1, 'int'=> 1,
           'wis'=> 1, 'cha'=> 1
         ],
         "Roge"=> [
           'hp'=> 4, 'mp'=> 1,
           'str'=> 1, 'dex'=> 5,
-          'con'=> 1, 'inte'=> 1,
+          'con'=> 1, 'int'=> 1,
           'wis'=> 1, 'cha'=> 1
       ],
       "Mage"=> [
           'hp'=> 2, 'mp'=> 5,
           'str'=> 1, 'dex'=> 1,
-          'con'=> 1, 'inte'=> 1,
+          'con'=> 1, 'int'=> 1,
           'wis'=> 5, 'cha'=> 1
       ]
     ];
@@ -94,18 +94,19 @@ class Header{
       return [
         "Warrior"=> [
           'str'=> 7, 'dex'=> 3,
-          'con'=> 6, 'inte'=> 2,
+          'con'=> 6, 'int'=> 2,
           'wis'=> 2, 'cha'=> 4
         ],
         "Roge"=> [
           'str'=> 6, 'dex'=> 5,
-          'con'=> 4, 'inte'=> 2,
+          'con'=> 4, 'int'=> 2,
           'wis'=> 2, 'cha'=> 3
       ],
       "Mage"=> [
           'str'=> 4, 'dex'=> 5,
-          'con'=> 4, 'inte'=> 3,
-          'wis'=> 3, 'cha'=> 3
+          'con'=> 4, 'int'=> 3,
+          'wis'=> 3, 'cha'=> 3,
+          'hp'=> 4, 'mp'=> 6
       ]
     ];
   };
@@ -208,7 +209,8 @@ class Header{
       return DEFAULT_HEIGHT_MAP_VILLAGE();
     };
     public static inline function DUNGEON_PREFIX(): Array<String>{
-      return ['Dark', 'Little', 'Singular', 'Blood', 'Frozen', 'Ice', 'Fire', 'Dead', 'Vampire', 'Wolf', 'Fucking', 'Gay'];
+      return ['Dark', 'Little', 'Singular', 'Blood', 'Frozen',
+              'Ice', 'Fire', 'Dead', 'Vampire', 'Wolf', 'Fucking', 'Gay'];
     };
     public static inline function DUNGEON_TYPE(): Array<String>{
       return [' castle', ' gates', ' house', ' house'];
@@ -216,6 +218,9 @@ class Header{
     public static inline function DUNGEON_SUFFIX(): Array<String>{
       return ['Ilya', 'Dionis', 'Leena', 'Lanaya', 'Raxar', 'Lisa Su'];
     };
+    public  static inline  function DEFAULT_CLASS(): String {
+      return 'Mage';
+    }
 }
 
 typedef Coordinate = {

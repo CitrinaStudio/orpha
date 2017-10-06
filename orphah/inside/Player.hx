@@ -22,10 +22,34 @@ class Player {
 
         player_params.pAge = Util.inputInt("Input your age: ");
 
+        if (player_params.pAge > 1000) {
+          Util.cprint('You type ${player_params.pAge}, but maximum age is 1000.', Bold, Green, BlackBack);
+          player_params.pAge = 1000;
+        }
+
+        player_params.pHp = Header.CLASSES_BONUSES()[Header.DEFAULT_CLASS()]['hp'] + Header.CLASSES_ABILITY()[Header.DEFAULT_CLASS()]['hp'] + 7;
+
+        player_params.pMp = Header.CLASSES_ABILITY()[Header.DEFAULT_CLASS()]['mp'] + Header.CLASSES_BONUSES()[Header.DEFAULT_CLASS()]['mp'];
+
+        player_params.Ability.pCha = Header.CLASSES_ABILITY()[Header.DEFAULT_CLASS()]['cha'] + Header.CLASSES_BONUSES()[Header.DEFAULT_CLASS()]['cha'];
+
+        player_params.Ability.pInt = Header.CLASSES_ABILITY()[Header.DEFAULT_CLASS()]['int'] + Header.CLASSES_BONUSES()[Header.DEFAULT_CLASS()]['int'];
+
+        player_params.Ability.pStr = Header.CLASSES_ABILITY()[Header.DEFAULT_CLASS()]['str'] + Header.CLASSES_BONUSES()[Header.DEFAULT_CLASS()]['str'];
+
+        player_params.Ability.pDex = Header.CLASSES_ABILITY()[Header.DEFAULT_CLASS()]['dex'] + Header.CLASSES_BONUSES()[Header.DEFAULT_CLASS()]['dex'];
+
+        player_params.Ability.pWis = Header.CLASSES_ABILITY()[Header.DEFAULT_CLASS()]['wis'] + Header.CLASSES_BONUSES()[Header.DEFAULT_CLASS()]['wis'];
+
+        player_params.Ability.pCon = Header.CLASSES_ABILITY()[Header.DEFAULT_CLASS()]['con'] + Header.CLASSES_BONUSES()[Header.DEFAULT_CLASS()]['con'];
+
+
+        Sys.print(player_params);
+
 
         var ability_is_ok = true;
         while(!ability_is_ok){
-            
+
         };
 
 

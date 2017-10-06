@@ -88,7 +88,3 @@ def new_player():
         inside.util.cprint("Player with name '%s' exists!" %
                            player_name, foreground="red", background="white")
     return player_name
-
-
-# def change_params():
-    #'''Функция изменения параметров игрока'''

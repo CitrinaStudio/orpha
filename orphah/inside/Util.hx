@@ -3,6 +3,7 @@ package inside;
 import Sys;
 import ANSI;
 import Math;
+import Std;
 
 import Header;
 
@@ -36,7 +37,7 @@ class Util { //Class for Utils functions
 
     public static function inputInt(msg: String) : Int {
       Sys.print(msg);
-      return Sys.stdin().readUInt16();
+      return Std.parseInt(Sys.stdin().readLine());
     };
 
     public static function inputString(msg: String) : String {

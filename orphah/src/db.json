@@ -1,0 +1,19 @@
+{
+     "orphadb.TablePlayer" : [
+         {
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pName" : "sdg"
+            ,"pAge" : 234
+            ,"pClass" : null
+            ,"pHp" : 0
+            ,"pMp" : 0
+            ,"pStr" : 0
+            ,"pDex" : 0
+            ,"pCon" : 0
+            ,"pInt" : 0
+            ,"pWis" : 0
+            ,"pCha" : 0
+            ,"pCoordinate" : null
+        }
+    ]
+}
