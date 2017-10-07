@@ -210,5 +210,35 @@
             ,"pName" : "asd"
             ,"pCoordinate" : null
         }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 345
+            ,"pCha" : 4
+            ,"pCon" : 5
+            ,"pDex" : 6
+            ,"pInt" : 4
+            ,"pStr" : 5
+            ,"pWis" : 8
+            ,"pHp" : 13
+            ,"pMp" : 11
+            ,"pClass" : null
+            ,"pName" : "dgfsdg"
+            ,"pCoordinate" : null
+        }
+        ,{
+             "_hxcls" : "orphadb.TablePlayer"
+            ,"pAge" : 1000
+            ,"pCha" : 4
+            ,"pCon" : 5
+            ,"pDex" : 6
+            ,"pInt" : 4
+            ,"pStr" : 5
+            ,"pWis" : 8
+            ,"pHp" : 13
+            ,"pMp" : 11
+            ,"pClass" : null
+            ,"pName" : "sdfg"
+            ,"pCoordinate" : null
+        }
     ]
 }

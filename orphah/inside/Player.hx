@@ -9,6 +9,7 @@ import HaxeLow;
 import Sys;
 import haxe.io.Input;
 import haxe.io.Bytes;
+import haxe.crypto.Adler32;
 
 class Player {
 
@@ -22,7 +23,7 @@ class Player {
         player_params.pName = Util.inputString("Input your name: ");
 
         player_params.pAge = Util.inputInt("Input your age: ");
-        Sys.print(Bytes.ofString(player_params.pAge));
+
 
         if (player_params.pAge > 1000) {
           Util.cprint('You type ${player_params.pAge}, but maximum age is 1000.', Bold, Green, BlackBack);
