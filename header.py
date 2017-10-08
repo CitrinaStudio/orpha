@@ -219,3 +219,6 @@ DUNGEON_TYPE = [
 DUNGEON_SUFFIX = smarkov.Markov([
     'Ilya', 'Dionis', 'Leena', 'Lanaya', 'Raxar', 'Lisa Su'
 ])
+
+DUNGEON_WEIGHT_ROOM = np.random.randint(10, 17)
+DUNGEON_HEIGHT_ROOM = np.random.randint(10, 17)
